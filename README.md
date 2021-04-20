@@ -1,2 +1,3 @@
 # C1020G1-Repo-BE
-#demo
+#demo push
+#demo pull
