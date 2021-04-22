@@ -1,5 +1,7 @@
 package c1020g1.social_network.model;
 
+import c1020g1.social_network.model.account.Account;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -35,9 +37,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     private Status status;
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-    private Account account;
 
     public int getUserId() {
         return userId;
@@ -117,14 +116,6 @@ public class User {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     public Ward getWard() {
