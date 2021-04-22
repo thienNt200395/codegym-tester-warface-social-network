@@ -9,17 +9,17 @@ public class GroupRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_request_id")
-    private int groupRequestId;
+    private Integer groupRequestId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private Group group;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-    @Column(name = "from")
+    @Column(name = "from_where")
     private String from;
 
-    public int getGroupRequestId() {
+    public Integer getGroupRequestId() {
         return groupRequestId;
     }
 

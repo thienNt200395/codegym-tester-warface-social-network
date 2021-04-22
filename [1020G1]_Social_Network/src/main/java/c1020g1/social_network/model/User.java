@@ -2,6 +2,7 @@ package c1020g1.social_network.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -10,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
     @Column(name = "username", nullable = false)
     private String userName;
     @Column(name = "birthday", nullable = false)
@@ -38,6 +39,9 @@ public class User {
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
+
+    @OneToMany(mappedBy = "user")
+    private Set<GroupRequest> groupRequests;
 
     public int getUserId() {
         return userId;
