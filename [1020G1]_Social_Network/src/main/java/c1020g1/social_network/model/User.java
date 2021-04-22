@@ -10,40 +10,52 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
+
     @Column(name = "username", nullable = false)
     private String userName;
+
     @Column(name = "birthday", nullable = false)
     private Date birthday;
+
     @Column(name = "gender", nullable = false)
     private String gender;
+
     @Column(name = "occupation", nullable = false)
     private String occupation;
+
     @Column(name = "email", nullable = false)
     private String email;
+
     @Column(name = "user_avatar")
     private String userAvatar;
+
     @Column(name = "user_background")
     private String userBackground;
+
     @Column(name = "marriaged", nullable = false)
     private String marriaged;
+
     @ManyToOne
     @JoinColumn(name = "ward_id", referencedColumnName = "ward_id")
     private Ward ward;
+
     @Column(name = "address")
     private String address;
+
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     private Status status;
+
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
