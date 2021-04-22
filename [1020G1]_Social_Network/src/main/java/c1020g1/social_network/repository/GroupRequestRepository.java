@@ -26,4 +26,6 @@ public interface GroupRequestRepository extends JpaRepository<GroupRequest, Inte
     Page<GroupRequest> findAllByGroupAndKey(@Param("group_id") int groupId,@Param("key") String key, Pageable pageable);
 
     Page<GroupRequest> findAllByUser(User user, Pageable pageable);
+    @Query(value = "select * from group_request r where r.group_id = :group_id and r.user_id = :user_id",nativeQuery = true)
+    GroupRequest findExist(@Param("group_id") int groupId,@Param("user_id") int userId);
 }
