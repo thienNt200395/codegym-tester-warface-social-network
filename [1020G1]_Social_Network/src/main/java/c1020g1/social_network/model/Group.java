@@ -10,7 +10,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
-    private int groupId;
+    private Integer groupId;
     @Column(name = "group_name")
     private String groupName;
     @Column(name = "group_published")
@@ -26,11 +26,11 @@ public class Group {
     @Column(name = "scope")
     private String scope;
 
-    public int getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
