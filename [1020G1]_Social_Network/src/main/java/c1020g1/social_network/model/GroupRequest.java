@@ -3,7 +3,7 @@ package c1020g1.social_network.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "group_request")
+@Table(name = "[group_request]")
 public class GroupRequest {
 
     @Id

@@ -2,6 +2,7 @@ package c1020g1.social_network.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -10,7 +11,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private int postId;
+    private Integer postId;
     @Column(name = "post_content")
     private String postContent;
     @Column(name = "post_status")
@@ -23,6 +24,12 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private Group group;
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+
 
     public int getPostId() {
         return postId;
