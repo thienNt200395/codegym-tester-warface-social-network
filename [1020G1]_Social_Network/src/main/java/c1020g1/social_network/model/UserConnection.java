@@ -25,7 +25,7 @@ public class UserConnection implements Serializable {
     private String providerUserId;
 
     @Column(name = "Rank", nullable = false)
-    private int rank;
+    private Integer rank;
 
     @Column(name = "Displayname", nullable = true)
     private String displayName;
@@ -72,11 +72,11 @@ public class UserConnection implements Serializable {
         this.providerUserId = providerUserId;
     }
 
-    public int getRank() {
+    public Integer getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Integer rank) {
         this.rank = rank;
     }
 

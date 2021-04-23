@@ -9,7 +9,7 @@ public class ReferentAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "referent_account_id")
-    private int referenceAccountId;
+    private Integer referenceAccountId;
     @Column(name = "referent_account_url")
     private String referenceAccountEmail;
     @ManyToOne
@@ -18,11 +18,11 @@ public class ReferentAccount {
     @Column(name = "email_referent")
     private String emailReferent;
 
-    public int getReferenceAccountId() {
+    public Integer getReferenceAccountId() {
         return referenceAccountId;
     }
 
-    public void setReferenceAccountId(int referenceAccountId) {
+    public void setReferenceAccountId(Integer referenceAccountId) {
         this.referenceAccountId = referenceAccountId;
     }
 
