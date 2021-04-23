@@ -1,6 +1,7 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.Post;
+
 import c1020g1.social_network.model.PostImage;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.post.PostService;
@@ -66,4 +67,35 @@ public class PostController {
 
         return new ResponseEntity<>(listPostImage, HttpStatus.OK);
     }
+  
+   @PostMapping("")
+    public ResponseEntity<Void> createPost(@Validated @RequestBody Post post, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
+        if (bindingResult.hasFieldErrors()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        post.setPostPublished(new Timestamp(System.currentTimeMillis()));
+        System.out.println(post);
+        postService.createPost(post);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(post.getPostId()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<Post> editPost(@PathVariable("postId") Integer postId,@Validated @RequestBody Post post, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Post post1 = postService.findPotsById(postId);
+        if (post1 == null) {
+            System.out.println("Post with id " + postId + " not found!");
+            return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
+        }
+        post1.setPostContent(post.getPostContent());
+        post1.setPostStatus(post.getPostStatus());
+
+        postService.editPost(post1);
+        return new ResponseEntity<Post>(post1, HttpStatus.OK);
+    }
 }
+

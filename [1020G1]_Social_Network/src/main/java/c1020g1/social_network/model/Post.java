@@ -1,8 +1,8 @@
 package c1020g1.social_network.model;
 
+import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -19,9 +19,13 @@ public class Post {
     private Integer postId;
 
     @Column(name = "post_content")
+    @NotBlank(message = "Content not blank!!")
     private String postContent;
 
     @Column(name = "post_status")
+    @NotBlank(message = "Status not blank!!")
+    @Column(name = "post_status")
+
     private String postStatus;
 
     @Column(name = "post_published")

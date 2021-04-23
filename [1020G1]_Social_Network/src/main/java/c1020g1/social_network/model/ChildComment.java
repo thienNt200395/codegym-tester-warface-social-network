@@ -92,4 +92,5 @@ public class ChildComment implements Validator {
         if(childComment.getContent() == null && childComment.getCommentImage() == null)
             errors.reject("bad-request");
     }
+
 }
