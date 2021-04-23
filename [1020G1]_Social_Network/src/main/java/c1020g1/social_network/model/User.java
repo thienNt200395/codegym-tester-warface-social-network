@@ -173,23 +173,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                ", occupation='" + occupation + '\'' +
-                ", email='" + email + '\'' +
-                ", userAvatar='" + userAvatar + '\'' +
-                ", userBackground='" + userBackground + '\'' +
-                ", marriaged='" + marriaged + '\'' +
-                ", ward=" + ward +
-                ", address='" + address + '\'' +
-                ", status=" + status +
-                ", account=" + account +
-                '}';
-    }
+    
 }
