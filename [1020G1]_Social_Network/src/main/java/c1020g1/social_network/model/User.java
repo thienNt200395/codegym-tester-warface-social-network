@@ -38,6 +38,10 @@ public class User {
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     private Status status;
 
+    @OneToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    private Account account;
+
     public int getUserId() {
         return userId;
     }
@@ -132,5 +136,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

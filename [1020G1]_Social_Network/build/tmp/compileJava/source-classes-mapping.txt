@@ -26,10 +26,12 @@ c1020g1/social_network/model/Favourite.java
  c1020g1.social_network.model.Favourite
 c1020g1/social_network/model/account/JwtRequest.java
  c1020g1.social_network.model.account.JwtRequest
-c1020g1/social_network/config/WebSecurityConfig.java
- c1020g1.social_network.config.WebSecurityConfig
-c1020g1/social_network/config/JwtRequestFilter.java
- c1020g1.social_network.config.JwtRequestFilter
+c1020g1/social_network/sercurity/AccountPrincipal.java
+ c1020g1.social_network.sercurity.AccountPrincipal
+c1020g1/social_network/model/ParentComment.java
+ c1020g1.social_network.model.ParentComment
+c1020g1/social_network/model/PostImage.java
+ c1020g1.social_network.model.PostImage
 c1020g1/social_network/model/account/Account.java
  c1020g1.social_network.model.account.Account
 c1020g1/social_network/model/GroupRequest.java
@@ -58,13 +60,19 @@ c1020g1/social_network/model/FriendRequest.java
  c1020g1.social_network.model.FriendRequest
 c1020g1/social_network/model/GroupUser.java
  c1020g1.social_network.model.GroupUser
-c1020g1/social_network/service/account_service/implement/JwtAccountDetailService.java
- c1020g1.social_network.service.account_service.implement.JwtAccountDetailService
-c1020g1/social_network/model/ParentComment.java
- c1020g1.social_network.model.ParentComment
-c1020g1/social_network/model/PostImage.java
- c1020g1.social_network.model.PostImage
 c1020g1/social_network/service/account_service/implement/AccountServiceImp.java
  c1020g1.social_network.service.account_service.implement.AccountServiceImp
+c1020g1/social_network/config/WebSecurityConfig.java
+ c1020g1.social_network.config.WebSecurityConfig
+c1020g1/social_network/sercurity/AccountPrincipleFactory.java
+ c1020g1.social_network.sercurity.AccountPrincipleFactory
+c1020g1/social_network/model/account/Product.java
+ c1020g1.social_network.model.account.Product
+c1020g1/social_network/model/account/SocialResponse.java
+ c1020g1.social_network.model.account.SocialResponse
+c1020g1/social_network/service/account_service/implement/JwtAccountDetailService.java
+ c1020g1.social_network.service.account_service.implement.JwtAccountDetailService
+c1020g1/social_network/config/JwtRequestFilter.java
+ c1020g1.social_network.config.JwtRequestFilter
 c1020g1/social_network/controller/JwtAuthenticationController.java
  c1020g1.social_network.controller.JwtAuthenticationController

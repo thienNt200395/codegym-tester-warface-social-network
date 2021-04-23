@@ -51,9 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // tắt csrf
-        httpSecurity.csrf().disable()
+        httpSecurity.cors().and().csrf().disable()
                 // tắt xác thực cho các trang này
-                .authorizeRequests().antMatchers("/login", "/register", "/recover").permitAll().
+                .authorizeRequests().antMatchers("/login", "/register", "/recover", "/oauth/**").permitAll().
                 antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                 // các trang còn lại phải xác thực
                         anyRequest().authenticated().and().

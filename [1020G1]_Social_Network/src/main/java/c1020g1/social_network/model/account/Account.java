@@ -18,8 +18,7 @@ public class Account {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @OneToOne(mappedBy = "account")
     private User user;
 
     @OneToMany(mappedBy = "account")
