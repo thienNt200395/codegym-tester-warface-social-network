@@ -36,4 +36,5 @@ public class GroupUserServiceImpl implements GroupUserService {
     public GroupUser findExist(int groupId,int userId){
         return groupUserRepository.findExist(groupId,userId);
     }
+
 }

@@ -6,6 +6,8 @@ import c1020g1.social_network.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -13,5 +15,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(int id) {
         return userRepository.findByUserId(id);
+    }
+
+    @Override
+    public List<User> inviteFriendList(int groupId, int userId) {
+        return userRepository.inviteFriends(groupId, userId);
+    }
+
+    @Override
+    public List<User> inviteFriendsOfFriendsList(int groupId) {
+        return userRepository.inviteFriendsOfFriends(groupId);
     }
 }

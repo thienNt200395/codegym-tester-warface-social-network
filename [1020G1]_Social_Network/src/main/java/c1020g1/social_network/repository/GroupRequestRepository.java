@@ -21,7 +21,7 @@ public interface GroupRequestRepository extends JpaRepository<GroupRequest, Inte
     void deleteById(@Param("id") int id);
     @Query(value = "select * from group_request r " +
             "join `user` u on u.user_id = r.user_id " +
-            "where r.group_id = :group_id " +
+            "where r.group_id = :group_id and r.sender = 'admin'" +
             "and u.username like %:key%", nativeQuery = true)
     Page<GroupRequest> findAllByGroupAndKey(@Param("group_id") int groupId,@Param("key") String key, Pageable pageable);
 

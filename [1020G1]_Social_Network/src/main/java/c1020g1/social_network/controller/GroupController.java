@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("group")
@@ -31,7 +33,7 @@ public class GroupController {
     @GetMapping("/request/list/group/{id}")
     public ResponseEntity<Page<GroupRequest>> getRequestListByGroup(@PathVariable int id, @RequestParam(required = false) String key,
                                                                     Pageable pageable) {
-        if (key == null){
+        if (key == null) {
             key = "";
         }
         return new ResponseEntity<Page<GroupRequest>>(groupRequestService.findAllByGroupAndKey(id, key, pageable), HttpStatus.OK);
@@ -46,7 +48,7 @@ public class GroupController {
     @DeleteMapping("/request/delete/{id}")
     public ResponseEntity<Void> deleteRequest(@PathVariable int id) {
         if (groupRequestService.findById(id) == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         groupRequestService.deleteById(id);
         return new ResponseEntity<Void>(HttpStatus.OK);
@@ -55,15 +57,15 @@ public class GroupController {
     @PostMapping("/request/save")
     public ResponseEntity<Void> saveRequest(@RequestBody GroupRequest groupRequest) {
         if (groupRequest.getGroup() == null || groupRequest.getUser() == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         if (groupService.findById(groupRequest.getGroup().getGroupId()) == null
                 || userService.findById(groupRequest.getUser().getUserId()) == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        GroupUser groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(),groupRequest.getUser().getUserId());
-        if (groupRequestService.findExist(groupRequest) != null || groupUser != null){
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        GroupUser groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
+        if (groupRequestService.findExist(groupRequest) != null || groupUser != null) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         groupRequestService.save(groupRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -73,7 +75,7 @@ public class GroupController {
     public ResponseEntity<Void> acceptRequest(@PathVariable int id) {
         GroupRequest groupRequest = groupRequestService.findById(id);
         if (groupRequest == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         GroupUser groupUser = new GroupUser();
         groupUser.setGroup(groupRequest.getGroup());
@@ -83,31 +85,64 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/member/list")
-    public ResponseEntity<Page<GroupUser>> memberList(@RequestParam(required = false) String key, @PageableDefault(size = 1) Pageable pageable) {
+    @GetMapping("/member/list/{id}")
+    public ResponseEntity<Page<GroupUser>> memberList(@RequestParam(required = false) String key, @PathVariable int id,
+                                                      @PageableDefault(size = 11) Pageable pageable) {
         if (key == null) {
             key = "";
         }
-        Page<GroupUser> all = groupUserService.findAllByGroupAndUsernameContainingOrderByUsername(1, key, pageable);
+        Page<GroupUser> all = groupUserService.findAllByGroupAndUsernameContainingOrderByUsername(id, key, pageable);
         return new ResponseEntity<Page<GroupUser>>(all, HttpStatus.OK);
     }
 
     @PostMapping("/member/warning")
-    public ResponseEntity<Void> warning(@RequestBody GroupWarning groupWarning){
-        if (groupUserService.findById(groupWarning.getGroupUser().getGroupUserId()) == null){
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> warning(@RequestBody GroupWarning groupWarning) {
+        if (groupUserService.findById(groupWarning.getGroupUser().getGroupUserId()) == null) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         warningService.save(groupWarning);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/member/{id}")
+    public ResponseEntity<GroupUser> member(@PathVariable int id) {
+        GroupUser groupUser = groupUserService.findById(id);
+        if (groupUser == null) {
+            return new ResponseEntity<GroupUser>(groupUser, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<GroupUser>(groupUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/member/warning/{id}")
+    public ResponseEntity<Page<GroupWarning>> warningList(@PathVariable int id, @PageableDefault(size = 5) Pageable pageable) {
+        if (groupUserService.findById(id) == null) {
+            return new ResponseEntity<Page<GroupWarning>>(Page.empty(), HttpStatus.NO_CONTENT);
+        }
+        GroupUser groupUser = groupUserService.findById(id);
+        return new ResponseEntity<Page<GroupWarning>>(warningService.findAllByGroupUserOrderByWarningDateDesc(groupUser, pageable), HttpStatus.OK);
     }
 
     @DeleteMapping("/member/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id){
-        if (groupUserService.findById(id) != null){
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        if (groupUserService.findById(id) != null) {
             warningService.deleteByGroupUserId(id);
             groupUserService.deleteById(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
-        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/request/invite/list/{id}")
+    public ResponseEntity<List<User>> friendsOfFriendsInviteList(@PathVariable int id) {
+        return new ResponseEntity<List<User>>(userService.inviteFriendsOfFriendsList(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/request/invite/friends/{id}")
+    public ResponseEntity<List<User>> friendsInviteList(@PathVariable int id, @RequestParam int userId) {
+        List<User> list = userService.inviteFriendList(id, userId);
+        for (User user: list){
+            System.out.println(user.getUserName());
+        }
+        return new ResponseEntity<List<User>>(list, HttpStatus.OK);
     }
 }
