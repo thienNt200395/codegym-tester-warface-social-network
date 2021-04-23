@@ -23,8 +23,8 @@ public class PostServiceImpl implements PostService {
     private PostImageRepository postImageRepository;
 
     @Override
-    public Post findPotsById(Integer postId) {
-        return postRepository.findPostById(postId);
+    public Post getPostById(Integer postId) {
+        return postRepository.getPostById(postId);
     }
 
     @Override
@@ -41,10 +41,6 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void editPost(Post post) {
         postRepository.editPost(post.getPostContent(), post.getPostStatus(), post.getPostId());
-
-    @Override
-    public Post getPostById(Integer postId) {
-        return postRepository.getPostById(postId);
     }
 
     @Override

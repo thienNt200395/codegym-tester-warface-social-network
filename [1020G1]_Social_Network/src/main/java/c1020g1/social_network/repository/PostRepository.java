@@ -27,9 +27,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Modifying
     @Query(value = "update post set post_content = ?1, post_status = ?2 where post_id = ?3", nativeQuery = true)
     void editPost(String postContent, String postStatus, Integer postId);
-
-    @Query(value = "SELECT * FROM post WHERE post_id = ?1", nativeQuery = true)
-    Post findPostById(Integer postId);
   
     @Query(value = "SELECT * \n" +
             "FROM post \n" +

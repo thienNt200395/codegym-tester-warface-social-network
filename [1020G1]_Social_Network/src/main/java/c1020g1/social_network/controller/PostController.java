@@ -7,10 +7,15 @@ import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.post.PostService;
 import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -86,7 +91,7 @@ public class PostController {
         if (bindingResult.hasFieldErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Post post1 = postService.findPotsById(postId);
+        Post post1 = postService.getPostById(postId);
         if (post1 == null) {
             System.out.println("Post with id " + postId + " not found!");
             return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);

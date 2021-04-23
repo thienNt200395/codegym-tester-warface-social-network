@@ -24,8 +24,6 @@ public class Post {
 
     @Column(name = "post_status")
     @NotBlank(message = "Status not blank!!")
-    @Column(name = "post_status")
-
     private String postStatus;
 
     @Column(name = "post_published")
