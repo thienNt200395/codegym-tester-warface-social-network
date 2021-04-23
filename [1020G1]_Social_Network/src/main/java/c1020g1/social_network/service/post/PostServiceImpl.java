@@ -1,6 +1,8 @@
 package c1020g1.social_network.service.post;
 
 import c1020g1.social_network.model.Post;
+import c1020g1.social_network.model.PostImage;
+import c1020g1.social_network.repository.PostImageRepository;
 import c1020g1.social_network.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private PostImageRepository postImageRepository;
 
 //    @Override
 //    public List<Post> getAllPostInWall(Integer userId) {
@@ -33,6 +38,11 @@ public class PostServiceImpl implements PostService {
 //    }
 
     @Override
+    public Post getPostById(Integer postId) {
+        return postRepository.getPostById(postId);
+    }
+
+    @Override
     public List<Post> getAllPostInNewsFeed(Integer userId) {
         List<Post> postsInWall = postRepository.getAllPostInWall(userId);
 
@@ -47,5 +57,10 @@ public class PostServiceImpl implements PostService {
         postsInNewsFeed.sort(Comparator.comparing(Post::getPostPublished));
 
         return postsInNewsFeed;
+    }
+
+    @Override
+    public List<PostImage> getAllImageByPostId(Integer postId) {
+        return postImageRepository.getAllImageByPostId(postId);
     }
 }

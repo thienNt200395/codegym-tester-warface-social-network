@@ -1,11 +1,14 @@
 package c1020g1.social_network.model;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "parent_comment")
-public class ParentComment {
+public class ParentComment implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,5 +90,18 @@ public class ParentComment {
                 ", post=" + post +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return ParentComment.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ParentComment parentComment =(ParentComment) target;
+
+        if(parentComment.getContent() == null && parentComment.getCommentImage() == null)
+            errors.reject("bad-request");
     }
 }

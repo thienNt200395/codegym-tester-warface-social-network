@@ -10,6 +10,10 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
+    @Query(value = "SELECT * \n" +
+            "FROM post \n" +
+            "WHERE post_id = ?1", nativeQuery = true)
+    Post getPostById(Integer postId);
 
     @Query(value = "SELECT * " +
             "FROM post " +
