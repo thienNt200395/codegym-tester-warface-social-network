@@ -7,6 +7,9 @@ import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.post.PostService;
 import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,29 +31,14 @@ public class PostController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/wall/{id}")
-//    public ResponseEntity<List<Post>> findAllPostInWall(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostInWall(userId), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/group/{id}")
-//    public ResponseEntity<List<Post>> findAllPostInGroupUser(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostInGroupUser(userId), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/friend/{id}")
-//    public ResponseEntity<List<Post>> findAllPostOfFriendUser(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostOfFriendUser(userId), HttpStatus.OK);
-//    }
-
     @GetMapping("/newsfeed/{userId}")
-    public ResponseEntity<List<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId){
+    public ResponseEntity<Page<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable){
         User userFromDb = userService.getUserById(userId);
 
         if(userFromDb == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        List<Post> result = postService.getAllPostInNewsFeed(userId);
+        Page<Post> result = postService.getAllPostInNewsFeed(userId, pageable);
 
         if(result.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
