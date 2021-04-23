@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
@@ -25,6 +26,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 //    testImplementation 'org.springframework.security:spring-security-test'
+=======
+//    implementation 'org.springframework.boot:spring-boot-starter-mail'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'mysql:mysql-connector-java'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+>>>>>>> e6b238dc9a414cc0bd0c87ed746d11ee0813bae3
 }
 
 test {
