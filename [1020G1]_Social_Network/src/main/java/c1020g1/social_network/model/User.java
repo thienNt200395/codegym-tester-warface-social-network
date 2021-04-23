@@ -10,7 +10,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
     @Column(name = "username", nullable = false)
     private String userName;
     @Column(name = "birthday", nullable = false)
@@ -39,11 +39,11 @@ public class User {
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
