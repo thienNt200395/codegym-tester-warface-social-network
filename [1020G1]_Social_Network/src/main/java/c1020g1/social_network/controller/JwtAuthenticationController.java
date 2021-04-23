@@ -31,7 +31,6 @@ public class JwtAuthenticationController {
     String googleClientId;
 
 
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -41,14 +40,11 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtAccountDetailService jwtAccountDetailService;
 
-//    @RequestMapping(value = "/register", method = RequestMethod.POST)
-//    public ResponseEntity<?> saveUser(@RequestBody AccountDTO accountDTO) throws Exception {
-//        return ResponseEntity.ok(jwtAccountDetailService.save(accountDTO));
-//    }
 
-    @GetMapping(value = "/error-page")
-    public ResponseEntity<?> test() {
-        return ResponseEntity.ok(new AccountDTO());
+    @GetMapping(value = "/error-page/{accountName}")
+    public ResponseEntity<?> test(@PathVariable("accountName") String accountName) {
+        c1020g1.social_network.model.User user = jwtAccountDetailService.getAccount(accountName).getUser();
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping(value = "/login")
@@ -103,6 +99,7 @@ public class JwtAuthenticationController {
     @PostMapping("oauth/facebook")
     public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) throws IOException {
         Facebook facebook = new FacebookTemplate(jwtResponseSocial.getToken());
+
         final String[] fields = {"email","picture"};
         User user = facebook.fetchObject("me",User.class,fields);
         Account account = jwtAccountDetailService.getAccount(user.getEmail());

@@ -1,6 +1,7 @@
 package c1020g1.social_network.model;
 
 import c1020g1.social_network.model.account.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JsonBackReference
     private Account account;
 
     public int getUserId() {
