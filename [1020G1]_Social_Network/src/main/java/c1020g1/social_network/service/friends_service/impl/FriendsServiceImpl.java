@@ -6,14 +6,36 @@ import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
-
 @Service
+@Transactional
 public class FriendsServiceImpl implements FriendsService {
 
     @Autowired
-    FriendsRepository friendsRepository;
+    private FriendsRepository friendsRepository;
+
+    @Override
+    public List<Friends> findAllFriendById(Integer id) {
+        return friendsRepository.findAllFriendById(id);
+    }
+
+    @Override
+    public List<Object> getAllSuggestFriend(Integer id) {
+        return friendsRepository.getAllSuggestFriend(id);
+    }
+
+    @Override
+    public Friends findFriendsById(Integer id) {
+        return friendsRepository.findFriendsById(id);
+    }
+
+    @Override
+    public void deleteFriends(Integer id) {
+        friendsRepository.deleteFriendsByFriendsId(id);
+    }
 
     @Override
     public String addNewFriend(Friends friends) {
@@ -26,10 +48,4 @@ public class FriendsServiceImpl implements FriendsService {
         friendsRepository.save(friends);
         return "OK";
     }
-
-    @Override
-    public List<Friends> findAllFriendById(Integer idUser) {
-        return friendsRepository.findAllFriendById(idUser);
-    }
-
 }

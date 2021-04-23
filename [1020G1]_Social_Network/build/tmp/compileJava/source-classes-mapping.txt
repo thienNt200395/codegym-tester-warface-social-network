@@ -8,22 +8,51 @@ c1020g1/social_network/model/Post.java
  c1020g1.social_network.model.Post
 c1020g1/social_network/model/ChildComment.java
  c1020g1.social_network.model.ChildComment
-c1020g1/social_network/model/User.java
- c1020g1.social_network.model.User
 c1020g1/social_network/model/FavouriteUser.java
  c1020g1.social_network.model.FavouriteUser
 c1020g1/social_network/model/Friends.java
  c1020g1.social_network.model.Friends
 c1020g1/social_network/model/Status.java
  c1020g1.social_network.model.Status
+<<<<<<< HEAD
+=======
 c1020g1/social_network/model/Province.java
  c1020g1.social_network.model.Province
 c1020g1/social_network/model/GroupWarning.java
  c1020g1.social_network.model.GroupWarning
+>>>>>>> e6b238dc9a414cc0bd0c87ed746d11ee0813bae3
 c1020g1/social_network/model/Group.java
  c1020g1.social_network.model.Group
 c1020g1/social_network/model/Favourite.java
  c1020g1.social_network.model.Favourite
+<<<<<<< HEAD
+c1020g1/social_network/model/FriendRequest.java
+ c1020g1.social_network.model.FriendRequest
+c1020g1/social_network/model/GroupUser.java
+ c1020g1.social_network.model.GroupUser
+c1020g1/social_network/model/PostImage.java
+ c1020g1.social_network.model.PostImage
+c1020g1/social_network/model/UserConnection.java
+ c1020g1.social_network.model.UserConnection
+c1020g1/social_network/controller/UserController.java
+ c1020g1.social_network.controller.UserController
+c1020g1/social_network/model/ParentComment.java
+ c1020g1.social_network.model.ParentComment
+c1020g1/social_network/model/PersistentLogins.java
+ c1020g1.social_network.model.PersistentLogins
+c1020g1/social_network/model/ReferentAccount.java
+ c1020g1.social_network.model.ReferentAccount
+c1020g1/social_network/model/User.java
+ c1020g1.social_network.model.User
+c1020g1/social_network/model/Ward.java
+ c1020g1.social_network.model.Ward
+c1020g1/social_network/model/Province.java
+ c1020g1.social_network.model.Province
+c1020g1/social_network/model/GroupWarning.java
+ c1020g1.social_network.model.GroupWarning
+c1020g1/social_network/model/District.java
+ c1020g1.social_network.model.District
+=======
 c1020g1/social_network/service/user_service/impl/UserServiceImpl.java
  c1020g1.social_network.service.user_service.impl.UserServiceImpl
 c1020g1/social_network/model/GroupUser.java
@@ -56,13 +85,19 @@ c1020g1/social_network/repository/friend_request_repository/FriendRequestReposit
  c1020g1.social_network.repository.friend_request_repository.FriendRequestRepository
 c1020g1/social_network/controller/FriendsController.java
  c1020g1.social_network.controller.FriendsController
+>>>>>>> e6b238dc9a414cc0bd0c87ed746d11ee0813bae3
 c1020g1/social_network/service/friends_service/FriendsService.java
  c1020g1.social_network.service.friends_service.FriendsService
 c1020g1/social_network/service/friends_service/impl/FriendsServiceImpl.java
  c1020g1.social_network.service.friends_service.impl.FriendsServiceImpl
 c1020g1/social_network/repository/friends_repository/FriendsRepository.java
  c1020g1.social_network.repository.friends_repository.FriendsRepository
+<<<<<<< HEAD
+c1020g1/social_network/controller/FriendsController.java
+ c1020g1.social_network.controller.FriendsController
+=======
 c1020g1/social_network/service/friend_request_service/impl/FriendRequestServiceImpl.java
  c1020g1.social_network.service.friend_request_service.impl.FriendRequestServiceImpl
 c1020g1/social_network/controller/FriendRequestController.java
  c1020g1.social_network.controller.FriendRequestController
+>>>>>>> e6b238dc9a414cc0bd0c87ed746d11ee0813bae3
