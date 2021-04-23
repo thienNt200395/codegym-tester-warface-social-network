@@ -16,8 +16,8 @@ public class GroupWarning {
     @ManyToOne
     @JoinColumn(name = "group_user_id", referencedColumnName = "group_user_id")
     private GroupUser groupUser;
-    @Column(name = "warning_date",nullable = false)
-    private Date warningDate;
+    @Column(name = "warning_date",nullable = false,columnDefinition = "date")
+    private String warningDate;
 
     public Integer getGroupWarningId() {
         return groupWarningId;
@@ -43,11 +43,11 @@ public class GroupWarning {
         this.groupUser = groupUser;
     }
 
-    public Date getWarningDate() {
+    public String getWarningDate() {
         return warningDate;
     }
 
-    public void setWarningDate(Date warningDate) {
+    public void setWarningDate(String warningDate) {
         this.warningDate = warningDate;
     }
 }
