@@ -9,7 +9,7 @@ public class GroupUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_user_id")
-    private int groupUserId;
+    private Integer groupUserId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private Group group;
@@ -17,7 +17,7 @@ public class GroupUser {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
-    public int getGroupUserId() {
+    public Integer getGroupUserId() {
         return groupUserId;
     }
 
