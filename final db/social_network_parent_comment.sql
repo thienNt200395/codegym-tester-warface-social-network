@@ -34,7 +34,7 @@ CREATE TABLE `parent_comment` (
   KEY `user_idx` (`user_id`),
   CONSTRAINT `dsaf` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `post` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `parent_comment` (
 
 LOCK TABLES `parent_comment` WRITE;
 /*!40000 ALTER TABLE `parent_comment` DISABLE KEYS */;
-INSERT INTO `parent_comment` VALUES (1,'this is a parent comment of user_2',NULL,1,2,'2021-01-01 18:05:20'),(2,'this is a parent comment of user_3',NULL,1,3,'2021-01-01 09:05:20'),(3,'this is a parent comment of user_4',NULL,2,4,'2021-01-01 10:05:20'),(4,'this is a parent comment of user_1',NULL,3,1,'2021-01-01 11:05:20'),(5,'this is a parent comment of user_4',NULL,3,4,'2021-01-01 12:05:20'),(6,'this is a parent comment of user_2',NULL,4,2,'2021-01-01 13:05:20'),(7,'this is a parent comment of user_1',NULL,5,1,'2021-01-01 14:05:20'),(8,'this is a parent comment of user_3',NULL,6,3,'2021-01-01 15:05:20'),(9,'this is a parent comment of user_1',NULL,7,1,'2021-01-01 16:05:20'),(10,'this is a parent comment of user_4',NULL,7,4,'2021-01-01 17:05:20'),(11,'fsdafds','fdsafsd',1,2,'2021-01-01 17:10:20'),(15,'test create with current time','fdas',1,2,'2021-04-22 11:41:00');
+INSERT INTO `parent_comment` VALUES (1,'this is a parent comment of user_2',NULL,1,2,'2021-01-01 18:05:20'),(2,'this is a parent comment of user_3',NULL,1,3,'2021-01-01 09:05:20'),(3,'this is a parent comment of user_4',NULL,2,4,'2021-01-01 10:05:20'),(4,'this is a parent comment of user_1',NULL,3,1,'2021-01-01 11:05:20'),(5,'this is a parent comment of user_4',NULL,3,4,'2021-01-01 12:05:20'),(6,'this is a parent comment of user_2',NULL,4,2,'2021-01-01 13:05:20'),(7,'this is a parent comment of user_1',NULL,5,1,'2021-01-01 14:05:20'),(8,'this is a parent comment of user_3',NULL,6,3,'2021-01-01 15:05:20'),(9,'this is a parent comment of user_1',NULL,7,1,'2021-01-01 16:05:20'),(10,'this is a parent comment of user_4',NULL,7,4,'2021-01-01 17:05:20'),(11,'fsdafds','fdsafsd',1,2,'2021-01-01 17:10:20'),(15,'test create with current time','fdas',1,2,'2021-04-22 11:41:00'),(16,'test validation',NULL,1,3,'2021-04-23 09:48:49');
 /*!40000 ALTER TABLE `parent_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-22 14:01:34
+-- Dump completed on 2021-04-23  9:59:24

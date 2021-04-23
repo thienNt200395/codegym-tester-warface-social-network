@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `group_request`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `group_request` (
   `group_request_id` int NOT NULL AUTO_INCREMENT,
-  `from` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sender` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `group_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`group_request_id`),
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-22 14:01:33
+-- Dump completed on 2021-04-23  9:59:23
