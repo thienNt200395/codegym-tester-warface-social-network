@@ -1,6 +1,7 @@
 package c1020g1.social_network.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
 @Entity
@@ -11,15 +12,22 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Integer postId;
+
     @Column(name = "post_content")
+    @NotBlank(message = "Content not blank!!")
     private String postContent;
+
     @Column(name = "post_status")
+    @NotBlank(message = "Status not blank!!")
     private String postStatus;
+
     @Column(name = "post_published")
     private Timestamp postPublished;
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
