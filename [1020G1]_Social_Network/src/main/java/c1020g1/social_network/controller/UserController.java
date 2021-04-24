@@ -3,7 +3,6 @@ package c1020g1.social_network.controller;
 import c1020g1.social_network.model.*;
 import c1020g1.social_network.model.dto.UserCreateDTO;
 import c1020g1.social_network.model.dto.UserResultMessageDTO;
-import c1020g1.social_network.repository.UserRepository;
 import c1020g1.social_network.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 
     @Autowired

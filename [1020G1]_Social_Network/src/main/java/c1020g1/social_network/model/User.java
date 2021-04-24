@@ -20,7 +20,6 @@ public class User {
 
     @Column(name = "birthday", nullable = false)
     @NotNull(message = "required")
-    @Past(message = "unexpected_value")
     private Date birthday;
 
     @Pattern(regexp = "^(male|female)$", message = "unexpected_value")
@@ -39,12 +38,10 @@ public class User {
 
     @Column(name = "user_avatar")
     @NotBlank(message = "required")
-    @Pattern(regexp = "(?i).*\\.(png|jpeg)$",message = "wrong_format")
     private String userAvatar;
 
     @Column(name = "user_background")
     @NotBlank(message = "required")
-    @Pattern(regexp = "(?i).*\\.(png|jpeg)$",message = "wrong_format")
     private String userBackground;
 
     @Column(name = "marriaged", nullable = false)
@@ -173,5 +170,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
 }
