@@ -4,6 +4,7 @@ import c1020g1.social_network.config.JwtTokenUtil;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.model.account.*;
 import c1020g1.social_network.service.UserService;
+
 import c1020g1.social_network.service.account_service.implement.JwtAccountDetailService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -21,7 +22,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.social.facebook.api.Facebook;
-
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,11 +54,6 @@ public class JwtAuthenticationController {
     public UserService userService;
 
 
-//    @GetMapping(value = "/error-page/{accountName}")
-//    public ResponseEntity<?> test(@PathVariable("accountName") String accountName) {
-//        User user = jwtAccountDetailService.getAccount(accountName).getUser();
-//        return ResponseEntity.ok(user);
-//    }
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) {

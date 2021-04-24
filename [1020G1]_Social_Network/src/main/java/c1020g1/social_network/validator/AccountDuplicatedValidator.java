@@ -1,7 +1,6 @@
 package c1020g1.social_network.validator;
 
 import c1020g1.social_network.annotation.AccountDuplicated;
-
 import c1020g1.social_network.model.account.Account;
 import c1020g1.social_network.repository.account_repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
