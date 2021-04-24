@@ -3,7 +3,7 @@ package c1020g1.social_network.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "group_request")
+@Table(name = "[group_request]")
 public class GroupRequest {
 
     @Id
@@ -16,8 +16,10 @@ public class GroupRequest {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-    @Column(name = "from")
+    @Column(name = "[from]")
     private String from;
+
+
 
     public int getGroupRequestId() {
         return groupRequestId;

@@ -1,4 +1,4 @@
-package c1020g1.social_network.model;
+package c1020g1.social_network.model.account;
 
 import javax.persistence.*;
 

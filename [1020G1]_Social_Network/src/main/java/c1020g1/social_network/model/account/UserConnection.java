@@ -1,4 +1,4 @@
-package c1020g1.social_network.model;
+package c1020g1.social_network.model.account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class UserConnection implements Serializable {
     @Column(name = "Provideruserid", length = 255, nullable = false)
     private String providerUserId;
 
-    @Column(name = "Rank", nullable = false)
+    @Column(name = "`Rank`", nullable = false)
     private int rank;
 
     @Column(name = "Displayname", nullable = true)
