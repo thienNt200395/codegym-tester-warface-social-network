@@ -15,17 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface GroupRequestRepository extends JpaRepository<GroupRequest, Integer> {
     @Query(value = "select * from group_request where group_request_id = :id",nativeQuery = true)
-    GroupRequest findById(@Param("id") int id);
+    GroupRequest findByGroupId(@Param("id") Integer id);
     @Modifying
     @Query(value = "delete from group_request where group_request_id = :id",nativeQuery = true)
-    void deleteById(@Param("id") int id);
+    void deleteById(@Param("id") Integer id);
     @Query(value = "select * from group_request r " +
             "join `user` u on u.user_id = r.user_id " +
             "where r.group_id = :group_id and r.sender = 'admin'" +
             "and u.username like %:key%", nativeQuery = true)
-    Page<GroupRequest> findAllByGroupAndKey(@Param("group_id") int groupId,@Param("key") String key, Pageable pageable);
+    Page<GroupRequest> findAllByGroupAndKey(@Param("group_id") Integer groupId, @Param("key") String key, Pageable pageable);
 
     Page<GroupRequest> findAllByUser(User user, Pageable pageable);
     @Query(value = "select * from group_request r where r.group_id = :group_id and r.user_id = :user_id",nativeQuery = true)
-    GroupRequest findExist(@Param("group_id") int groupId,@Param("user_id") int userId);
+    GroupRequest findExist(@Param("group_id") Integer groupId,@Param("user_id") Integer userId);
 }

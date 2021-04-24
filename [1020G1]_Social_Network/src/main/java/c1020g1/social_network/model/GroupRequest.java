@@ -23,7 +23,7 @@ public class GroupRequest {
         return groupRequestId;
     }
 
-    public void setGroupRequestId(int groupRequestId) {
+    public void setGroupRequestId(Integer groupRequestId) {
         this.groupRequestId = groupRequestId;
     }
 
@@ -31,7 +31,7 @@ public class GroupRequest {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(Group groupSocial) {
         this.group = group;
     }
 

@@ -6,7 +6,6 @@ import java.util.Date;
 @Entity
 @Table(name = "group_social")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
@@ -30,7 +29,7 @@ public class Group {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 

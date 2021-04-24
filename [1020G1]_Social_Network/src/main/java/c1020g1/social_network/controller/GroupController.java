@@ -1,6 +1,16 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.GroupRequest;
+import c1020g1.social_network.model.Group;
+import c1020g1.social_network.model.GroupUser;
+import c1020g1.social_network.model.Post;
+import c1020g1.social_network.service.GroupRequestService;
+import c1020g1.social_network.service.GroupService;
+import c1020g1.social_network.service.GroupUserService;
+import c1020g1.social_network.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import c1020g1.social_network.model.GroupUser;
 import c1020g1.social_network.model.GroupWarning;
 import c1020g1.social_network.model.User;
@@ -16,8 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("group")
+@CrossOrigin("http://localhost:4200")
 public class GroupController {
     @Autowired
     private GroupRequestService groupRequestService;
@@ -28,6 +37,107 @@ public class GroupController {
     @Autowired
     private GroupUserService groupUserService;
     @Autowired
+    private PostService postService;  // getAllGroupMember():Observable<any>{
+    //   return this.http.get((this.API + '/member'))
+    // }
+    
+    //show list group
+    @RequestMapping(value = "/group", method = RequestMethod.GET)
+    public ResponseEntity<List<Group>> listAllGroup() {
+        List<Group> Groups = groupService.findAll();
+        if (Groups.isEmpty()) {
+            return new ResponseEntity<List<Group>>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<List<Group>>(Groups, HttpStatus.OK);
+        }
+    }
+
+    //tim kiem group theo ten
+    @RequestMapping(value = "/group/{name}", method = RequestMethod.GET)
+    public ResponseEntity<List<Group>> listGroupByName(@PathVariable String name){
+        List<Group> Groups = groupService.findGroupByNameContaining(name);
+        if(Groups.isEmpty()){
+            return new ResponseEntity<List<Group>>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<List<Group>>(Groups, HttpStatus.OK);
+        }
+    }
+
+    //hien group detail
+    @RequestMapping(value = "/group-detail/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Group> getGroup(@PathVariable("id") Integer id) {
+        System.out.println("Fetching Group with id " + id);
+        Group Group = groupService.findById(id);
+        if (Group == null) {
+            System.out.println("Group with id " + id + " not found");
+            return new ResponseEntity<Group>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Group>(Group, HttpStatus.OK);
+    }
+
+    //Xoa group
+    @RequestMapping(value = "/group/delete-{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Group> deleteGroup(@PathVariable("id") Integer id) {
+        System.out.println("Fetching & Deleting Group with id " + id);
+
+        Group Group = groupService.findById(id);
+        if (Group == null) {
+            System.out.println("Unable to delete. Group with id " + id + " not found");
+            return new ResponseEntity<Group>(HttpStatus.NOT_FOUND);
+        }
+        groupService.remove(id);
+        return new ResponseEntity<Group>(HttpStatus.NO_CONTENT);
+    }
+
+    //list Member
+    @RequestMapping(value = "/group-member/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<GroupUser>> listAllGroupMember(@PathVariable Integer id) {
+        List<GroupUser> groupUsers = groupUserService.findAllGroupMember(id);
+        if (groupUsers.isEmpty()) {
+            return new ResponseEntity<List<GroupUser>>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<List<GroupUser>>(groupUsers, HttpStatus.OK);
+        }
+    }
+
+    //Display page feed
+    @RequestMapping(value = "/group-list-post/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> listAllPostGroup(@PathVariable Integer id) {
+        List<Post> posts = postService.findAllPostGroup(id);
+        if (posts.isEmpty()) {
+            return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+        }
+    }
+
+    //edit Group
+    @RequestMapping(value = "/group-edit/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Group> updateGroup(@PathVariable("id") Integer id, @RequestBody Group Group) {
+        System.out.println("Updating Group " + id);
+
+        Group currentGroup = groupService.findById(id);
+
+        if (currentGroup == null) {
+            System.out.println("Customer with id " + id + " not found");
+            return new ResponseEntity<Group>(HttpStatus.NOT_FOUND);
+        }
+
+        currentGroup.setImageAvatarUrl(Group.getImageAvatarUrl());
+        currentGroup.setImageBackground(Group.getImageBackground());
+        currentGroup.setScope(Group.getScope());
+
+        groupService.save(currentGroup);
+        return new ResponseEntity<Group>(currentGroup, HttpStatus.OK);
+    }
+
+    //Gui request join group
+    @RequestMapping(value = "/group-request", method = RequestMethod.POST)
+    public ResponseEntity<GroupRequest> requestGroup(@RequestBody GroupRequest groupRequest) {
+        if (groupRequestService.addGroupRequest(groupRequest).equals("NG"))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     private WarningService warningService;
 
     @GetMapping("/request/list/group/{id}")
