@@ -45,12 +45,12 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "FROM friends fr\n" +
             "JOIN user u USING (user_id)\n" +
             "JOIN post p ON fr.friend_id = p.user_id \n" +
-            "WHERE fr.user_id = ?1\n" +
+            "WHERE fr.user_id = :userId\n" +
             "UNION \n" +
             "SELECT *\n" +
             "FROM post \n" +
-            "WHERE user_id = ?1 \n" +
-            "ORDER BY post_published",countQuery= "SELECT count(*) from friends\n", nativeQuery = true)
-    Page<Post> getAllPostInNewsFeed(Integer userId, Pageable pageable);
+            "WHERE user_id = :userId \n" +
+            "ORDER BY post_published DESC ",countQuery= "SELECT count(*) from friends\n", nativeQuery = true)
+    Page<Post> getAllPostInNewsFeed(@Param("userId") Integer userId, Pageable pageable);
 
 }

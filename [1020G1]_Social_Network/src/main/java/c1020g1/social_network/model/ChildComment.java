@@ -1,5 +1,8 @@
 package c1020g1.social_network.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -8,6 +11,9 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "child_comment")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "childCommentId")
 public class ChildComment implements Validator {
 
     @Id

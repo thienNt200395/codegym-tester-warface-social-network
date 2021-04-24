@@ -2,9 +2,11 @@ package c1020g1.social_network.model;
 
 import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -36,6 +38,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
+
+    @OneToMany(mappedBy = "post")
+    private List<ParentComment> parentComments;
 
     public Integer getPostId() {
         return postId;
@@ -83,5 +88,13 @@ public class Post {
 
     public void setGroupSocial(GroupSocial groupSocial) {
         this.groupSocial = groupSocial;
+    }
+
+    public List<ParentComment> getParentComments() {
+        return parentComments;
+    }
+
+    public void setParentComments(List<ParentComment> parentComments) {
+        this.parentComments = parentComments;
     }
 }
