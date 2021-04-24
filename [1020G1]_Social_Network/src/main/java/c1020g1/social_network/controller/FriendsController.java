@@ -2,6 +2,8 @@ package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.FriendRequest;
 import c1020g1.social_network.model.Friends;
+import c1020g1.social_network.model.SuggestFriend;
+import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.friend_request_service.FriendRequestService;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,8 @@ public class FriendsController {
 
     //show List Suggest Friend
     @RequestMapping(value = "friend-suggest/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Object>> showListSuggest(@PathVariable Integer id) {
-        List<Object> friendSuggestList = friendsService.getAllSuggestFriend(id);
+    public ResponseEntity<List<SuggestFriend>> showListSuggest(@PathVariable Integer id) {
+        List<SuggestFriend> friendSuggestList = friendsService.getAllSuggestFriend(id);
         if (friendSuggestList == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
