@@ -71,9 +71,4 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         }
         return "NG";
     }
-
-    @Override
-    public FriendRequest getFriendRequest(Integer idFriendRequest) {
-        return friendRequestRepository.findByFriendRequestId(idFriendRequest);
-    }
 }

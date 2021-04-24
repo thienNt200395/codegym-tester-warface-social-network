@@ -1,6 +1,7 @@
 package c1020g1.social_network.service.friends_service.impl;
 
 import c1020g1.social_network.model.Friends;
+import c1020g1.social_network.model.User;
 import c1020g1.social_network.repository.friends_repository.FriendsRepository;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class FriendsServiceImpl implements FriendsService {
     @Override
     public List<Friends> findAllFriendById(Integer idUser) {
         return friendsRepository.findAllFriendById(idUser);
+    }
+
+    @Override
+    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+        return friendsRepository.findMutualFriend(receiveUser,sendUser);
     }
 
 }
