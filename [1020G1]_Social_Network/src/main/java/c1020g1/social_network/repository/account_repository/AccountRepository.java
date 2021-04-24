@@ -14,6 +14,10 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query(value = "INSERT INTO account (account_name, password) VALUES (:#{#account.accountName}, :#{#account.password})",nativeQuery = true)
     void createAccount(Account account);
 
+    @Modifying
+    @Query(value ="UPDATE account SET password = :password WHERE account_name = :accountName",nativeQuery = true)
+    void updateAccount(@Param("password") String encodePw, @Param("accountName") String accountName );
+
 
     @Query(value = "SELECT * FROM account WHERE account.account_name = :accountName", nativeQuery = true)
     Account getAccountByName(@Param("accountName") String accountName);
