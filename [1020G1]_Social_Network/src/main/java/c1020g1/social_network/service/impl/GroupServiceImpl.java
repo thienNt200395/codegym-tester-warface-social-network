@@ -1,7 +1,6 @@
 package c1020g1.social_network.service.impl;
 
-import c1020g1.social_network.model.GroupSocial;
-import c1020g1.social_network.model.GroupUser;
+import c1020g1.social_network.model.Group;
 import c1020g1.social_network.repository.GroupRepository;
 import c1020g1.social_network.service.GroupService;
 import c1020g1.social_network.service.GroupUserService;
@@ -18,30 +17,32 @@ public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
     @Autowired
     private GroupUserService groupUserService;
+
     @Override
-    public List<GroupSocial> findAll() {
+    public List<Group> findAll() {
         return groupRepository.findAllGroup();
     }
 
     @Override
-    public List<GroupSocial> findGroupByNameContaining(String name) {
+    public List<Group> findGroupByNameContaining(String name) {
         return groupRepository.findGroupByGroupNameContaining(name);
     }
 
     @Override
-    public void save(GroupSocial groupSocial) {
-        groupRepository.updateGroup(groupSocial.getImageBackground(),groupSocial.getImageAvatarUrl(),groupSocial.getScope(),groupSocial.getGroupId());
+    public void save(Group group) {
+        groupRepository.updateGroup(group.getImageBackground(), group.getImageAvatarUrl(), group.getScope(), group.getGroupId());
     }
-//
+
+    //
 //    @Override
 //    public List<GroupUser> findAllGroupMember(Integer id) {
 //        return groupRepository.findAllGroupMember(id);
 //    }
-
     @Override
-    public GroupSocial findById(Integer id) {
+    public Group findById(Integer id) {
         return groupRepository.findGroupById(id);
     }
+
 
     @Override
     public void remove(Integer id) {
@@ -50,6 +51,4 @@ public class GroupServiceImpl implements GroupService {
 //        if ()
         groupRepository.removeGroupById(id);
     }
-
-
 }

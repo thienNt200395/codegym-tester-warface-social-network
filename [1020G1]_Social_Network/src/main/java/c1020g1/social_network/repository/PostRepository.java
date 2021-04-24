@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,Integer> {
-    @Query("select p from Post p where p.groupSocial.groupId=?1")
+    @Query("select p from Post p where p.group.groupId=?1")
     List<Post> findAllPostGroup(Integer id);
 }

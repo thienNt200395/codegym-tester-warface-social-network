@@ -1,15 +1,17 @@
 package c1020g1.social_network.service;
 
-import c1020g1.social_network.model.GroupSocial;
-import c1020g1.social_network.model.GroupUser;
+import c1020g1.social_network.model.Group;
 
 import java.util.List;
 
 public interface GroupService {
-    List<GroupSocial> findAll();
-    List<GroupSocial> findGroupByNameContaining(String name);
+    List<Group> findAll();
 
-    void save(GroupSocial groupSocial);
-    GroupSocial findById(Integer id);
+    List<Group> findGroupByNameContaining(String name);
+
+    void save(Group groupSocial);
+
+    Group findById(Integer id);
+
     void remove(Integer id);
 }

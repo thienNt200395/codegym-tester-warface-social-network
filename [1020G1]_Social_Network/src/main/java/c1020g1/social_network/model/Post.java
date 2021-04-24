@@ -22,7 +22,7 @@ public class Post {
     private User user;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial groupSocial;
+    private Group group;
 
     public Integer getPostId() {
         return postId;
@@ -64,11 +64,11 @@ public class Post {
         this.user = user;
     }
 
-    public GroupSocial getGroupSocial() {
-        return groupSocial;
+    public Group getGroupSocial() {
+        return group;
     }
 
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
+    public void setGroupSocial(Group groupSocial) {
+        this.group = groupSocial;
     }
 }
