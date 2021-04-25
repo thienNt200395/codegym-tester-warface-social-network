@@ -1,6 +1,6 @@
 package c1020g1.social_network.sercurity;
 
-import c1020g1.social_network.model.account.Account;
+import c1020g1.social_network.model.Account;
 
 import java.util.ArrayList;
 

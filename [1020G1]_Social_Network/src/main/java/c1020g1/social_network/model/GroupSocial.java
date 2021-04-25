@@ -6,7 +6,6 @@ import java.util.Date;
 @Entity
 @Table(name = "group_social")
 public class GroupSocial {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
