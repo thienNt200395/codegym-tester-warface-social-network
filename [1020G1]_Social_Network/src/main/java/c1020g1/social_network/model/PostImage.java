@@ -18,12 +18,8 @@ public class PostImage {
     @Column(name = "image")
     private String image;
 
-<<<<<<< HEAD
 
-    public int getPostImageId() {
-=======
     public Integer getPostImageId() {
->>>>>>> post_management
         return postImageId;
     }
 

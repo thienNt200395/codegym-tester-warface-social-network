@@ -5,28 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
-<<<<<<< HEAD
+import java.security.Timestamp;
 import java.util.Date;
-=======
-import java.sql.Timestamp;
->>>>>>> post_management
 import java.util.List;
 
 @Entity
 @Table(name = "post")
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "postId")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Integer postId;
-<<<<<<< HEAD
-=======
 
->>>>>>> post_management
     @Column(name = "post_content")
     @NotBlank(message = "Content not blank!!")
     private String postContent;
@@ -49,10 +40,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
 
-<<<<<<< HEAD
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
+
     @OneToMany(mappedBy = "post")
     List<PostImage> postImages;
 
@@ -65,10 +53,9 @@ public class Post {
         this.postImages = postImages;
     }
 
-    public int getPostId() {
-=======
+
+
     public Integer getPostId() {
->>>>>>> post_management
         return postId;
     }
 
