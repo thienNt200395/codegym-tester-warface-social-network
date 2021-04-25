@@ -7,7 +7,7 @@ import c1020g1.social_network.model.Post;
 import c1020g1.social_network.service.GroupRequestService;
 import c1020g1.social_network.service.GroupService;
 import c1020g1.social_network.service.GroupUserService;
-import c1020g1.social_network.service.PostService;
+import c1020g1.social_network.service.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -153,7 +153,7 @@ public class GroupController {
 
     @GetMapping("/request/list/user/{id}")
     public ResponseEntity<Page<GroupRequest>> getRequestListByUser(@PathVariable int id, Pageable pageable) {
-        User user = userService.findById(id);
+        User user = userService.getUserById(id);
         return new ResponseEntity<Page<GroupRequest>>(groupRequestService.findAllByUser(user, pageable), HttpStatus.OK);
     }
 
@@ -172,7 +172,7 @@ public class GroupController {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         if (groupService.findById(groupRequest.getGroup().getGroupId()) == null
-                || userService.findById(groupRequest.getUser().getUserId()) == null) {
+                || userService.getUserById(groupRequest.getUser().getUserId()) == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         GroupUser groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());

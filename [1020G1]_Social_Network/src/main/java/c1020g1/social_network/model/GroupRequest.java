@@ -11,20 +11,13 @@ public class GroupRequest {
     private Integer groupRequestId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial groupSocial;
+    private Group group;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-<<<<<<< HEAD
     @Column(name = "sender")
     private String sender;
 
-=======
-
-    @Column(name = "sender")
-    private String sender;
-
->>>>>>> dev
     public Integer getGroupRequestId() {
         return groupRequestId;
     }
@@ -33,17 +26,12 @@ public class GroupRequest {
         this.groupRequestId = groupRequestId;
     }
 
-    public GroupSocial getGroupSocial() {
-        return groupSocial;
+    public Group getGroup() {
+        return group;
     }
 
-<<<<<<< HEAD
-    public void setGroup(Group groupSocial) {
+    public void setGroup(Group group) {
         this.group = group;
-=======
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
->>>>>>> dev
     }
 
     public User getUser() {
@@ -58,12 +46,7 @@ public class GroupRequest {
         return sender;
     }
 
-<<<<<<< HEAD
-    public void setSender(String from) {
-        this.sender = from;
-=======
     public void setSender(String sender) {
         this.sender = sender;
->>>>>>> dev
     }
 }

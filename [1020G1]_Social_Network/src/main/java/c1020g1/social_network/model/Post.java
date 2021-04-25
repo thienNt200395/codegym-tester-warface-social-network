@@ -13,10 +13,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Integer postId;
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
     @Column(name = "post_content")
     @NotBlank(message = "Content not blank!!")
     private String postContent;
@@ -34,10 +30,11 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial groupSocial;
+    private Group group;
 
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
+
 
     public Integer getPostId() {
         return postId;
@@ -79,20 +76,12 @@ public class Post {
         this.user = user;
     }
 
-<<<<<<< HEAD
-    public Group getGroupSocial() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroupSocial(Group groupSocial) {
-        this.group = groupSocial;
-=======
-    public GroupSocial getGroupSocial() {
-        return groupSocial;
-    }
-
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public List<ParentComment> getParentComments() {
@@ -102,6 +91,5 @@ public class Post {
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
 
->>>>>>> dev
     }
 }
