@@ -13,7 +13,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
     @Column(name = "username", nullable = false)
     private String userName;
 
