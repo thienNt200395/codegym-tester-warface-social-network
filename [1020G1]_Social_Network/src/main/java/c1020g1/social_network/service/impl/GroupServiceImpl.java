@@ -49,6 +49,6 @@ public class GroupServiceImpl implements GroupService {
         // thêm điều kiện kiểm tra user hiện tại có phải admin ko để hiện nút xoá group
         // Đợi merge code UserService
 //        if ()
-        groupRepository.removeGroupById(id);
+        groupRepository.deleteGroupByGroupId(id);
     }
 }

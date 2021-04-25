@@ -24,8 +24,7 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
     @Query("select gr from Group gr where gr.groupName like %?1%")
     List<Group> findGroupByGroupNameContaining(String name);
 
-    @Query("delete from Group gr where gr.groupId = ?1")
-    Group removeGroupById(Integer id);
+    void deleteGroupByGroupId(Integer id);
 
     @Modifying
     @Query(" UPDATE Group gr set gr.scope = ?3, gr.imageAvatarUrl= ?2," +
