@@ -36,6 +36,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
 
+
     public Integer getPostId() {
         return postId;
     }
@@ -82,6 +83,7 @@ public class Post {
 
     public void setGroupSocial(GroupSocial groupSocial) {
         this.groupSocial = groupSocial;
+
     }
 
     public List<ParentComment> getParentComments() {

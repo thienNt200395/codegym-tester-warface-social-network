@@ -24,6 +24,8 @@ c1020g1/social_network/model/dto/AccountDTO.java
  c1020g1.social_network.model.dto.AccountDTO
 c1020g1/social_network/repository/ParentCommentRepository.java
  c1020g1.social_network.repository.ParentCommentRepository
+c1020g1/social_network/service/SearchService.java
+ c1020g1.social_network.service.SearchService
 c1020g1/social_network/repository/PostRepository.java
  c1020g1.social_network.repository.PostRepository
 c1020g1/social_network/controller/JwtAuthenticationController.java
@@ -36,6 +38,8 @@ c1020g1/social_network/validator/AccountDuplicatedValidator.java
  c1020g1.social_network.validator.AccountDuplicatedValidator
 c1020g1/social_network/service/DistrictService.java
  c1020g1.social_network.service.DistrictService
+c1020g1/social_network/repository/SearchRepository.java
+ c1020g1.social_network.repository.SearchRepository
 c1020g1/social_network/service/comment/CommentServiceImpl.java
  c1020g1.social_network.service.comment.CommentServiceImpl
 c1020g1/social_network/model/User.java
@@ -78,6 +82,8 @@ c1020g1/social_network/model/Post.java
  c1020g1.social_network.model.Post
 c1020g1/social_network/service/post/PostServiceImpl.java
  c1020g1.social_network.service.post.PostServiceImpl
+c1020g1/social_network/service/impl/SearchServiceImpl.java
+ c1020g1.social_network.service.impl.SearchServiceImpl
 c1020g1/social_network/controller/CommentController.java
  c1020g1.social_network.controller.CommentController
 c1020g1/social_network/controller/MiscController.java
@@ -98,6 +104,8 @@ c1020g1/social_network/repository/FavouriteRepository.java
  c1020g1.social_network.repository.FavouriteRepository
 c1020g1/social_network/model/JwtRequest.java
  c1020g1.social_network.model.JwtRequest
+c1020g1/social_network/controller/SearchController.java
+ c1020g1.social_network.controller.SearchController
 c1020g1/social_network/repository/friend_request_repository/FriendRequestRepository.java
  c1020g1.social_network.repository.friend_request_repository.FriendRequestRepository
 c1020g1/social_network/service/WardService.java
@@ -112,8 +120,6 @@ c1020g1/social_network/controller/FriendRequestController.java
  c1020g1.social_network.controller.FriendRequestController
 c1020g1/social_network/annotation/AccountDuplicated.java
  c1020g1.social_network.annotation.AccountDuplicated
-c1020g1/social_network/service/DistrictServiceImpl.java
- c1020g1.social_network.service.DistrictServiceImpl
 c1020g1/social_network/repository/ProvinceRepository.java
  c1020g1.social_network.repository.ProvinceRepository
 c1020g1/social_network/config/JwtRequestFilter.java
@@ -146,3 +152,5 @@ c1020g1/social_network/config/WebSecurityConfig.java
  c1020g1.social_network.config.WebSecurityConfig
 c1020g1/social_network/config/JwtTokenUtil.java
  c1020g1.social_network.config.JwtTokenUtil
+c1020g1/social_network/service/DistrictServiceImpl.java
+ c1020g1.social_network.service.DistrictServiceImpl
