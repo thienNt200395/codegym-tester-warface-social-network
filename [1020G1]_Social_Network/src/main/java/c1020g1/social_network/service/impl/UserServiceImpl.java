@@ -29,12 +29,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAvatar(Integer userId, String image) {
-        userRepository.updateAvatar( userId, image );
+    public void updateAvatar(Integer userId, String image, String imageName) {
+        if (imageName.equals( "png" ) || imageName.equals( "jpg" )) {
+            userRepository.updateAvatar( userId, image );
+        }
     }
 
     @Override
-    public void updateBackground(Integer userId, String background) {
-        userRepository.updateBackground( userId,background );
+    public void updateBackground(Integer userId, String background, String imageName) {
+        if (imageName.equals( "png" ) || imageName.equals( "jpg" )) {
+            userRepository.updateBackground( userId, background );
+        }
     }
 }

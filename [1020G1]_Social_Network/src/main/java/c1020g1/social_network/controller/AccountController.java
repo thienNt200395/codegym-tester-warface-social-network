@@ -1,7 +1,12 @@
 package c1020g1.social_network.controller;
 
+import c1020g1.social_network.model.Account;
+import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.AccountService;
+import c1020g1.social_network.service.UserService;
+import c1020g1.social_network.service.impl.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,9 +15,32 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PutMapping("/account/{idAccount}/changePassword/{newPassword}")
-    public void changePassword(@PathVariable("idAccount") Integer id, @PathVariable("newPassword") String newPassword,
-                               @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
-        accountService.changePassword( id, password, newPassword, confirmPassword );
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/account/{idAccount}/changePassword")
+    public void sendMailConfirmChangePassword(@PathVariable("idAccount") Integer id,
+                                              @RequestParam("code") Integer code) {
+        User user = userService.findUserById( id );
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo( user.getEmail() );
+        simpleMailMessage.setSubject( "Confirm Change Password" );
+        simpleMailMessage.setFrom( "huuhan2507@gmail.com" );
+        simpleMailMessage.setText( "Your Code: " + code );
+        emailSenderService.sendEmail( simpleMailMessage );
+    }
+
+    @PutMapping("/account/{accountName}/changePassword")
+    public void ChangePassword(@PathVariable("accountName") String accountName,
+                               @RequestParam("oldPassword") String oldPassword,
+                               @RequestParam("newPassword") String newPassword,
+                               @RequestParam("confirmPassword") String confirmPassword) {
+        Account account = accountService.findAccountById( accountName );
+        if (accountService.checkChangePassword( account, oldPassword, newPassword, confirmPassword )){
+            accountService.changePassword( account, oldPassword, newPassword, confirmPassword );
+        }
     }
 }

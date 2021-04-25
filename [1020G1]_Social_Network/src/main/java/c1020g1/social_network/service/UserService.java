@@ -11,7 +11,7 @@ public interface UserService {
 
     User findUserById(Integer id);
 
-    void updateAvatar(Integer userId, String image);
+    void updateAvatar(Integer userId, String image, String imageName);
 
-    void updateBackground(Integer userId, String background);
+    void updateBackground(Integer userId, String background, String imageName);
 }

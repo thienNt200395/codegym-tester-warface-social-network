@@ -21,14 +21,14 @@ public class UserController {
     }
 
     @PutMapping("/user/{idUser}/update/avatar")
-    public void updateAvatar(@PathVariable("idUser") Integer idUser, @RequestParam("image")String image) {
-        System.out.println(image);
-        userService.updateAvatar( idUser, image );
+    public void updateAvatar(@PathVariable("idUser") Integer idUser, @RequestParam("image") String image,
+                             @RequestParam("imageFile") String imageName) {
+        userService.updateAvatar( idUser, image, imageName );
     }
 
     @PutMapping("/user/{idUser}/update/background")
-    public void updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background")String image) {
-        System.out.println(image);
-        userService.updateBackground( idUser, image );
+    public void updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background") String image,
+                                 @RequestParam("imageFile") String imageName) {
+        userService.updateBackground( idUser, image, imageName );
     }
 }
