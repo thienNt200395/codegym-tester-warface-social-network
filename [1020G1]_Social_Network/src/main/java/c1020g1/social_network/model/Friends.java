@@ -19,7 +19,6 @@ public class Friends {
     @JoinColumn(name = "friend_id", referencedColumnName = "user_id")
     private User friend;
 
-
     public Integer getFriendsId() {
         return friendsId;
     }

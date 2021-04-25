@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+
 @Entity
 @Table(name = "parent_comment")
 @JsonIdentityInfo(
@@ -96,18 +97,6 @@ public class ParentComment implements Validator {
 
     public void setChildComments(List<ChildComment> childComments) {
         this.childComments = childComments;
-    }
-
-    @Override
-    public String toString() {
-        return "ParentComment{" +
-                "parentCommentId=" + parentCommentId +
-                ", content='" + content + '\'' +
-                ", commentImage='" + commentImage + '\'' +
-                ", commentTime=" + commentTime +
-                ", post=" + post +
-                ", user=" + user +
-                '}';
     }
 
     @Override

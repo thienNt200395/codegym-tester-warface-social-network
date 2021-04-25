@@ -4,8 +4,8 @@ import c1020g1.social_network.model.Post;
 
 import c1020g1.social_network.model.PostImage;
 import c1020g1.social_network.model.User;
+import c1020g1.social_network.service.UserService;
 import c1020g1.social_network.service.post.PostService;
-import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.sql.Timestamp;
+
 import java.util.List;
 
 @RestController

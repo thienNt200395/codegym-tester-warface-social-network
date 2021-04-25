@@ -96,5 +96,6 @@ public class Post {
 
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
+
     }
 }
