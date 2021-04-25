@@ -48,5 +48,5 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     @Query("select f from Friends f where f.friendsId = ?1")
     Friends findFriendsById(Integer friendsId);
 
-    void deleteFriendsByFriendsId(Integer friendsId);
+    void deleteFriendsByUserUserIdAndFriendUserId(Integer userId , Integer friendId);
 }
