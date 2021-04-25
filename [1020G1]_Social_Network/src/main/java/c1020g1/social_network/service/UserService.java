@@ -7,5 +7,7 @@ public interface UserService {
 
     User createUser(UserCreateDTO userCreateDTO);
 
-    User getUserById(int id);
+    User getUserById(Integer id);
+//dương
+    User getUserByEmail(String email);
 }

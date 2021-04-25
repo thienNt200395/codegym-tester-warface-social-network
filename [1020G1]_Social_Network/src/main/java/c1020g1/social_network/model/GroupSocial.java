@@ -1,24 +1,31 @@
 package c1020g1.social_network.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "group")
-public class Group {
-
+@Table(name = "group_social")
+public class GroupSocial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
     private Integer groupId;
+
     @Column(name = "group_name")
     private String groupName;
+
     @Column(name = "group_published")
     private Date groupPublished;
+
     @Column(name = "group_background")
     private String imageBackground;
+
     @Column(name = "group_avatar")
     private String imageAvatarUrl;
+
     @ManyToOne
     @JoinColumn(name = "admin", referencedColumnName = "user_id")
     private User admin;

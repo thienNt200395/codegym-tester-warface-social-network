@@ -1,10 +1,14 @@
 package c1020g1.social_network.service;
 
-import c1020g1.social_network.model.*;
+
+import c1020g1.social_network.model.Favourite;
+import c1020g1.social_network.model.Status;
+import c1020g1.social_network.model.User;
+import c1020g1.social_network.model.Account;
 import c1020g1.social_network.model.dto.UserCreateDTO;
-import c1020g1.social_network.repository.AccountRepository;
 import c1020g1.social_network.repository.FavouriteUserRepository;
 import c1020g1.social_network.repository.UserRepository;
+import c1020g1.social_network.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +50,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Integer id) {
         return userRepository.getUserById(id);
     }
+//dương
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
 }

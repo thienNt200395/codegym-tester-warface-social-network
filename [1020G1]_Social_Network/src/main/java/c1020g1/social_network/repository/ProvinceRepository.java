@@ -10,4 +10,5 @@ public interface ProvinceRepository extends JpaRepository<Province,Integer> {
 
     @Query(value = "SELECT * FROM province", nativeQuery = true)
     Iterable<Province> findAllProvince();
+
 }
