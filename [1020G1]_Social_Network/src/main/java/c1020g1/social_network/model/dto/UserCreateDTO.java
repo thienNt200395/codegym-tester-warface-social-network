@@ -1,6 +1,7 @@
 package c1020g1.social_network.model.dto;
 
 import c1020g1.social_network.annotation.AccountDuplicated;
+
 import c1020g1.social_network.model.Favourite;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.model.Account;

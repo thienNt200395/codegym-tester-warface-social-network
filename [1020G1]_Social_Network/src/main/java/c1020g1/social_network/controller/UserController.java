@@ -54,5 +54,4 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable("id") int userId) {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
-
 }

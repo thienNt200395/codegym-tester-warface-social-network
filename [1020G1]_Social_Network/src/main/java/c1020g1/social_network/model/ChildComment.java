@@ -21,6 +21,7 @@ public class ChildComment implements Validator {
     @Column(name = "child_comment_id")
     private Integer childCommentId;
 
+
     @Column(name = "content", nullable = false)
     private String content;
 

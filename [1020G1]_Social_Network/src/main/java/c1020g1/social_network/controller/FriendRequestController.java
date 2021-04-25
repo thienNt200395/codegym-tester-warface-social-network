@@ -2,9 +2,9 @@ package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.FriendRequest;
 import c1020g1.social_network.model.User;
+import c1020g1.social_network.service.UserService;
 import c1020g1.social_network.service.friend_request_service.FriendRequestService;
 import c1020g1.social_network.service.friends_service.FriendsService;
-import c1020g1.social_network.service.user_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +42,8 @@ public class FriendRequestController {
 
     @PostMapping("/friend_request")
     public ResponseEntity<Void> createFriendRequest(@RequestBody FriendRequest friendRequest) {
-        if (userService.findUserById(friendRequest.getSendUser().getUserId()) == null ||
-                userService.findUserById(friendRequest.getReceiveUser().getUserId()) == null) {
+        if (userService.getUserById(friendRequest.getSendUser().getUserId()) == null ||
+                userService.getUserById(friendRequest.getReceiveUser().getUserId()) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 

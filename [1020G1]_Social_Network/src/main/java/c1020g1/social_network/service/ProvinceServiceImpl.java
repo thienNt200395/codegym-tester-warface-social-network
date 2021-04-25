@@ -13,6 +13,6 @@ public class ProvinceServiceImpl implements ProvinceService {
 
     @Override
     public Iterable<Province> getAllProvince() {
-        return provinceRepository.findAll();
+        return provinceRepository.findAllProvince();
     }
 }
