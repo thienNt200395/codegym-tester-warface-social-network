@@ -13,7 +13,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Integer postId;
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
     @Column(name = "post_content")
     @NotBlank(message = "Content not blank!!")
     private String postContent;
@@ -76,6 +79,14 @@ public class Post {
         this.user = user;
     }
 
+<<<<<<< HEAD
+    public Group getGroupSocial() {
+        return group;
+    }
+
+    public void setGroupSocial(Group groupSocial) {
+        this.group = groupSocial;
+=======
     public GroupSocial getGroupSocial() {
         return groupSocial;
     }
@@ -91,5 +102,6 @@ public class Post {
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
 
+>>>>>>> dev
     }
 }

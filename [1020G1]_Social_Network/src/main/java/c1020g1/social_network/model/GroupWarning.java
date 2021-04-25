@@ -11,8 +11,11 @@ public class GroupWarning {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_warning_id")
     private Integer groupWarningId;
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> dev
     @Column(name = "warning_content")
     private String warningContent;
 

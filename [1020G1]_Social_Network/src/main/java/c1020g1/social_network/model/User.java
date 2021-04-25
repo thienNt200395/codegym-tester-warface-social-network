@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -15,7 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
     @Column(name = "username", nullable = false)
     @NotBlank(message = "required")
     private String userName;
@@ -70,7 +74,14 @@ public class User {
     @JsonBackReference
     private Account account;
 
+<<<<<<< HEAD
+    @OneToMany(mappedBy = "user")
+    private Set<GroupRequest> groupRequests;
+
+    public int getUserId() {
+=======
     public Integer getUserId() {
+>>>>>>> dev
         return userId;
     }
 
