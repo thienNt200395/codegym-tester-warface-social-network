@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "post")
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "postId")
 public class Post {
 
     @Id
@@ -41,6 +39,21 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
+
+
+    @OneToMany(mappedBy = "post")
+    List<PostImage> postImages;
+
+
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
+    }
+
+
 
     public Integer getPostId() {
         return postId;
