@@ -9,7 +9,7 @@ public class Friends {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "friends_id")
-    private int friendsId;
+    private Integer friendsId;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
@@ -17,11 +17,11 @@ public class Friends {
     @JoinColumn(name = "friend_id", referencedColumnName = "user_id")
     private User friend;
 
-    public int getFriendsId() {
+    public Integer getFriendsId() {
         return friendsId;
     }
 
-    public void setFriendsId(int friendsId) {
+    public void setFriendsId(Integer friendsId) {
         this.friendsId = friendsId;
     }
 
