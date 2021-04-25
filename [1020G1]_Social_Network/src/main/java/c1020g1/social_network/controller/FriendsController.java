@@ -41,7 +41,7 @@ public class FriendsController {
         if (friends == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        friendsService.deleteFriends(id);
+        friendsService.deleteFriends(friends);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

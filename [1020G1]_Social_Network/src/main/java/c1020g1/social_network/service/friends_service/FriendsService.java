@@ -10,7 +10,7 @@ public interface FriendsService {
 
     Friends findFriendsById(Integer id);
 
-    void deleteFriends(Integer id);
+    void deleteFriends(Friends friends);
 
     List<Friends> findAllFriendById(Integer idUser);
 
