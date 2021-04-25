@@ -14,4 +14,7 @@ public interface FavouriteRepository extends JpaRepository<Favourite, Integer> {
             "join User u on f.user.userId = u.userId " +
             "where u.userId = :id")
     List<Favourite> getListFavourite(Integer id);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM favourite")
+    Iterable<Favourite> findAllFavourite();
 }
