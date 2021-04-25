@@ -29,6 +29,4 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-
-
 }
