@@ -79,6 +79,7 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         post.setPostPublished(new Timestamp(System.currentTimeMillis()));
+        post.setPostContent(postService.encodeStringUrl(post.getPostContent()));
         System.out.println(post);
         postService.createPost(post);
         HttpHeaders headers = new HttpHeaders();
@@ -96,11 +97,21 @@ public class PostController {
             System.out.println("Post with id " + postId + " not found!");
             return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
         }
-        post1.setPostContent(post.getPostContent());
+        post1.setPostContent(postService.encodeStringUrl(post.getPostContent()));
         post1.setPostStatus(post.getPostStatus());
 
         postService.editPost(post1);
         return new ResponseEntity<Post>(post1, HttpStatus.OK);
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId){
+        Post post = postService.getPostById(postId);
+        if (post == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        post.setPostContent(postService.decodeStringUrl(post.getPostContent()));
+        return new ResponseEntity<Post>(post, HttpStatus.OK);
     }
 }
 

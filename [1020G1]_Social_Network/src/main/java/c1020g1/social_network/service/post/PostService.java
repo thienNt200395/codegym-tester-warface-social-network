@@ -16,4 +16,7 @@ public interface PostService {
 
     List<PostImage> getAllImageByPostId(Integer postId);
 
+    String encodeStringUrl(String url);
+
+    String decodeStringUrl(String encodedUrl);
 }
