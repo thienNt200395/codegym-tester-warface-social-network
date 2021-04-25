@@ -1,16 +1,18 @@
 package c1020g1.social_network.model;
 
+import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "postId")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "postId")
 public class Post {
 
     @Id
@@ -19,9 +21,11 @@ public class Post {
     private Integer postId;
 
     @Column(name = "post_content")
+    @NotBlank(message = "Content not blank!!")
     private String postContent;
 
     @Column(name = "post_status")
+    @NotBlank(message = "Status not blank!!")
     private String postStatus;
 
     @Column(name = "post_published")
@@ -34,6 +38,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
+
+    @OneToMany(mappedBy = "post")
+    private List<ParentComment> parentComments;
 
     public Integer getPostId() {
         return postId;
@@ -81,5 +88,13 @@ public class Post {
 
     public void setGroupSocial(GroupSocial groupSocial) {
         this.groupSocial = groupSocial;
+    }
+
+    public List<ParentComment> getParentComments() {
+        return parentComments;
+    }
+
+    public void setParentComments(List<ParentComment> parentComments) {
+        this.parentComments = parentComments;
     }
 }

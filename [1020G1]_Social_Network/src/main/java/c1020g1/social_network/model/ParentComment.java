@@ -1,11 +1,21 @@
 package c1020g1.social_network.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "parent_comment")
-public class ParentComment {
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "parentCommentId")
+public class ParentComment implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +38,9 @@ public class ParentComment {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "parentComment")
+    private List<ChildComment> childComments;
 
     public Integer getParentCommentId() {
         return parentCommentId;
@@ -77,6 +90,14 @@ public class ParentComment {
         this.commentTime = commentTime;
     }
 
+    public List<ChildComment> getChildComments() {
+        return childComments;
+    }
+
+    public void setChildComments(List<ChildComment> childComments) {
+        this.childComments = childComments;
+    }
+
     @Override
     public String toString() {
         return "ParentComment{" +
@@ -87,5 +108,18 @@ public class ParentComment {
                 ", post=" + post +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return ParentComment.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ParentComment parentComment =(ParentComment) target;
+
+        if(parentComment.getContent() == null && parentComment.getCommentImage() == null)
+            errors.reject("bad-request");
     }
 }
