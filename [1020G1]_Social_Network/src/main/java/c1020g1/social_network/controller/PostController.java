@@ -71,7 +71,7 @@ public class PostController {
         postService.createPost(post);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(post.getPostId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{postId}")
@@ -88,7 +88,12 @@ public class PostController {
         post1.setPostStatus(post.getPostStatus());
 
         postService.editPost(post1);
-        return new ResponseEntity<Post>(post1, HttpStatus.OK);
+        return new ResponseEntity<>(post1, HttpStatus.OK);
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId){
+        return new ResponseEntity<>(postService.getPostById(postId), HttpStatus.OK);
     }
 }
 
