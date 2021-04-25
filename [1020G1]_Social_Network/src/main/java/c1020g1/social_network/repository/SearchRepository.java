@@ -23,7 +23,7 @@ public interface SearchRepository extends JpaRepository<User, Integer> {
             "join FavouriteUser f on u.userId = f.user.userId " +
             "join Favourite fv on f.favourite.favouriteId = fv.favouriteId " +
             "where (u.userName like %:name%) and " +
-            "((function('year', u.birthday)) > :birthday) and " +
+            "((:birthday is null) or ((function('year', u.birthday)) > :birthday)) and " +
             "(:gender is null or u.gender = :gender) and " +
             "(:province is null or u.ward.district.province.provinceName = :province) and " +
             "(:district is null or u.ward.district.districtName = :district) and " +
@@ -33,6 +33,21 @@ public interface SearchRepository extends JpaRepository<User, Integer> {
             "group by u.userName")
     List<User> advancedSearch(String name, Integer birthday, String gender, String province, String district, String ward,
                               String occupation, List<String> favourites);
+
+    @Query("select u from User u " +
+            "join Ward w on u.ward.wardId = w.wardId " +
+            "join District d on w.district.districtId = d.districtId " +
+            "join Province p on d.province.provinceId = p.provinceId " +
+            "where (u.userName like %:name%) and " +
+            "((:birthday is null) or ((function('year', u.birthday)) > :birthday)) and " +
+            "(:gender is null or u.gender = :gender) and " +
+            "(:province is null or u.ward.district.province.provinceName = :province) and " +
+            "(:district is null or u.ward.district.districtName = :district) and " +
+            "(:ward is null or u.ward.wardName = :ward) and " +
+            "(:occupation is null or u.occupation = :occupation) " +
+            "group by u.userName")
+    List<User> advancedSearchNoFavourites(String name, Integer birthday, String gender, String province, String district, String ward,
+                              String occupation);
 
     @Query("select u from User u " +
             "join Ward w on u.ward.wardId = w.wardId " +
@@ -50,12 +65,16 @@ public interface SearchRepository extends JpaRepository<User, Integer> {
             "group by u.userName")
     List<User> recommendation(Integer id, Date birthday, Integer province, List<String> favourites);
 
-//    "((function('year', u.birthday)) between ((function('year', :birthday)) - 5) " +
-//            "and ((function('year', :birthday)) + 5)) and " +
-
-//    "join Friends fr on u.userId = fr.friend.userId " +
-
-//    "(u not in (select u from User " +
-//            "join Friends fr on u.userId = fr.user.userId " +
-//            "where u.userId = :id)) " +
+    @Query("select u from User u " +
+            "join Ward w on u.ward.wardId = w.wardId " +
+            "join District d on w.district.districtId = d.districtId " +
+            "join Province p on d.province.provinceId = p.provinceId " +
+            "where (((function('year', u.birthday)) between ((function('year', :birthday)) - 5) " +
+            "and ((function('year', :birthday)) + 5))) and " +
+            "(u.ward.district.province.provinceId = :province) and " +
+            "((u not in (select u from User " +
+            "join Friends fr on u.userId = fr.friend.userId " +
+            "where fr.user.userId = :id) and u.userId <> :id )) " +
+            "group by u.userName")
+    List<User> recommendationNoFavourite(Integer id, Date birthday, Integer province);
 }

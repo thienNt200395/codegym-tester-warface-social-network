@@ -46,11 +46,11 @@ c1020g1/social_network/model/Province.java
  c1020g1.social_network.model.Province
 c1020g1/social_network/model/GroupWarning.java
  c1020g1.social_network.model.GroupWarning
+c1020g1/social_network/service/SearchService.java
+ c1020g1.social_network.service.SearchService
 c1020g1/social_network/service/impl/SearchServiceImpl.java
  c1020g1.social_network.service.impl.SearchServiceImpl
 c1020g1/social_network/repository/SearchRepository.java
  c1020g1.social_network.repository.SearchRepository
-c1020g1/social_network/service/SearchService.java
- c1020g1.social_network.service.SearchService
 c1020g1/social_network/controller/SearchController.java
  c1020g1.social_network.controller.SearchController

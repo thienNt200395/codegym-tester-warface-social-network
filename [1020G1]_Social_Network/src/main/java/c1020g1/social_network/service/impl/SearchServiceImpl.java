@@ -33,12 +33,18 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<User> advancedSearch(String name, Integer birthday, String gender, String province, String district, String ward,
                                      String occupation, List<String> favorites) {
+        if (favorites == null){
+            return searchRepository.advancedSearchNoFavourites(name, birthday, gender, province, district, ward, occupation);
+        }
         return searchRepository.advancedSearch(name, birthday, gender, province, district, ward, occupation, favorites);
     }
 
     @Override
     public List<User> recommendation(Integer id, Date birthday, Integer province,
                            List<String> favorites) {
+        if (favorites.isEmpty()){
+            return searchRepository.recommendationNoFavourite(id, birthday, province);
+        }
         return searchRepository.recommendation(id, birthday, province, favorites);
     }
 

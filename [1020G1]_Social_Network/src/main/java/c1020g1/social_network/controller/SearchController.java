@@ -5,6 +5,7 @@ import c1020g1.social_network.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,12 +20,21 @@ public class SearchController {
     }
 
     @GetMapping("/searching/advanced-search")
-    public List<User> doAdvancedSearch(@RequestParam("name") String name, @RequestParam("birthday") Integer birthday,
-                                       @RequestParam("gender") String gender, @RequestParam("province") String province,
-                                       @RequestParam("district") String district, @RequestParam("ward") String ward,
-                                       @RequestParam("occupation") String occupation,
-                                       @RequestParam("favourites") List<String> favourites) {
-        return searchService.advancedSearch(name, birthday, gender, province, district, ward, occupation, favourites);
+    public List<User> doAdvancedSearch(@RequestParam("name") String name,
+                                       @RequestParam(value = "birthday", required = false) String birthday,
+                                       @RequestParam(value = "gender", required = false) String gender,
+                                       @RequestParam(value = "province", required = false) String province,
+                                       @RequestParam(value = "district", required = false) String district,
+                                       @RequestParam(value = "ward", required = false) String ward,
+                                       @RequestParam(value = "occupation", required = false) String occupation,
+                                       @RequestParam(value = "favourites", required = false) List<String> favourites) {
+        Integer birthdayInt;
+        if (birthday.equals("undefined")) {
+            birthdayInt = null;
+        } else {
+            birthdayInt = Integer.parseInt(birthday);
+        }
+        return searchService.advancedSearch(name, birthdayInt, gender, province, district, ward, occupation, favourites);
     }
 
     @GetMapping("/searching/recommend")
