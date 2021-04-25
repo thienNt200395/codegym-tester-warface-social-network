@@ -28,8 +28,17 @@ public class Post {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
+    @OneToMany(mappedBy = "post")
+    List<PostImage> postImages;
 
 
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
+    }
 
     public int getPostId() {
         return postId;
