@@ -3,13 +3,12 @@ package c1020g1.social_network.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "group_request")
+@Table(name = "[group_request]")
 public class GroupRequest {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_request_id")
-    private int groupRequestId;
+    private Integer groupRequestId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
@@ -20,11 +19,11 @@ public class GroupRequest {
     @Column(name = "sender")
     private String sender;
 
-    public int getGroupRequestId() {
+    public Integer getGroupRequestId() {
         return groupRequestId;
     }
 
-    public void setGroupRequestId(int groupRequestId) {
+    public void setGroupRequestId(Integer groupRequestId) {
         this.groupRequestId = groupRequestId;
     }
 
