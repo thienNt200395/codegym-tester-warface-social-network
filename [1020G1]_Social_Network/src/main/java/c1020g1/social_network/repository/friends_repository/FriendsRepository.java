@@ -13,6 +13,12 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     @Query("select c from Friends c where c.user.userId = ?1")
     List<Friends> findAllFriendById(Integer idUser);
 
+
+    @Query("select myFriend.friend from Friends myFriend " +
+            "inner join Friends yourFriend on myFriend.friend.userId = yourFriend.friend.userId " +
+            "where myFriend.user.userId = ?1 and yourFriend.user.userId = ?2")
+    List<User> findMutualFriend(Integer receiveUserId , Integer sendUserId);
+
     @Query(value = "select tmp_2.user_id," +
             " count(tmp_2.user_id) as number_of_mutual_friend" +
             " from (" +
@@ -38,11 +44,9 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
             " order by number_of_mutual_friend desc", nativeQuery = true)
     List<Object> getAllSuggestFriend(Integer userId);
 
-    @Query("select u from User u where u.userId = ?1")
-    User findUserById(Integer userId);
 
     @Query("select f from Friends f where f.friendsId = ?1")
     Friends findFriendsById(Integer friendsId);
 
-    void deleteFriendsByFriendsId(Integer friendsId);
+    void deleteFriendsByUserUserIdAndFriendUserId(Integer userId , Integer friendId);
 }

@@ -1,6 +1,7 @@
 package c1020g1.social_network.service.friends_service.impl;
 
 import c1020g1.social_network.model.Friends;
+import c1020g1.social_network.model.User;
 import c1020g1.social_network.repository.friends_repository.FriendsRepository;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,9 @@ public class FriendsServiceImpl implements FriendsService {
     }
 
     @Override
-    public void deleteFriends(Integer id) {
-        friendsRepository.deleteFriendsByFriendsId(id);
+    public void deleteFriends(Friends friends) {
+        friendsRepository.deleteFriendsByUserUserIdAndFriendUserId(friends.getUser().getUserId(),friends.getFriend().getUserId());
+        friendsRepository.deleteFriendsByUserUserIdAndFriendUserId(friends.getFriend().getUserId(),friends.getUser().getUserId());
     }
 
     @Override
@@ -47,5 +49,10 @@ public class FriendsServiceImpl implements FriendsService {
         }
         friendsRepository.save(friends);
         return "OK";
+    }
+
+    @Override
+    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+        return friendsRepository.findMutualFriend(receiveUser,sendUser);
     }
 }

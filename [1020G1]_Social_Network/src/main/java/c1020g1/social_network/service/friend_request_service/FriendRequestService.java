@@ -9,5 +9,4 @@ public interface FriendRequestService {
     List<FriendRequest> findAllFriendRequest(Integer idUser);
     String saveFriendRequest(FriendRequest friendRequest);
     String deleteFriendRequest(Integer idFriendRequest);
-    FriendRequest getFriendRequest(Integer idFriendRequest);
 }
