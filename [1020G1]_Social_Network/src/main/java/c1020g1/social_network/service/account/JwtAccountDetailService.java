@@ -1,7 +1,7 @@
-package c1020g1.social_network.service.account_service.implement;
+package c1020g1.social_network.service.account;
 
-import c1020g1.social_network.model.account.Account;
-import c1020g1.social_network.repository.account_repository.AccountRepository;
+import c1020g1.social_network.model.Account;
+import c1020g1.social_network.repository.AccountRepository;
 import c1020g1.social_network.sercurity.AccountPrincipleFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

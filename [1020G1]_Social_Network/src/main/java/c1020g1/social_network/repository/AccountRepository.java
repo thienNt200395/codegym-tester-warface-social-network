@@ -1,6 +1,6 @@
-package c1020g1.social_network.repository.account_repository;
+package c1020g1.social_network.repository;
 
-import c1020g1.social_network.model.account.Account;
+import c1020g1.social_network.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,11 +1,10 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.config.JwtTokenUtil;
-import c1020g1.social_network.model.User;
-import c1020g1.social_network.model.account.*;
+import c1020g1.social_network.model.*;
 import c1020g1.social_network.service.UserService;
 
-import c1020g1.social_network.service.account_service.implement.JwtAccountDetailService;
+import c1020g1.social_network.service.account.JwtAccountDetailService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;

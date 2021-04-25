@@ -1,6 +1,5 @@
 package c1020g1.social_network.model;
 
-import c1020g1.social_network.model.account.Account;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;

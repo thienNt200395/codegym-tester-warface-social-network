@@ -1,6 +1,4 @@
-package c1020g1.social_network.model.account;
-
-import c1020g1.social_network.model.User;
+package c1020g1.social_network.model;
 
 import javax.persistence.*;
 import java.util.List;

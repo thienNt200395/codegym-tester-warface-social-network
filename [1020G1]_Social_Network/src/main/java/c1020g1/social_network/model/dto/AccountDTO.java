@@ -1,4 +1,4 @@
-package c1020g1.social_network.model.account;
+package c1020g1.social_network.model.dto;
 
 public class AccountDTO {
 
