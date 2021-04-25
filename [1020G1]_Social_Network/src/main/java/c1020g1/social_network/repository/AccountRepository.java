@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
+
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Modifying
@@ -17,7 +18,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Modifying
     @Query(value ="UPDATE account SET password = :password WHERE account_name = :accountName",nativeQuery = true)
     void updateAccount(@Param("password") String encodePw, @Param("accountName") String accountName );
-
 
     @Query(value = "SELECT * FROM account WHERE account.account_name = :accountName", nativeQuery = true)
     Account getAccountByName(@Param("accountName") String accountName);
