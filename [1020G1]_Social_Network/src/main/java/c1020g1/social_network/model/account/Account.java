@@ -13,16 +13,17 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private Integer accountId;
+
     @Column(name = "account_name",nullable = false, unique = true)
     private String accountName;
+
     @Column(name = "password")
     private String password;
 
     @OneToOne(mappedBy = "account")
     private User user;
 
-    @OneToMany(mappedBy = "account")
-    private List<ReferentAccount> referentAccounts;
+
 
     public Integer getAccountId() {
         return accountId;
@@ -48,13 +49,9 @@ public class Account {
         this.password = password;
     }
 
-    public List<ReferentAccount> getReferentAccounts() {
-        return referentAccounts;
-    }
 
-    public void setReferentAccounts(List<ReferentAccount> referentAccounts) {
-        this.referentAccounts = referentAccounts;
-    }
+
+
 
     public User getUser() {
         return user;
