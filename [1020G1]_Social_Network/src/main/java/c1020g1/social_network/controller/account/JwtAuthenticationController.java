@@ -53,7 +53,6 @@ public class JwtAuthenticationController {
     public UserService userService;
 
 
-
     @PostMapping(value = "/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) {
         JwtResponse jwtResponse = login(jwtRequest);
@@ -67,19 +66,22 @@ public class JwtAuthenticationController {
         GoogleIdTokenVerifier.Builder builder =
                 new GoogleIdTokenVerifier.Builder(netHttpTransport, jacksonFactory)
                         .setAudience(Collections.singletonList(googleClientId));
-        final GoogleIdToken googleIdToken = GoogleIdToken.parse(builder.getJsonFactory(),jwtResponseSocial.getToken());
-        final GoogleIdToken.Payload payload =  googleIdToken.getPayload();
+        final GoogleIdToken googleIdToken = GoogleIdToken.parse(builder.getJsonFactory(), jwtResponseSocial.getToken());
+        final GoogleIdToken.Payload payload = googleIdToken.getPayload();
         User newUser = userService.getUserByEmail(payload.getEmail());
         JwtResponse jwtResponse = new JwtResponse("");
-        if (newUser == null){
+
+        if (newUser == null) {
             newUser = new User();
             newUser.setEmail(payload.getEmail());
-        } else {
-            Account account = newUser.getAccount();
-            JwtRequest jwtRequest = new JwtRequest(account.getAccountName(),account.getPassword());
-            jwtResponse = loginSocial(jwtRequest);
-            jwtResponse.setAccountName(account.getAccountName());
+            jwtResponse.setUser(newUser);
+            return ResponseEntity.ok(jwtResponse);
         }
+        Account account = newUser.getAccount();
+        JwtRequest jwtRequest = new JwtRequest(account.getAccountName(), account.getPassword());
+        jwtResponse = loginSocial(jwtRequest);
+        jwtResponse.setAccountName(account.getAccountName());
+
         jwtResponse.setUser(newUser);
         return ResponseEntity.ok(jwtResponse);
     }
@@ -88,20 +90,23 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) throws IOException {
         Facebook facebook = new FacebookTemplate(jwtResponseSocial.getToken());
 
-        final String[] fields = {"email","picture"};
+        final String[] fields = {"email", "gender", "name", "location", "picture"};
         org.springframework.social.facebook.api.User user = facebook
-                .fetchObject("me",org.springframework.social.facebook.api.User.class,fields);
+                .fetchObject("me", org.springframework.social.facebook.api.User.class, fields);
         User newUser = userService.getUserByEmail(user.getEmail());
         JwtResponse jwtResponse = new JwtResponse("");
-        if (newUser == null){
+
+        if (newUser == null) {
             newUser = new User();
             newUser.setEmail(user.getEmail());
-        } else {
-            Account account = newUser.getAccount();
-            JwtRequest jwtRequest = new JwtRequest(account.getAccountName(),account.getPassword());
-            jwtResponse = loginSocial(jwtRequest);
-            jwtResponse.setAccountName(account.getAccountName());
+            newUser.setUserName(user.getName());
+            jwtResponse.setUser(newUser);
+            return ResponseEntity.ok(jwtResponse);
         }
+        Account account = newUser.getAccount();
+        JwtRequest jwtRequest = new JwtRequest(account.getAccountName(), account.getPassword());
+        jwtResponse = loginSocial(jwtRequest);
+        jwtResponse.setAccountName(account.getAccountName());
         jwtResponse.setUser(newUser);
         return ResponseEntity.ok(jwtResponse);
     }
@@ -110,7 +115,7 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> mailSender(@PathVariable("accountName") String accountName) throws MessagingException {
         Account account = jwtAccountDetailService.getAccount(accountName);
 
-        if(account == null){
+        if (account == null) {
             return new ResponseEntity<>("Account không tồn tại", HttpStatus.OK);
         }
 
@@ -139,7 +144,8 @@ public class JwtAuthenticationController {
         emailSender.send(message);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
-    private JwtResponse loginSocial(JwtRequest jwtRequest){
+
+    private JwtResponse loginSocial(JwtRequest jwtRequest) {
         final UserDetails userDetails = jwtAccountDetailService
                 .loadUserByUsername(jwtRequest.getAccountName());
 
@@ -148,7 +154,7 @@ public class JwtAuthenticationController {
         return new JwtResponse(token);
     }
 
-    private JwtResponse login(JwtRequest jwtRequest){
+    private JwtResponse login(JwtRequest jwtRequest) {
         try {
             authenticate(jwtRequest.getAccountName(), jwtRequest.getPassword());
         } catch (Exception e) {
