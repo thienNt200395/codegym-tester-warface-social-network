@@ -28,9 +28,6 @@ public class FriendRequestController {
     @GetMapping("/friend_request/{id}")
     public ResponseEntity<List<FriendRequest>> getAllFriendRequest(@PathVariable Integer id) {
         List<FriendRequest> friendRequestList = friendRequestService.findAllFriendRequest(id);
-        if (friendRequestList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
 
         for (int i = 0; i < friendRequestList.size(); i++){
             FriendRequest friendRequest = friendRequestList.get(i);
