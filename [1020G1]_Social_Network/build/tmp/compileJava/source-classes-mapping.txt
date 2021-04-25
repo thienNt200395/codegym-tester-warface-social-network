@@ -44,11 +44,29 @@ c1020g1/social_network/model/Ward.java
  c1020g1.social_network.model.Ward
 c1020g1/social_network/model/District.java
  c1020g1.social_network.model.District
+c1020g1/social_network/service/WardService.java
+ c1020g1.social_network.service.WardService
+c1020g1/social_network/repository/WardRepository.java
+ c1020g1.social_network.repository.WardRepository
 c1020g1/social_network/service/impl/EditServiceImpl.java
  c1020g1.social_network.service.impl.EditServiceImpl
 c1020g1/social_network/repository/EditRepository.java
  c1020g1.social_network.repository.EditRepository
 c1020g1/social_network/service/EditService.java
  c1020g1.social_network.service.EditService
+c1020g1/social_network/service/impl/WardServiceImpl.java
+ c1020g1.social_network.service.impl.WardServiceImpl
+c1020g1/social_network/service/DistrictService.java
+ c1020g1.social_network.service.DistrictService
+c1020g1/social_network/service/impl/DistrictServiceImpl.java
+ c1020g1.social_network.service.impl.DistrictServiceImpl
+c1020g1/social_network/repository/DistrictRepository.java
+ c1020g1.social_network.repository.DistrictRepository
+c1020g1/social_network/service/impl/ProvinceServiceImpl.java
+ c1020g1.social_network.service.impl.ProvinceServiceImpl
+c1020g1/social_network/service/ProvinceService.java
+ c1020g1.social_network.service.ProvinceService
+c1020g1/social_network/repository/ProvinceRepository.java
+ c1020g1.social_network.repository.ProvinceRepository
 c1020g1/social_network/controller/EditController.java
  c1020g1.social_network.controller.EditController
