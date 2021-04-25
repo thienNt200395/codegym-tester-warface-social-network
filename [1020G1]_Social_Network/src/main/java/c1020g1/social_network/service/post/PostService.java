@@ -2,6 +2,9 @@ package c1020g1.social_network.service.post;
 
 import c1020g1.social_network.model.Post;
 import c1020g1.social_network.model.PostImage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface PostService {
@@ -12,7 +15,7 @@ public interface PostService {
 
     Post getPostById(Integer postId);
 
-    List<Post> getAllPostInNewsFeed(Integer userId);
+    Page<Post> getAllPostInNewsFeed(Integer userId, Pageable pageable);
 
     List<PostImage> getAllImageByPostId(Integer postId);
 
