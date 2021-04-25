@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,5 +49,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int id) {
         return userRepository.getUserById(id);
+    }
+
+
+
+    @Override
+    public void updateStatus(Integer userId, Integer statusId) {
+        userRepository.updateStatus( userId, statusId );
+    }
+
+
+    @Override
+    public void updateAvatar(Integer userId, String image) {
+        userRepository.updateAvatar( userId, image );
+    }
+
+    @Override
+    public void updateBackground(Integer userId, String background) {
+        userRepository.updateBackground( userId,background );
     }
 }
