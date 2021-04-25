@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class GroupController {
     @Autowired
     private GroupRequestService groupRequestService;
@@ -40,7 +40,7 @@ public class GroupController {
     private PostService postService;  // getAllGroupMember():Observable<any>{
     //   return this.http.get((this.API + '/member'))
     // }
-    
+
     //show list group
     @RequestMapping(value = "/group", method = RequestMethod.GET)
     public ResponseEntity<List<Group>> listAllGroup() {
@@ -53,10 +53,10 @@ public class GroupController {
     }
 
     //tim kiem group theo ten
-    @RequestMapping(value = "/group/{name}", method = RequestMethod.GET)
-    public ResponseEntity<List<Group>> listGroupByName(@PathVariable String name){
+    @RequestMapping(value = "/group-search/{name}", method = RequestMethod.GET)
+    public ResponseEntity<List<Group>> listGroupByName(@PathVariable String name) {
         List<Group> Groups = groupService.findGroupByNameContaining(name);
-        if(Groups.isEmpty()){
+        if (Groups.isEmpty()) {
             return new ResponseEntity<List<Group>>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<List<Group>>(Groups, HttpStatus.OK);
@@ -76,17 +76,17 @@ public class GroupController {
     }
 
     //Xoa group
-    @RequestMapping(value = "/group/delete-{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Group> deleteGroup(@PathVariable("id") Integer id) {
+    @RequestMapping(value = "/group-delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteGroup(@PathVariable("id") Integer id) {
         System.out.println("Fetching & Deleting Group with id " + id);
 
         Group Group = groupService.findById(id);
         if (Group == null) {
             System.out.println("Unable to delete. Group with id " + id + " not found");
-            return new ResponseEntity<Group>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         groupService.remove(id);
-        return new ResponseEntity<Group>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     //list Member
@@ -101,7 +101,7 @@ public class GroupController {
     }
 
     //Display page feed
-    @RequestMapping(value = "/group-list-post/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/group-list-post/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Post>> listAllPostGroup(@PathVariable Integer id) {
         List<Post> posts = postService.findAllPostGroup(id);
         if (posts.isEmpty()) {
@@ -138,10 +138,12 @@ public class GroupController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     private WarningService warningService;
 
     @GetMapping("/request/list/group/{id}")
-    public ResponseEntity<Page<GroupRequest>> getRequestListByGroup(@PathVariable int id, @RequestParam(required = false) String key,
+    public ResponseEntity<Page<GroupRequest>> getRequestListByGroup(@PathVariable int id,
+                                                                    @RequestParam(required = false) String key,
                                                                     Pageable pageable) {
         if (key == null) {
             key = "";
@@ -250,7 +252,7 @@ public class GroupController {
     @GetMapping("/request/invite/friends/{id}")
     public ResponseEntity<List<User>> friendsInviteList(@PathVariable int id, @RequestParam int userId) {
         List<User> list = userService.inviteFriendList(id, userId);
-        for (User user: list){
+        for (User user : list) {
             System.out.println(user.getUserName());
         }
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
