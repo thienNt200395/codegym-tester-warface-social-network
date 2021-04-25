@@ -9,10 +9,16 @@ public class FriendRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "friend_request_id")
+<<<<<<< HEAD
     private Integer friendRequestId;
+=======
+    private int friendRequestId;
+
+>>>>>>> dev
     @ManyToOne
     @JoinColumn(name = "receiver_user_id", referencedColumnName = "user_id")
     private User receiveUser;
+
     @ManyToOne
     @JoinColumn(name = "send_user_id", referencedColumnName = "user_id")
     private User sendUser;
