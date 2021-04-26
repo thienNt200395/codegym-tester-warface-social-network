@@ -2,6 +2,8 @@ package c1020g1.social_network.service.post;
 
 import c1020g1.social_network.model.Post;
 import c1020g1.social_network.model.PostImage;
+import c1020g1.social_network.model.User;
+
 import java.util.List;
 
 public interface PostService {
@@ -19,4 +21,6 @@ public interface PostService {
     String encodeStringUrl(String url);
 
     String decodeStringUrl(String encodedUrl);
+
+    Post getRecentPostByUserId(Integer userId);
 }

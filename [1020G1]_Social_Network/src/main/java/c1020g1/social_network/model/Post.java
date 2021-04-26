@@ -84,4 +84,16 @@ public class Post {
     public void setGroupSocial(GroupSocial groupSocial) {
         this.groupSocial = groupSocial;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postContent='" + postContent + '\'' +
+                ", postStatus='" + postStatus + '\'' +
+                ", postPublished=" + postPublished +
+                ", user=" + user +
+                ", groupSocial=" + groupSocial +
+                '}';
+    }
 }

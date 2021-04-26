@@ -90,4 +90,9 @@ public class PostServiceImpl implements PostService {
         }
         return decodedUrl;
     }
+
+    @Override
+    public Post getRecentPostByUserId(Integer userId) {
+        return postRepository.getRecentPostByUserId(userId);
+    }
 }

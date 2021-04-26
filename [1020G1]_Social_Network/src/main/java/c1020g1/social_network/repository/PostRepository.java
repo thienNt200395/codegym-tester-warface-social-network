@@ -56,4 +56,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "WHERE f.user_id = ?1 ", nativeQuery = true)
     List<Post> getAllPostOfFriendUser(Integer userId);
 
+    @Query(value = "SELECT * FROM post WHERE post.user_id = :userId ORDER BY post.post_id DESC LIMIT 1", nativeQuery = true)
+    Post getRecentPostByUserId(Integer userId);
 }
