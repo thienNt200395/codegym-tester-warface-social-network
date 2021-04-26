@@ -1,6 +1,5 @@
 package c1020g1.social_network.controller;
 
-import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("*")
 public class UserController {
+    /**
+     * method: update status of user.
+     * author: HanTH.
+     */
     @Autowired
     private UserService userService;
     @PutMapping("/user/{idUser}/update/status/{idStatus}")
@@ -15,17 +18,26 @@ public class UserController {
         userService.updateStatus( idUser, idStatus );
     }
 
-    @GetMapping("/user/{id}")
-    public User findUserById(@PathVariable Integer id) {
-        return userService.findUserById( id );
-    }
-
+    /**
+     * method: update avatar of user.
+     * author: HanTH
+     * @param idUser
+     * @param image
+     * @param imageName
+     */
     @PutMapping("/user/{idUser}/update/avatar")
     public void updateAvatar(@PathVariable("idUser") Integer idUser, @RequestParam("image") String image,
                              @RequestParam("imageFile") String imageName) {
         userService.updateAvatar( idUser, image, imageName );
     }
 
+    /**
+     * method: update background of user.
+     * author: HanTH.
+     * @param idUser
+     * @param image
+     * @param imageName
+     */
     @PutMapping("/user/{idUser}/update/background")
     public void updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background") String image,
                                  @RequestParam("imageFile") String imageName) {

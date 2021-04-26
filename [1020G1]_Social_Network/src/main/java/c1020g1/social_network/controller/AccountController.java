@@ -21,6 +21,12 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    /**
+     * method: sent email to mail of user
+     * author: HanTH
+     * @param id
+     * @param code
+     */
     @GetMapping("/account/{idAccount}/changePassword")
     public void sendMailConfirmChangePassword(@PathVariable("idAccount") Integer id,
                                               @RequestParam("code") Integer code) {
@@ -33,6 +39,14 @@ public class AccountController {
         emailSenderService.sendEmail( simpleMailMessage );
     }
 
+    /**
+     * method: change password of user through account.
+     * author: HanTH
+     * @param accountName
+     * @param oldPassword
+     * @param newPassword
+     * @param confirmPassword
+     */
     @PutMapping("/account/{accountName}/changePassword")
     public void ChangePassword(@PathVariable("accountName") String accountName,
                                @RequestParam("oldPassword") String oldPassword,
