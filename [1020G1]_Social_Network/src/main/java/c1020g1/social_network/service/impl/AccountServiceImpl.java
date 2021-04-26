@@ -14,7 +14,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void changePassword(Account account, String oldPassword, String newPassword, String confirmPassword) {
-        accountRepository.changePassword( account.getAccountId(),  new BCryptPasswordEncoder().encode( newPassword ) );
+        accountRepository.changePassword( account.getAccountId(), new BCryptPasswordEncoder().encode( newPassword ) );
     }
 
     @Override
@@ -23,9 +23,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean checkChangePassword(Account account , String oldPassword, String newPassword, String confirmPassword) {
+    public boolean checkChangePassword(Account account, String oldPassword, String newPassword, String confirmPassword) {
         BCryptPasswordEncoder cryptPasswordEncoder = new BCryptPasswordEncoder();
-        if (!cryptPasswordEncoder.matches( oldPassword, account.getPassword())){
+        if (!cryptPasswordEncoder.matches( oldPassword, account.getPassword() )) {
             return !oldPassword.equals( newPassword ) && newPassword.equals( confirmPassword );
         }
         return false;
