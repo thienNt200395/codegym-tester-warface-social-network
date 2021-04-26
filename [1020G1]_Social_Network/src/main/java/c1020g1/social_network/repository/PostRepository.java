@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Repository
@@ -52,5 +53,10 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "WHERE user_id = :userId \n" +
             "ORDER BY post_published DESC ",countQuery= "SELECT count(*) from friends\n", nativeQuery = true)
     Page<Post> getAllPostInNewsFeed(@Param("userId") Integer userId, Pageable pageable);
+
+    @Query(value = "SELECT *\n" +
+            "FROM post\n" +
+            "WHERE user_id = :userId", nativeQuery = true)
+    List<Post> getAllPostInWallUser(@Param("userId") Integer userId);
 
 }

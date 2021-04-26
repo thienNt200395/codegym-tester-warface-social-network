@@ -124,7 +124,29 @@ public class PostController {
      */
     @GetMapping("/{postId}")
     public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId){
-        return new ResponseEntity<>(postService.getPostById(postId), HttpStatus.OK);
+        Post postFromDb = postService.getPostById(postId);
+
+        if(postFromDb == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(postFromDb, HttpStatus.OK);
+    }
+
+    /**
+     * Author : DungHA
+     * get all posts in wall of user
+     * @param userId
+     */
+    @GetMapping("/wall/{userId}")
+    public ResponseEntity<List<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId){
+        List<Post> postInWall = postService.getAllPostInWallUser(userId);
+
+        if(postInWall == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(postInWall, HttpStatus.OK);
     }
 }
 

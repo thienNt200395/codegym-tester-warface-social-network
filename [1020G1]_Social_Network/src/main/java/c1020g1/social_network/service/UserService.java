@@ -8,6 +8,6 @@ public interface UserService {
     User createUser(UserCreateDTO userCreateDTO);
 
     User getUserById(Integer id);
-//dương
+
     User getUserByEmail(String email);
 }

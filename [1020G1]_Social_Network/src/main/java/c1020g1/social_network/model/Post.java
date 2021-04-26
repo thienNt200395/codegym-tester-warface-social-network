@@ -39,6 +39,9 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostImage> postImages;
+
     public Integer getPostId() {
         return postId;
     }
@@ -94,5 +97,13 @@ public class Post {
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
 
+    }
+
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
     }
 }
