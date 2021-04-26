@@ -1,15 +1,24 @@
+
 package c1020g1.social_network.service.impl;
 
-import c1020g1.social_network.model.*;
+
+import c1020g1.social_network.model.Favourite;
+import c1020g1.social_network.model.Status;
+import c1020g1.social_network.model.User;
+import c1020g1.social_network.model.Account;
+
 import c1020g1.social_network.model.dto.UserCreateDTO;
-import c1020g1.social_network.repository.AccountRepository;
 import c1020g1.social_network.repository.FavouriteUserRepository;
 import c1020g1.social_network.repository.UserRepository;
+
 import c1020g1.social_network.service.UserService;
+
+import c1020g1.social_network.repository.AccountRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -64,9 +73,10 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Integer id) {
         return userRepository.getUserById(id);
     }
+
 
 
     /**
@@ -77,14 +87,13 @@ public class UserServiceImpl implements UserService {
      * @param statusId
      */
     @Override
-
     public void updateStatus(Integer userId, Integer statusId) {
         userRepository.updateStatus(userId, statusId);
     }
 
     /**
      * method: update avatar of user.
-     *
+     * author: HanTH
      * @param userId
      * @param image
      * @param imageName
@@ -110,5 +119,21 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+//dương
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
+    @Override
+    public List<User> inviteFriendList(int groupId, int userId) {
+        return userRepository.inviteFriends(groupId, userId);
+    }
+
+    @Override
+    public List<User> inviteFriendsOfFriendsList(int groupId) {
+        return userRepository.inviteFriendsOfFriends(groupId);
+    }
 
 }
