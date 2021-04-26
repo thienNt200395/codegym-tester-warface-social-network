@@ -10,7 +10,7 @@ public class GroupWarning {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_warning_id")
-    private int groupWarningId;
+    private Integer groupWarningId;
 
     @Column(name = "warning_content")
     private String warningContent;
@@ -22,11 +22,11 @@ public class GroupWarning {
     @Column(name = "warning_date",nullable = false)
     private Date warningDate;
 
-    public int getGroupWarningId() {
+    public Integer getGroupWarningId() {
         return groupWarningId;
     }
 
-    public void setGroupWarningId(int groupWarningId) {
+    public void setGroupWarningId(Integer groupWarningId) {
         this.groupWarningId = groupWarningId;
     }
 

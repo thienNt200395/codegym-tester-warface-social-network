@@ -108,4 +108,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.getRecentPostByUserId(userId);
     }
 
+    @Override
+    public List<Post> findAllPostGroup(Integer id) {
+        return postRepository.findAllPostGroup(id);
+    }
+
 }

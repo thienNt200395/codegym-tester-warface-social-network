@@ -1,7 +1,7 @@
 package c1020g1.social_network.model;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "account")
@@ -11,16 +11,15 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private Integer accountId;
-
-    @Column(name = "account_name",nullable = false, unique = true)
+    @Column(name = "account_name", nullable = false)
+    @NotBlank(message = "required")
     private String accountName;
-
+    @NotBlank(message = "required")
     @Column(name = "password")
     private String password;
 
     @OneToOne(mappedBy = "account")
     private User user;
-
 
     public Integer getAccountId() {
         return accountId;
@@ -45,6 +44,7 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public User getUser() {
         return user;

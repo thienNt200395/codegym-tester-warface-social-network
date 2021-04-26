@@ -56,4 +56,6 @@ public interface PostService {
 
     Post getRecentPostByUserId(Integer userId);
 
+    List<Post> findAllPostGroup(Integer id);
+
 }

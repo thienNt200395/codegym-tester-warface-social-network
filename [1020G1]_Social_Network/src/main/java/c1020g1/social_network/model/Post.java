@@ -1,15 +1,13 @@
 package c1020g1.social_network.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Table(name = "post")
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "postId")
 public class Post {
 
     @Id
@@ -30,17 +28,18 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
+    @JsonBackReference
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial groupSocial;
 
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
 
     @OneToMany(mappedBy = "post")
     private List<PostImage> postImages;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    private GroupSocial groupSocial;
 
     public Integer getPostId() {
         return postId;
@@ -86,8 +85,8 @@ public class Post {
         return groupSocial;
     }
 
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
+    public void setGroupSocial(GroupSocial group) {
+        this.groupSocial = group;
     }
 
     @Override

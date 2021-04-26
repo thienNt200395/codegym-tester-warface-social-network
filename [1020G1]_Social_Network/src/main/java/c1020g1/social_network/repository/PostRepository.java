@@ -61,4 +61,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query(value = "SELECT * FROM post WHERE post.user_id = :userId ORDER BY post.post_id DESC LIMIT 1", nativeQuery = true)
     Post getRecentPostByUserId(Integer userId);
+
+    @Query("select p from Post p where p.groupSocial.groupId=?1")
+    List<Post> findAllPostGroup(Integer id);
+
 }

@@ -1,5 +1,6 @@
 package c1020g1.social_network.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

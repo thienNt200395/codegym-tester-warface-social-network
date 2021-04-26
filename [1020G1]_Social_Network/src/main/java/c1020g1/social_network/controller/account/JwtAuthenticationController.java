@@ -1,4 +1,4 @@
-package c1020g1.social_network.controller;
+package c1020g1.social_network.controller.account;
 
 import c1020g1.social_network.config.JwtTokenUtil;
 import c1020g1.social_network.model.*;
