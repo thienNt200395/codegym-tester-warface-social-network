@@ -1,6 +1,14 @@
 package c1020g1.social_network.controller;
 
+
 import c1020g1.social_network.model.User;
+
+
+import org.springframework.web.bind.annotation.RestController;
+
+import c1020g1.social_network.model.dto.UserCreateDTO;
+import c1020g1.social_network.model.dto.UserResultMessageDTO;
+
 import c1020g1.social_network.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,8 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import c1020g1.social_network.model.dto.UserCreateDTO;
-import c1020g1.social_network.model.dto.UserResultMessageDTO;
+
 
 import org.springframework.http.HttpHeaders;
 
