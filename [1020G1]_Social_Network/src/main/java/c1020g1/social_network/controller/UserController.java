@@ -1,5 +1,7 @@
 package c1020g1.social_network.controller;
 
+
+import org.springframework.web.bind.annotation.RestController;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.model.dto.UserCreateDTO;
 import c1020g1.social_network.model.dto.UserResultMessageDTO;
@@ -52,5 +54,4 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable("id") int userId) {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
-
 }
