@@ -24,6 +24,12 @@ public class FriendsController {
     @Autowired
     FriendRequestService friendRequestService;
 
+    /**
+     * Author: DungNV
+     * Get List Friend find User login
+     * @param id
+     * @return
+     */
     // show list friend
     @RequestMapping(value = "/friend-list/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Friends>> getAllList(@PathVariable Integer id) {
@@ -34,6 +40,12 @@ public class FriendsController {
         return new ResponseEntity<>(friendsList, HttpStatus.OK);
     }
 
+    /**
+     * Author: DungNV
+     * Delete Friend
+     * @param id
+     * @return
+     */
     //Delete friend
     @RequestMapping(value = "friend-delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Friends> deleteFriends(@PathVariable Integer id) {
@@ -45,6 +57,12 @@ public class FriendsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Author: DungNv
+     * Get List Suggest Friend
+     * @param id
+     * @return
+     */
     //show List Suggest Friend
     @RequestMapping(value = "friend-suggest/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<SuggestFriend>> showListSuggest(@PathVariable Integer id) {

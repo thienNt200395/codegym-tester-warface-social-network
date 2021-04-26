@@ -58,13 +58,13 @@ c1020g1/social_network/service/friend_request_service/FriendRequestService.java
  c1020g1.social_network.service.friend_request_service.FriendRequestService
 c1020g1/social_network/model/SuggestFriend.java
  c1020g1.social_network.model.SuggestFriend
-c1020g1/social_network/service/friends_service/impl/FriendsServiceImpl.java
- c1020g1.social_network.service.friends_service.impl.FriendsServiceImpl
-c1020g1/social_network/service/friends_service/FriendsService.java
- c1020g1.social_network.service.friends_service.FriendsService
-c1020g1/social_network/repository/friends_repository/FriendsRepository.java
- c1020g1.social_network.repository.friends_repository.FriendsRepository
 c1020g1/social_network/service/friend_request_service/impl/FriendRequestServiceImpl.java
  c1020g1.social_network.service.friend_request_service.impl.FriendRequestServiceImpl
+c1020g1/social_network/service/friends_service/FriendsService.java
+ c1020g1.social_network.service.friends_service.FriendsService
 c1020g1/social_network/controller/FriendsController.java
  c1020g1.social_network.controller.FriendsController
+c1020g1/social_network/repository/friends_repository/FriendsRepository.java
+ c1020g1.social_network.repository.friends_repository.FriendsRepository
+c1020g1/social_network/service/friends_service/impl/FriendsServiceImpl.java
+ c1020g1.social_network.service.friends_service.impl.FriendsServiceImpl
