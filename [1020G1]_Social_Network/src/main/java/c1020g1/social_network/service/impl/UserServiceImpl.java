@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
      *
      * @param userCreateDTO
      * @return
+     *
      */
     @Override
     @Transactional
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * <<<<<<< HEAD
+     *
      * author: PhucPT
      * method: return user in database by id
      *
