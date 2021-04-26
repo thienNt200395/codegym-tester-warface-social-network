@@ -20,12 +20,20 @@ c1020g1/social_network/repository/FavouriteUserRepository.java
  c1020g1.social_network.repository.FavouriteUserRepository
 c1020g1/social_network/service/ProvinceService.java
  c1020g1.social_network.service.ProvinceService
+c1020g1/social_network/model/UserConnection.java
+ c1020g1.social_network.model.UserConnection
+c1020g1/social_network/service/UserService.java
+ c1020g1.social_network.service.UserService
+c1020g1/social_network/model/Province.java
+ c1020g1.social_network.model.Province
+c1020g1/social_network/model/District.java
+ c1020g1.social_network.model.District
 c1020g1/social_network/repository/ParentCommentRepository.java
  c1020g1.social_network.repository.ParentCommentRepository
 c1020g1/social_network/repository/PostRepository.java
  c1020g1.social_network.repository.PostRepository
-c1020g1/social_network/service/impl/EmailSenderService.java
- c1020g1.social_network.service.impl.EmailSenderService
+c1020g1/social_network/service/EditService.java
+ c1020g1.social_network.service.EditService
 c1020g1/social_network/repository/AccountRepository.java
  c1020g1.social_network.repository.AccountRepository
 c1020g1/social_network/validator/AccountDuplicatedValidator.java
@@ -86,8 +94,6 @@ c1020g1/social_network/model/Status.java
  c1020g1.social_network.model.Status
 c1020g1/social_network/repository/WardRepository.java
  c1020g1.social_network.repository.WardRepository
-c1020g1/social_network/model/UserConnection.java
- c1020g1.social_network.model.UserConnection
 c1020g1/social_network/repository/FavouriteRepository.java
  c1020g1.social_network.repository.FavouriteRepository
 c1020g1/social_network/service/WardService.java
@@ -106,19 +112,13 @@ c1020g1/social_network/repository/ProvinceRepository.java
  c1020g1.social_network.repository.ProvinceRepository
 c1020g1/social_network/model/dto/UserResultMessageDTO.java
  c1020g1.social_network.model.dto.UserResultMessageDTO
-c1020g1/social_network/model/Province.java
- c1020g1.social_network.model.Province
-c1020g1/social_network/service/EditService.java
- c1020g1.social_network.service.EditService
-c1020g1/social_network/model/District.java
- c1020g1.social_network.model.District
-c1020g1/social_network/service/UserService.java
- c1020g1.social_network.service.UserService
 c1020g1/social_network/service/impl/AccountServiceImpl.java
  c1020g1.social_network.service.impl.AccountServiceImpl
 c1020g1/social_network/controller/UserController.java
  c1020g1.social_network.controller.UserController
 c1020g1/social_network/controller/AccountController.java
  c1020g1.social_network.controller.AccountController
+c1020g1/social_network/service/impl/EmailSenderService.java
+ c1020g1.social_network.service.impl.EmailSenderService
 c1020g1/social_network/service/impl/UserServiceImpl.java
  c1020g1.social_network.service.impl.UserServiceImpl
