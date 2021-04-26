@@ -1,6 +1,8 @@
 package c1020g1.social_network.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -13,42 +15,56 @@ public class User {
     private Integer userId;
 
     @Column(name = "username", nullable = false)
+    @NotBlank(message = "required")
     private String userName;
 
     @Column(name = "birthday", nullable = false)
+    @NotNull(message = "required")
     private Date birthday;
 
+    @Pattern(regexp = "^(male|female)$", message = "unexpected_value")
     @Column(name = "gender", nullable = false)
+    @NotBlank(message ="required")
     private String gender;
 
     @Column(name = "occupation", nullable = false)
+    @NotBlank(message = "required")
     private String occupation;
 
     @Column(name = "email", nullable = false)
+    @Email(message = "wrong_format")
+    @NotBlank(message = "required")
     private String email;
 
     @Column(name = "user_avatar")
+    @NotBlank(message = "required")
     private String userAvatar;
 
     @Column(name = "user_background")
+    @NotBlank(message = "required")
     private String userBackground;
 
     @Column(name = "marriaged", nullable = false)
+    @NotBlank(message = "required")
+    @Pattern(regexp = "^(single|married)$",message = "unexpected_value")
     private String marriaged;
 
     @ManyToOne
     @JoinColumn(name = "ward_id", referencedColumnName = "ward_id")
+    @Valid
+    @NotNull(message = "required")
     private Ward ward;
 
     @Column(name = "address")
+    @NotBlank(message = "required")
     private String address;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "status_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "status_id",nullable = false)
     private Status status;
 
     @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id",nullable = false)
     private Account account;
 
     public Integer getUserId() {
@@ -154,4 +170,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

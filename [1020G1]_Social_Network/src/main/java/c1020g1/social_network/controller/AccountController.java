@@ -24,7 +24,7 @@ public class AccountController {
     @GetMapping("/account/{idAccount}/changePassword")
     public void sendMailConfirmChangePassword(@PathVariable("idAccount") Integer id,
                                               @RequestParam("code") Integer code) {
-        User user = userService.findUserById( id );
+        User user = userService.getUserById( id );
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo( user.getEmail() );
         simpleMailMessage.setSubject( "Confirm Change Password" );

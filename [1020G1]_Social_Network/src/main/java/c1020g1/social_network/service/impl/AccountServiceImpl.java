@@ -19,7 +19,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findAccountById(String accountName) {
-        return accountRepository.findAccountByAccountName( accountName );
+        return accountRepository.getAccountByName( accountName );
     }
 
     @Override
