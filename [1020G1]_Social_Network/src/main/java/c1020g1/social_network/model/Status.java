@@ -13,6 +13,14 @@ public class Status {
     @Column(name = "status_name")
     private String statusName;
 
+    public Status() {
+    }
+
+    public Status(int statusId, String statusName) {
+        this.statusId = statusId;
+        this.statusName = statusName;
+    }
+
     public Integer getStatusId() {
         return statusId;
     }

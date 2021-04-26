@@ -4,10 +4,14 @@ import c1020g1.social_network.model.Post;
 import c1020g1.social_network.model.PostDTO;
 import c1020g1.social_network.model.PostImage;
 import c1020g1.social_network.model.User;
+import c1020g1.social_network.service.UserService;
 import c1020g1.social_network.service.post.PostService;
 import c1020g1.social_network.service.post_image.PostImageService;
-import c1020g1.social_network.service.user.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.sql.Timestamp;
+
 import java.util.List;
 
 @RestController
@@ -33,29 +38,20 @@ public class PostController {
     @Autowired
     private PostImageService postImageService;
 
-//    @GetMapping("/wall/{id}")
-//    public ResponseEntity<List<Post>> findAllPostInWall(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostInWall(userId), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/group/{id}")
-//    public ResponseEntity<List<Post>> findAllPostInGroupUser(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostInGroupUser(userId), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/friend/{id}")
-//    public ResponseEntity<List<Post>> findAllPostOfFriendUser(@PathVariable("id") Integer userId){
-//        return  new ResponseEntity<>(postService.getAllPostOfFriendUser(userId), HttpStatus.OK);
-//    }
-
+    /**
+     * Author : CaoLPT
+     * get all posts in news feed of user
+     * @param userId
+     * @param pageable
+     */
     @GetMapping("/newsfeed/{userId}")
-    public ResponseEntity<List<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId) {
+    public ResponseEntity<Page<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable){
         User userFromDb = userService.getUserById(userId);
 
         if (userFromDb == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        List<Post> result = postService.getAllPostInNewsFeed(userId);
+        Page<Post> result = postService.getAllPostInNewsFeed(userId, pageable);
 
         if (result.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -63,6 +59,11 @@ public class PostController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * Author : CaoLPT
+     * find all images of the post
+     * @param postId
+     */
     @GetMapping("/image/{postId}")
     public ResponseEntity<List<PostImage>> findAllImageByPostId(@PathVariable("postId") Integer postId) {
         Post postFromDb = postService.getPostById(postId);
@@ -89,7 +90,7 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         postDTO.getPost().setPostPublished(new Timestamp(System.currentTimeMillis()));
-        postDTO.getPost().setPostContent(postService.encodeStringUrl(postDTO.getPost().getPostContent()));
+        postDTO.getPost().setPostContent(postService.decodeStringUrl(postDTO.getPost().getPostContent()));
         postService.createPost(postDTO.getPost());
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
         for (String image : postDTO.getPostImages()) {
@@ -101,8 +102,11 @@ public class PostController {
     }
 
     /**
-     * @author SonPH
+     * Author : SonPH
      * edit post
+     * @param postId
+     * @param post
+     * @param bindingResult
      */
     @PutMapping("/{postId}")
     public ResponseEntity<Post> editPost(@PathVariable("postId") Integer postId, @Validated @RequestBody Post post, BindingResult bindingResult) {
@@ -114,25 +118,43 @@ public class PostController {
             System.out.println("Post with id " + postId + " not found!");
             return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
         }
-        post1.setPostContent(postService.encodeStringUrl(post.getPostContent()));
+        post1.setPostContent(post.getPostContent());
         post1.setPostStatus(post.getPostStatus());
 
         postService.editPost(post1);
-        return new ResponseEntity<Post>(post1, HttpStatus.OK);
+        return new ResponseEntity<>(post1, HttpStatus.OK);
     }
 
     /**
-     * @author SonPH
-     * get post by postId
+     * Author : CaoLPT
+     * get post by ID
+     * @param postId
      */
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId) {
-        Post post = postService.getPostById(postId);
-        if (post == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId){
+        Post postFromDb = postService.getPostById(postId);
+
+        if(postFromDb == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        post.setPostContent(postService.decodeStringUrl(post.getPostContent()));
-        return new ResponseEntity<Post>(post, HttpStatus.OK);
+
+        return new ResponseEntity<>(postFromDb, HttpStatus.OK);
+    }
+
+    /**
+     * Author : DungHA
+     * get all posts in wall of user
+     * @param userId
+     */
+    @GetMapping("/wall/{userId}")
+    public ResponseEntity<List<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId){
+        List<Post> postInWall = postService.getAllPostInWallUser(userId);
+
+        if(postInWall == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(postInWall, HttpStatus.OK);
     }
 }
 
