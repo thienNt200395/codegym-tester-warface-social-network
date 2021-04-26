@@ -98,13 +98,13 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(jwtResponse);
     }
 
+
     /**
      * Method: convert facebook access to jwt token
      * Author: DươngLQ
      * @param jwtResponseSocial
      * @return
      */
-
     @PostMapping("oauth/facebook")
     public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) {
         Facebook facebook = new FacebookTemplate(jwtResponseSocial.getToken());
@@ -130,6 +130,7 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(jwtResponse);
     }
 
+
     /**
      * Method: send email for user when revocer password
      * Author: DươngLQ
@@ -137,7 +138,6 @@ public class JwtAuthenticationController {
      * @return
      * @throws MessagingException
      */
-
     @GetMapping("/recover/{accountName}")
     public ResponseEntity<?> mailSender(@PathVariable("accountName") String accountName) throws MessagingException {
         Account account = jwtAccountDetailService.getAccount(accountName);
@@ -172,13 +172,13 @@ public class JwtAuthenticationController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+
     /**
      * Method:create userDetails and create Jwt token
      * Author: DươngLQ
      * @param jwtRequest
      * @return
      */
-
     private JwtResponse loginSocial(JwtRequest jwtRequest) {
         final UserDetails userDetails = jwtAccountDetailService
                 .loadUserByUsername(jwtRequest.getAccountName());
@@ -188,13 +188,13 @@ public class JwtAuthenticationController {
         return new JwtResponse(token);
     }
 
+
     /**
      * Method: catch exeption from method authenticate, if not exception create userDetails and create Jwt token
      * Author: DươngLQ
      * @param jwtRequest
      * @return
      */
-
     private JwtResponse login(JwtRequest jwtRequest) {
         try {
             authenticate(jwtRequest.getAccountName(), jwtRequest.getPassword());
@@ -212,6 +212,7 @@ public class JwtAuthenticationController {
         return jwtResponse;
     }
 
+
     /**
      * Method: check authenticate with authenticationManager throw exeption if exits
      * Author: DươngLQ
@@ -219,7 +220,6 @@ public class JwtAuthenticationController {
      * @param password
      * @throws Exception
      */
-
     private void authenticate(String accountName, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(accountName, password));
