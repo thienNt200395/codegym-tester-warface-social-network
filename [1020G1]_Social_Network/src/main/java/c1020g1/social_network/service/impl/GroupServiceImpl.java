@@ -33,11 +33,7 @@ public class GroupServiceImpl implements GroupService {
         groupRepository.updateGroup(group.getImageBackground(), group.getImageAvatarUrl(), group.getScope(), group.getGroupId());
     }
 
-    //
-//    @Override
-//    public List<GroupUser> findAllGroupMember(Integer id) {
-//        return groupRepository.findAllGroupMember(id);
-//    }
+
     @Override
     public Group findById(Integer id) {
         return groupRepository.findGroupById(id);
