@@ -13,7 +13,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Transactional
     @Modifying
     @Query(value = "update account\n" + "set password = ?2\n" + "where account_id = ?1",nativeQuery = true)
-    public void changePassword(Integer accountId, String newPassword);
+    void changePassword(Integer accountId, String newPassword);
 
 
     @Modifying
