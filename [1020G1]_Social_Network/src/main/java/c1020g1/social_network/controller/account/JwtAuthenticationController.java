@@ -52,13 +52,25 @@ public class JwtAuthenticationController {
     @Autowired
     public UserService userService;
 
-
+    /**
+     * Method: Create authen
+     * Author:Dương LQ
+     * @param jwtRequest
+     * @return
+     */
     @PostMapping(value = "/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) {
         JwtResponse jwtResponse = login(jwtRequest);
         return ResponseEntity.ok(jwtResponse);
     }
 
+    /**
+     * Method: convert facebook access to jwt token
+     * Author: DươngLQ
+     * @param jwtResponseSocial
+     * @return
+     * @throws IOException
+     */
     @PostMapping("oauth/google")
     public ResponseEntity<?> google(@RequestBody SocialResponse jwtResponseSocial) throws IOException {
         final NetHttpTransport netHttpTransport = new NetHttpTransport();
@@ -86,8 +98,15 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(jwtResponse);
     }
 
+    /**
+     * Method: convert facebook access to jwt token
+     * Author: DươngLQ
+     * @param jwtResponseSocial
+     * @return
+     */
+
     @PostMapping("oauth/facebook")
-    public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) throws IOException {
+    public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) {
         Facebook facebook = new FacebookTemplate(jwtResponseSocial.getToken());
 
         final String[] fields = {"email", "gender", "name", "location", "picture"};
@@ -110,6 +129,14 @@ public class JwtAuthenticationController {
         jwtResponse.setUser(newUser);
         return ResponseEntity.ok(jwtResponse);
     }
+
+    /**
+     * Method: send email for user when revocer password
+     * Author: DươngLQ
+     * @param accountName
+     * @return
+     * @throws MessagingException
+     */
 
     @GetMapping("/recover/{accountName}")
     public ResponseEntity<?> mailSender(@PathVariable("accountName") String accountName) throws MessagingException {
@@ -145,6 +172,13 @@ public class JwtAuthenticationController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    /**
+     * Method:create userDetails and create Jwt token
+     * Author: DươngLQ
+     * @param jwtRequest
+     * @return
+     */
+
     private JwtResponse loginSocial(JwtRequest jwtRequest) {
         final UserDetails userDetails = jwtAccountDetailService
                 .loadUserByUsername(jwtRequest.getAccountName());
@@ -153,6 +187,13 @@ public class JwtAuthenticationController {
 
         return new JwtResponse(token);
     }
+
+    /**
+     * Method: catch exeption from method authenticate, if not exception create userDetails and create Jwt token
+     * Author: DươngLQ
+     * @param jwtRequest
+     * @return
+     */
 
     private JwtResponse login(JwtRequest jwtRequest) {
         try {
@@ -170,6 +211,14 @@ public class JwtAuthenticationController {
         jwtResponse.setUser(user);
         return jwtResponse;
     }
+
+    /**
+     * Method: check authenticate with authenticationManager throw exeption if exits
+     * Author: DươngLQ
+     * @param accountName
+     * @param password
+     * @throws Exception
+     */
 
     private void authenticate(String accountName, String password) throws Exception {
         try {
