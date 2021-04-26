@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
     /**
      * method: update status of user.
      * author: HanTH.
+     *
      * @param userId
      * @param statusId
      */
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     /**
      * method: find user by id of user.
      * author: HanTH.
+     *
      * @param id
      * @return
      */
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * method: update avatar of user.
+     *
      * @param userId
      * @param image
      * @param imageName
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * method: update background of user.
+     *
      * @param userId
      * @param background
      * @param imageName
