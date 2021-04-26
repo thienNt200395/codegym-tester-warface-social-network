@@ -28,6 +28,10 @@ public class GroupController {
     @Autowired
     private WarningService warningService;
 
+    /**
+     * @author PhinNL
+     * get list request by group id
+     */
     @GetMapping("/request/list/group/{id}")
     public ResponseEntity<Page<GroupRequest>> getRequestListByGroup(@PathVariable int id, @RequestParam(required = false) String key,
                                                                     @PageableDefault(size = 11) Pageable pageable) {
@@ -40,6 +44,10 @@ public class GroupController {
         return new ResponseEntity<Page<GroupRequest>>(groupRequestService.findAllByGroupAndKey(id, key, pageable), HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * get list request by user id
+     */
     @GetMapping("/request/list/user/{id}")
     public ResponseEntity<Page<GroupRequest>> getRequestListByUser(@PathVariable int id, Pageable pageable) {
         User user = userService.findById(id);
@@ -56,8 +64,12 @@ public class GroupController {
         return new ResponseEntity<User>(userService.findById(id),HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * delete request by group request id
+     */
     @DeleteMapping("/request/delete/{id}")
-    public ResponseEntity<Void> deleteRequest(@PathVariable int id) {
+    public ResponseEntity<Void> deleteRequestById(@PathVariable int id) {
         if (groupRequestService.findById(id) == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
@@ -65,6 +77,10 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * create a request
+     */
     @PostMapping("/request/save")
     public ResponseEntity<Void> saveRequest(@RequestBody GroupRequest groupRequest) {
         if (groupRequest.getGroup() == null || groupRequest.getUser() == null) {
@@ -82,6 +98,10 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    /**
+     * @author PhinNL
+     * delete request and create member
+     */
     @PostMapping("/request/accept/{id}")
     public ResponseEntity<Void> acceptRequest(@PathVariable int id) {
         GroupRequest groupRequest = groupRequestService.findById(id);
@@ -96,8 +116,12 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    /**
+     * @author PhinNL
+     * get member list by group id
+     */
     @GetMapping("/member/list/{id}")
-    public ResponseEntity<Page<GroupUser>> memberList(@RequestParam(required = false) String key, @PathVariable int id,
+    public ResponseEntity<Page<GroupUser>> getMemberList(@RequestParam(required = false) String key, @PathVariable int id,
                                                       @PageableDefault(size = 11) Pageable pageable) {
         if (groupService.findById(id) == null) {
             return new ResponseEntity<Page<GroupUser>>(Page.empty(), HttpStatus.NOT_FOUND);
@@ -109,8 +133,12 @@ public class GroupController {
         return new ResponseEntity<Page<GroupUser>>(all, HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * create warning
+     */
     @PostMapping("/member/warning")
-    public ResponseEntity<Void> warning(@RequestBody GroupWarning groupWarning) {
+    public ResponseEntity<Void> warningMember(@RequestBody GroupWarning groupWarning) {
         if (groupUserService.findById(groupWarning.getGroupUser().getGroupUserId()) == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
@@ -118,8 +146,12 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    /**
+     * @author PhinNL
+     * get member by id
+     */
     @GetMapping("/member/{id}")
-    public ResponseEntity<GroupUser> member(@PathVariable int id) {
+    public ResponseEntity<GroupUser> getMemberById(@PathVariable int id) {
         GroupUser groupUser = groupUserService.findById(id);
         if (groupUser == null) {
             return new ResponseEntity<GroupUser>(groupUser, HttpStatus.NOT_FOUND);
@@ -127,8 +159,12 @@ public class GroupController {
         return new ResponseEntity<GroupUser>(groupUser, HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * get warning list by group user id
+     */
     @GetMapping("/member/warning/{id}")
-    public ResponseEntity<Page<GroupWarning>> warningList(@PathVariable int id, @PageableDefault(size = 5) Pageable pageable) {
+    public ResponseEntity<Page<GroupWarning>> getWarningList(@PathVariable int id, @PageableDefault(size = 5) Pageable pageable) {
         if (groupUserService.findById(id) == null) {
             return new ResponseEntity<Page<GroupWarning>>(Page.empty(), HttpStatus.NOT_FOUND);
         }
@@ -136,8 +172,12 @@ public class GroupController {
         return new ResponseEntity<Page<GroupWarning>>(warningService.findAllByGroupUserOrderByWarningDateDesc(groupUser, pageable), HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * delete member by id
+     */
     @DeleteMapping("/member/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) {
+    public ResponseEntity<Void> deleteMemberById(@PathVariable int id) {
         if (groupUserService.findById(id) != null) {
             warningService.deleteByGroupUserId(id);
             groupUserService.deleteById(id);
@@ -146,16 +186,24 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * @author PhinNL
+     * get list friends of friends admin not in group user and group request by group id
+     */
     @GetMapping("/request/invite/list/{id}")
-    public ResponseEntity<List<User>> friendsOfFriendsInviteList(@PathVariable int id) {
+    public ResponseEntity<List<User>> getFriendsOfFriendsInviteList(@PathVariable int id) {
         if (groupService.findById(id) == null){
             return new ResponseEntity<List<User>>(new ArrayList<>(),HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<User>>(userService.inviteFriendsOfFriendsList(id), HttpStatus.OK);
     }
 
+    /**
+     * @author PhinNL
+     * get list friend of admin by group id
+     */
     @GetMapping("/request/invite/friends/{id}")
-    public ResponseEntity<List<User>> friendsInviteList(@PathVariable int id, @RequestParam int userId) {
+    public ResponseEntity<List<User>> getFriendsInviteList(@PathVariable int id, @RequestParam int userId) {
         if (groupService.findById(id) == null || userService.findById(userId) == null){
             return new ResponseEntity<List<User>>(new ArrayList<>(),HttpStatus.NOT_FOUND);
         }
