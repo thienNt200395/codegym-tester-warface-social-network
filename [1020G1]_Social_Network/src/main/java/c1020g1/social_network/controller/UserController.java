@@ -25,6 +25,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * author: PhucPT
+     * method: create user, account and list favourite and return HTTP response
+     * @param userCreateDTO
+     * @param ucBuider
+     * @return
+     */
     @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody @Valid UserCreateDTO userCreateDTO, UriComponentsBuilder ucBuider) {
         User user = userService.createUser(userCreateDTO);
@@ -33,6 +40,12 @@ public class UserController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+    /**
+     * author: PhucPT
+     * method: handle all exception by javax.validation and return HTTP response with status 400 and error as json
+     * @param ex
+     * @return
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public UserResultMessageDTO handleValidationException(MethodArgumentNotValidException ex) {
@@ -48,6 +61,12 @@ public class UserController {
         return result;
     }
 
+    /**
+     * author: PhucPT
+     * method: return HTTP response with JSON as user with user_id
+     * @param userId
+     * @return
+     */
     @GetMapping("/detail/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") int userId) {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
