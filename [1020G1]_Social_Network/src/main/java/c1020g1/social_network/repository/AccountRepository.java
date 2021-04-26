@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Transactional
     @Modifying
+
     @Query(value = "update account\n" + "set password = ?2\n" + "where account_id = ?1",nativeQuery = true)
     void changePassword(Integer accountId, String newPassword);
 

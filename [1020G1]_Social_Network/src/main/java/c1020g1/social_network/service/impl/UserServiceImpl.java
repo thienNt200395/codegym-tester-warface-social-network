@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
      * author: PhucPT
      * method: transaction invoke account repository, user repository, favourite repository to create account,
      * user and favourites in database. Return user object has been created
+     *
      * @param userCreateDTO
      * @return
      */
@@ -54,8 +55,10 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * <<<<<<< HEAD
      * author: PhucPT
      * method: return user in database by id
+     *
      * @param id
      * @return
      */
@@ -65,20 +68,46 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
+    /**
+     * method: update status of user.
+     * author: HanTH.
+     *
+     * @param userId
+     * @param statusId
+     */
     @Override
+
     public void updateStatus(Integer userId, Integer statusId) {
-        userRepository.updateStatus( userId, statusId );
+        userRepository.updateStatus(userId, statusId);
     }
 
-
+    /**
+     * method: update avatar of user.
+     *
+     * @param userId
+     * @param image
+     * @param imageName
+     */
     @Override
-    public void updateAvatar(Integer userId, String image) {
-        userRepository.updateAvatar( userId, image );
+    public void updateAvatar(Integer userId, String image, String imageName) {
+        if (imageName.equals("png") || imageName.equals("jpg")) {
+            userRepository.updateAvatar(userId, image);
+        }
     }
 
+    /**
+     * method: update background of user.
+     *
+     * @param userId
+     * @param background
+     * @param imageName
+     */
     @Override
-    public void updateBackground(Integer userId, String background) {
-        userRepository.updateBackground( userId,background );
+    public void updateBackground(Integer userId, String background, String imageName) {
+        if (imageName.equals("png") || imageName.equals("jpg")) {
+            userRepository.updateBackground(userId, background);
+        }
     }
+
+
 }

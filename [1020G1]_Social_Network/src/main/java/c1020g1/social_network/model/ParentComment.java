@@ -1,6 +1,7 @@
 package c1020g1.social_network.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "parent_comment")
@@ -10,10 +11,16 @@ public class ParentComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "parent_comment_id")
     private Integer parentCommentId;
+
     @Column(name = "content")
     private String content;
-    @Column(name = "commentImage")
+
+    @Column(name = "comment_image")
     private String commentImage;
+
+    @Column(name = "comment_time")
+    private Timestamp commentTime;
+
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private Post post;
@@ -60,5 +67,25 @@ public class ParentComment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Timestamp getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Timestamp commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ParentComment{" +
+                "parentCommentId=" + parentCommentId +
+                ", content='" + content + '\'' +
+                ", commentImage='" + commentImage + '\'' +
+                ", commentTime=" + commentTime +
+                ", post=" + post +
+                ", user=" + user +
+                '}';
     }
 }
