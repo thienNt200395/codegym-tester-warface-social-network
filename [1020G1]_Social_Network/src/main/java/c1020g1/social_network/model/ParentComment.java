@@ -9,7 +9,7 @@ public class ParentComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "parent_comment_id")
-    private int parentCommentId;
+    private Integer parentCommentId;
     @Column(name = "content")
     private String content;
     @Column(name = "commentImage")
@@ -22,11 +22,11 @@ public class ParentComment {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
-    public int getParentCommentId() {
+    public Integer getParentCommentId() {
         return parentCommentId;
     }
 
-    public void setParentCommentId(int parentCommentId) {
+    public void setParentCommentId(Integer parentCommentId) {
         this.parentCommentId = parentCommentId;
     }
 
