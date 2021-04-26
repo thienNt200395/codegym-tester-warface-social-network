@@ -13,7 +13,9 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     @Query("select c from Friends c where c.user.userId = ?1")
     List<Friends> findAllFriendById(Integer userId);
 
+
     // Câu lấy ra user_id được gợi ý với user login
+
     @Query(value = "select tmp_2.user_id," +
                     " count(tmp_2.user_id) as number_of_mutual_friend" +
             " from (" +
@@ -37,7 +39,9 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
                 " where (tmp_1.friend_id = tmp_2.friend_id) and (tmp_2.user_id != ?1)" +
             " group by tmp_2.user_id" +
             " order by number_of_mutual_friend desc", nativeQuery = true)
+
     List<Integer> getAllSuggestFriend(Integer userId);
+
 
     @Query("select f from Friends f where f.friendsId = ?1")
     Friends findFriendsById(Integer friendsId);

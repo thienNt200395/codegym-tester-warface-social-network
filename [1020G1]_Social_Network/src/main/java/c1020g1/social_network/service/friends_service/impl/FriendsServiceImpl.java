@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 
 @Service
 @Transactional
@@ -57,6 +56,7 @@ public class FriendsServiceImpl implements FriendsService {
     public void deleteFriends(Friends friends) {
         friendsRepository.deleteFriendsByUserUserIdAndFriendUserId(friends.getUser().getUserId(), friends.getFriend().getUserId());
         friendsRepository.deleteFriendsByUserUserIdAndFriendUserId(friends.getFriend().getUserId(), friends.getUser().getUserId());
+
     }
 
     @Override
@@ -69,5 +69,10 @@ public class FriendsServiceImpl implements FriendsService {
         }
         friendsRepository.save(friends);
         return "OK";
+    }
+
+    @Override
+    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+        return friendsRepository.findMutualFriend(receiveUser,sendUser);
     }
 }
