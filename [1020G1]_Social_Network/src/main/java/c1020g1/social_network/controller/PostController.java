@@ -1,7 +1,6 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.Post;
-
 import c1020g1.social_network.model.PostDTO;
 import c1020g1.social_network.model.PostImage;
 import c1020g1.social_network.model.User;
@@ -12,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -84,6 +83,7 @@ public class PostController {
      * create post
      */
     @PostMapping("")
+    @Transactional
     public ResponseEntity<Void> createPost(@Validated @RequestBody PostDTO postDTO, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -92,7 +92,6 @@ public class PostController {
         postDTO.getPost().setPostContent(postService.encodeStringUrl(postDTO.getPost().getPostContent()));
         postService.createPost(postDTO.getPost());
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
-        System.out.println(postDTO.getPostImages().length);
         for (String image : postDTO.getPostImages()) {
             postImageService.createPostImage(postTemp.getPostId(), image);
         }
