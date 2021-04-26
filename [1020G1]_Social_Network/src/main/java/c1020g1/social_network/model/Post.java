@@ -90,6 +90,18 @@ public class Post {
         this.groupSocial = groupSocial;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postContent='" + postContent + '\'' +
+                ", postStatus='" + postStatus + '\'' +
+                ", postPublished=" + postPublished +
+                ", user=" + user +
+                ", groupSocial=" + groupSocial +
+                '}';
+    }
+
     public List<ParentComment> getParentComments() {
         return parentComments;
     }
@@ -105,5 +117,6 @@ public class Post {
 
     public void setPostImages(List<PostImage> postImages) {
         this.postImages = postImages;
+
     }
 }

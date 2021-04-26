@@ -1,11 +1,13 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.Post;
-
+import c1020g1.social_network.model.PostDTO;
 import c1020g1.social_network.model.PostImage;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.UserService;
 import c1020g1.social_network.service.post.PostService;
+import c1020g1.social_network.service.post_image.PostImageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,9 @@ public class PostController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PostImageService postImageService;
+
     /**
      * Author : CaoLPT
      * get all posts in news feed of user
@@ -42,12 +48,12 @@ public class PostController {
     public ResponseEntity<Page<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable){
         User userFromDb = userService.getUserById(userId);
 
-        if(userFromDb == null)
+        if (userFromDb == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         Page<Post> result = postService.getAllPostInNewsFeed(userId, pageable);
 
-        if(result.isEmpty())
+        if (result.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -59,50 +65,52 @@ public class PostController {
      * @param postId
      */
     @GetMapping("/image/{postId}")
-    public ResponseEntity<List<PostImage>> findAllImageByPostId(@PathVariable("postId") Integer postId){
+    public ResponseEntity<List<PostImage>> findAllImageByPostId(@PathVariable("postId") Integer postId) {
         Post postFromDb = postService.getPostById(postId);
 
-        if(postFromDb == null)
+        if (postFromDb == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         List<PostImage> listPostImage = postService.getAllImageByPostId(postId);
 
-        if(listPostImage.isEmpty())
+        if (listPostImage.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(listPostImage, HttpStatus.OK);
     }
 
     /**
-     * Author : CaoLPT
-     * create new post
-     * @param post
-     * @param bindingResult
-     * @param ucBuilder
+     * @author SonPH
+     * create post
      */
-   @PostMapping("")
-    public ResponseEntity<Void> createPost(@Validated @RequestBody Post post, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
-        if (bindingResult.hasFieldErrors()){
+    @PostMapping("")
+    @Transactional
+    public ResponseEntity<Void> createPost(@Validated @RequestBody PostDTO postDTO, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
+        if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        post.setPostPublished(new Timestamp(System.currentTimeMillis()));
-        System.out.println(post);
-        postService.createPost(post);
+        postDTO.getPost().setPostPublished(new Timestamp(System.currentTimeMillis()));
+        postDTO.getPost().setPostContent(postService.decodeStringUrl(postDTO.getPost().getPostContent()));
+        postService.createPost(postDTO.getPost());
+        Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
+        for (String image : postDTO.getPostImages()) {
+            postImageService.createPostImage(postTemp.getPostId(), image);
+        }
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(post.getPostId()).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(postTemp).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
     /**
-     * Author : CaoLPT
+     * Author : SonPH
      * edit post
      * @param postId
      * @param post
      * @param bindingResult
      */
     @PutMapping("/{postId}")
-    public ResponseEntity<Post> editPost(@PathVariable("postId") Integer postId,@Validated @RequestBody Post post, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()){
+    public ResponseEntity<Post> editPost(@PathVariable("postId") Integer postId, @Validated @RequestBody Post post, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Post post1 = postService.getPostById(postId);

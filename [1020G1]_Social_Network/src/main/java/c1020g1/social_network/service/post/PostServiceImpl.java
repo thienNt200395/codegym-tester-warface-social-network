@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 
@@ -87,6 +90,22 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllPostInWallUser(Integer userId) {
         return postRepository.getAllPostInWallUser(userId);
+    }
+
+    @Override
+    public String decodeStringUrl(String encodedUrl) {
+        String decodedUrl =null;
+        try {
+            decodedUrl = URLDecoder.decode(encodedUrl, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return decodedUrl;
+        }
+        return decodedUrl;
+    }
+
+    @Override
+    public Post getRecentPostByUserId(Integer userId) {
+        return postRepository.getRecentPostByUserId(userId);
     }
 
 }

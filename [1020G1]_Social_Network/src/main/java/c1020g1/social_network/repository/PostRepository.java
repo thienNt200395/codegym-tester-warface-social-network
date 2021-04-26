@@ -59,4 +59,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "WHERE user_id = :userId", nativeQuery = true)
     List<Post> getAllPostInWallUser(@Param("userId") Integer userId);
 
+    @Query(value = "SELECT * FROM post WHERE post.user_id = :userId ORDER BY post.post_id DESC LIMIT 1", nativeQuery = true)
+    Post getRecentPostByUserId(Integer userId);
 }

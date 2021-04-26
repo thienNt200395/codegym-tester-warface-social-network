@@ -52,4 +52,8 @@ public interface PostService {
      */
     List<Post> getAllPostInWallUser(Integer userId);
 
+    String decodeStringUrl(String encodedUrl);
+
+    Post getRecentPostByUserId(Integer userId);
+
 }
