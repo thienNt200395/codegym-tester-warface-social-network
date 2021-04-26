@@ -16,7 +16,7 @@ public interface UserService {
     User createUser(UserCreateDTO userCreateDTO);
     //PhucPT
     User getUserById(Integer id);
-//dương
+
     User getUserByEmail(String email);
 
     List<User> inviteFriendList(int groupId, int userId);

@@ -34,9 +34,12 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<ParentComment> parentComments;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostImage> postImages;
+
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial group;
+    private GroupSocial groupSocial;
 
     public Integer getPostId() {
         return postId;
@@ -78,12 +81,24 @@ public class Post {
         this.user = user;
     }
 
-    public GroupSocial getGroup() {
-        return group;
+    public GroupSocial getGroupSocial() {
+        return groupSocial;
     }
 
-    public void setGroup(GroupSocial group) {
-        this.group = group;
+    public void setGroupSocial(GroupSocial group) {
+        this.groupSocial = group;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postContent='" + postContent + '\'' +
+                ", postStatus='" + postStatus + '\'' +
+                ", postPublished=" + postPublished +
+                ", user=" + user +
+                ", groupSocial=" + groupSocial +
+                '}';
     }
 
     public List<ParentComment> getParentComments() {
@@ -92,6 +107,15 @@ public class Post {
 
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
+
+    }
+
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
 
     }
 }

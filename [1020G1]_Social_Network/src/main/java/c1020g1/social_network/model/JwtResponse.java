@@ -1,7 +1,5 @@
 package c1020g1.social_network.model;
 
-import c1020g1.social_network.model.User;
-
 import java.io.Serializable;
 
 
@@ -31,7 +29,6 @@ public class JwtResponse implements Serializable {
     public String getToken() {
         return this.jwtToken;
     }
-
 
     public String getAccountName() {
         return accountName;

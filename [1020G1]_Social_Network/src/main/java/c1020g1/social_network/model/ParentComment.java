@@ -1,8 +1,7 @@
 package c1020g1.social_network.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -13,6 +12,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "parent_comment")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "parentCommentId")
 public class ParentComment implements Validator {
 
     @Id
@@ -39,6 +41,7 @@ public class ParentComment implements Validator {
     private User user;
 
     @OneToMany(mappedBy = "parentComment")
+    @JsonManagedReference
     private List<ChildComment> childComments;
 
     public Integer getParentCommentId() {

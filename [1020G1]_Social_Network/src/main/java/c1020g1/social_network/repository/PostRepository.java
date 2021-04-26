@@ -54,6 +54,15 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "ORDER BY post_published DESC ",countQuery= "SELECT count(*) from friends\n", nativeQuery = true)
     Page<Post> getAllPostInNewsFeed(@Param("userId") Integer userId, Pageable pageable);
 
-    @Query("select p from Post p where p.group.groupId=?1")
+    @Query(value = "SELECT *\n" +
+            "FROM post\n" +
+            "WHERE user_id = :userId", nativeQuery = true)
+    List<Post> getAllPostInWallUser(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT * FROM post WHERE post.user_id = :userId ORDER BY post.post_id DESC LIMIT 1", nativeQuery = true)
+    Post getRecentPostByUserId(Integer userId);
+
+    @Query("select p from Post p where p.groupSocial.groupId=?1")
     List<Post> findAllPostGroup(Integer id);
+
 }
