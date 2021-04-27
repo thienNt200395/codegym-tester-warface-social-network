@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 public interface AccountService {
     void changePassword(Account account, String oldPassword, String newPassword, String confirmPassword);
 
-    Account findAccountById(String accountName);
+    Account findAccountByName(String accountName);
+
+
 
     boolean checkChangePassword(Account account,String oldPassword, String newPassword, String confirmPassword);
 }

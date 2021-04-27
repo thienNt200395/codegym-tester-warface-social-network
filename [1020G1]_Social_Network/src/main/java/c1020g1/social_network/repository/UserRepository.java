@@ -15,17 +15,17 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Modifying
-    @Query(value = "update user\n" + "set status_id = ?2\n" + "where id = ?1", nativeQuery = true)
+    @Query(value = "update user\n" + "set user.status_id = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
     void updateStatus(Integer userId, Integer status_id);
 
     @Transactional
     @Modifying
-    @Query(value = "update user\n" + "set avatar = ?2\n" + "where id = ?1", nativeQuery = true)
+    @Query(value = "update user\n" + "set user.avatar = ?2\n" + "where user.user.id = ?1", nativeQuery = true)
     void updateAvatar(Integer userId, String image);
 
     @Transactional
     @Modifying
-    @Query(value = "update user\n" + "set background = ?2\n" + "where id = ?1", nativeQuery = true)
+    @Query(value = "update user\n" + "set user.background = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
     void updateBackground(Integer userId, String background);
 
 

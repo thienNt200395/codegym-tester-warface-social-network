@@ -174,8 +174,8 @@ c1020g1/social_network/repository/friend_request_repository/FriendRequestReposit
  c1020g1.social_network.repository.friend_request_repository.FriendRequestRepository
 c1020g1/social_network/service/WardService.java
  c1020g1.social_network.service.WardService
-c1020g1/social_network/controller/UserController.java
- c1020g1.social_network.controller.UserController
+c1020g1/social_network/config/JwtTokenUtil.java
+ c1020g1.social_network.config.JwtTokenUtil
 c1020g1/social_network/model/ParentComment.java
  c1020g1.social_network.model.ParentComment
 c1020g1/social_network/service/impl/EditServiceImpl.java
@@ -198,5 +198,5 @@ c1020g1/social_network/service/impl/WarningServiceImpl.java
  c1020g1.social_network.service.impl.WarningServiceImpl
 c1020g1/social_network/service/ProvinceService.java
  c1020g1.social_network.service.ProvinceService
-c1020g1/social_network/config/JwtTokenUtil.java
- c1020g1.social_network.config.JwtTokenUtil
+c1020g1/social_network/controller/UserController.java
+ c1020g1.social_network.controller.UserController

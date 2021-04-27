@@ -29,26 +29,30 @@ public class EditController {
     ProvinceService provinceService;
 
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Integer id){
-        return editService.getUserInfoById(id);
+    public User getUserById(@PathVariable Integer id) {
+        return editService.getUserInfoById( id );
     }
 
 
     @PostMapping("user/edit")
-    public void save(@RequestBody User user){
-        editService.save(user);
+    public void save(@RequestBody User user) {
+        editService.save( user );
     }
 
     @GetMapping("/user/ward")
-    public List<Ward> getWard(){
+    public List<Ward> getWard() {
         return wardService.getWardList();
     }
 
     @GetMapping("/user/district")
-    public List<District> getDistrict() { return districtService.getDistrictList(); }
+    public List<District> getDistrict() {
+        return districtService.getDistrictList();
+    }
 
     @GetMapping("/user/province")
-    public Iterable<Province> getProvinceList() { return provinceService.getAllProvince(); }
+    public Iterable<Province> getProvinceList() {
+        return provinceService.getAllProvince();
+    }
 }
 
 

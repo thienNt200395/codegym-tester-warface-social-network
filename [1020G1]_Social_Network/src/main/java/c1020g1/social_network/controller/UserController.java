@@ -45,6 +45,10 @@ public class UserController {
 
     @PutMapping("/user/{idUser}/update/status/{idStatus}")
     public ResponseEntity<?> updateStatus(@PathVariable("idUser") Integer idUser, @PathVariable("idStatus") Integer idStatus) {
+        User user = userService.getUserById( idUser );
+        if (user==null){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        }
         userService.updateStatus( idUser, idStatus );
         return new ResponseEntity<>( HttpStatus.OK );
     }
@@ -60,6 +64,10 @@ public class UserController {
     @PutMapping("/user/{idUser}/update/avatar")
     public ResponseEntity<?> updateAvatar(@PathVariable("idUser") Integer idUser, @RequestParam("image") String image,
                                           @RequestParam("imageFile") String imageName) {
+        User user = userService.getUserById( idUser );
+        if (user == null){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        }
         userService.updateAvatar( idUser, image, imageName );
         return new ResponseEntity<>( HttpStatus.OK );
     }
@@ -73,9 +81,14 @@ public class UserController {
      * @param imageName
      */
     @PutMapping("/user/{idUser}/update/background")
-    public void updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background") String image,
+    public ResponseEntity<?> updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background") String image,
                                  @RequestParam("imageFile") String imageName) {
+        User user = userService.getUserById( idUser );
+        if (user==null){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        }
         userService.updateBackground(idUser, image, imageName);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     /**

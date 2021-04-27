@@ -4,7 +4,7 @@ import c1020g1.social_network.model.Account;
 import c1020g1.social_network.repository.AccountRepository;
 import c1020g1.social_network.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +12,8 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     /**
      * method: change password of user through account.
      * author: HanTH.
@@ -24,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void changePassword(Account account, String oldPassword, String newPassword, String confirmPassword) {
         if (checkChangePassword( account, oldPassword, newPassword, confirmPassword )) {
-            accountRepository.changePassword( account.getAccountId(), new BCryptPasswordEncoder().encode( newPassword ) );
+            accountRepository.changePassword( account.getAccountId(), passwordEncoder.encode( newPassword ) );
         }
     }
 
@@ -36,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
-    public Account findAccountById(String accountName) {
+    public Account findAccountByName(String accountName) {
         return accountRepository.getAccountByName( accountName );
     }
 
@@ -52,8 +54,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean checkChangePassword(Account account, String oldPassword, String newPassword, String confirmPassword) {
-        BCryptPasswordEncoder cryptPasswordEncoder = new BCryptPasswordEncoder();
-        if (!cryptPasswordEncoder.matches( oldPassword, account.getPassword() )) {
+        if (!passwordEncoder.matches( oldPassword, account.getPassword() )) {
             return !oldPassword.equals( newPassword ) && newPassword.equals( confirmPassword );
         }
         return false;
