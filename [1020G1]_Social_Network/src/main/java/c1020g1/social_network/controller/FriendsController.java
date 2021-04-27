@@ -27,6 +27,7 @@ public class FriendsController {
     /**
      * Author: DungNV
      * Get List Friend find User login
+     *
      * @param id
      * @return
      */
@@ -35,11 +36,8 @@ public class FriendsController {
     public ResponseEntity<List<Friends>> getAllList(@PathVariable Integer id) {
         try {
             List<Friends> friendsList = friendsService.findAllFriendById(id);
-            if (friendsList.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
             return new ResponseEntity<>(friendsList, HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -47,6 +45,7 @@ public class FriendsController {
     /**
      * Author: DungNV
      * Delete Friend
+     *
      * @param id
      * @return
      */
@@ -60,8 +59,8 @@ public class FriendsController {
             }
             friendsService.deleteFriends(friends);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            return new  ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -74,13 +73,10 @@ public class FriendsController {
     //show List Suggest Friend
     @RequestMapping(value = "friend-suggest/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<SuggestFriend>> showListSuggest(@PathVariable Integer id) {
-        try{
-        List<SuggestFriend> friendSuggestList = friendsService.getAllSuggestFriend(id);
-        if (friendSuggestList == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        try {
+            List<SuggestFriend> friendSuggestList = friendsService.getAllSuggestFriend(id);
             return new ResponseEntity<>(friendSuggestList, HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -110,7 +106,7 @@ public class FriendsController {
 
             friendRequestService.deleteFriendRequest(friendRequest.getFriendRequestId());
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
