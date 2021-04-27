@@ -20,12 +20,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update user\n" + "set user.avatar = ?2\n" + "where user.user.id = ?1", nativeQuery = true)
+    @Query(value = "update user\n" + "set user.user_avatar = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
     void updateAvatar(Integer userId, String image);
 
     @Transactional
     @Modifying
-    @Query(value = "update user\n" + "set user.background = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
+    @Query(value = "update user\n" + "set user.user_background = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
     void updateBackground(Integer userId, String background);
 
 

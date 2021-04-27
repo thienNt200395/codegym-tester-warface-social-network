@@ -15,7 +15,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -30,20 +30,14 @@ public class AccountController {
      * method: sent email to mail of user
      * author: HanTH
      *
-     * @param accountName
+     * @param email
      * @param code
      */
-    @GetMapping("/account/{accountName}/changePassword")
-    public ResponseEntity<?> sendMailConfirmChangePassword(@PathVariable("accountName") String accountName,
+    @GetMapping("/account/{email}/changePassword")
+    public ResponseEntity<?> sendMailConfirmChangePassword(@PathVariable("email") String email,
                                                            @RequestParam("code") Integer code) throws MessagingException {
-        Account account = accountService.findAccountByName( accountName );
-        if (account == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
-        }
-
-        User user = userService.getUserByAccountId( account.getAccountId() );
-        if (user == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        if (email == null || code == null){
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT );
         }
 
         MimeMessage message = emailSender.createMimeMessage();
@@ -57,7 +51,7 @@ public class AccountController {
 
         message.setContent( htmlMsg, "text/html" );
 
-        helper.setTo( user.getEmail() );
+        helper.setTo( email );
 
         helper.setSubject( "C10Tinder Support Recover Password" );
 

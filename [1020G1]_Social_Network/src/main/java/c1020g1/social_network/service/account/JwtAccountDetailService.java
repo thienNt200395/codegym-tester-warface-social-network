@@ -48,7 +48,7 @@ public class JwtAccountDetailService implements UserDetailsService {
      */
 
     public void update(String accountName) {
-        accountRepository.updateAccount(passwordEncoder.encode(secretPwt),accountName);
+        accountRepository.changePassword(passwordEncoder.encode(secretPwt),accountName);
     }
 
     /**

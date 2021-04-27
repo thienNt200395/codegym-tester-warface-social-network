@@ -2,6 +2,7 @@ package c1020g1.social_network.controller;
 
 
 import c1020g1.social_network.model.Account;
+import c1020g1.social_network.model.Status;
 import c1020g1.social_network.model.User;
 
 
@@ -46,14 +47,28 @@ public class UserController {
     @Autowired
     private AccountService accountService;
 
-    @PutMapping("/user/{idUser}/update/status/{idStatus}")
+    @PutMapping("/{idUser}/update/status/{idStatus}")
     public ResponseEntity<?> updateStatus(@PathVariable("idUser") Integer idUser, @PathVariable("idStatus") Integer idStatus) {
         User user = userService.getUserById( idUser );
         if (user == null) {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
         userService.updateStatus( idUser, idStatus );
-        return new ResponseEntity<>( HttpStatus.OK );
+        switch (idStatus){
+            case 1 :
+                user.setStatus(new Status(1, "Online"));
+                break;
+            case 2:
+                user.setStatus(new Status(2,"Busy"));
+                break;
+            case 3:
+                user.setStatus(new Status(3,"Offline"));
+                break;
+            default:
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK );
     }
 
     /**
@@ -64,7 +79,7 @@ public class UserController {
      * @param image
      * @param imageName
      */
-    @PutMapping("/user/{idUser}/update/avatar")
+    @PutMapping("/{idUser}/update/avatar")
     public ResponseEntity<?> updateAvatar(@PathVariable("idUser") Integer idUser, @RequestParam("image") String image,
                                           @RequestParam("imageFile") String imageName) {
         User user = userService.getUserById( idUser );
@@ -72,7 +87,8 @@ public class UserController {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
         userService.updateAvatar( idUser, image, imageName );
-        return new ResponseEntity<>( HttpStatus.OK );
+        user.setUserAvatar(image);
+        return new ResponseEntity<>(user, HttpStatus.OK );
     }
 
     /**
@@ -83,7 +99,7 @@ public class UserController {
      * @param image
      * @param imageName
      */
-    @PutMapping("/user/{idUser}/update/background")
+    @PutMapping("/{idUser}/update/background")
     public ResponseEntity<?> updateBackground(@PathVariable("idUser") Integer idUser, @RequestParam("background") String image,
                                               @RequestParam("imageFile") String imageName) {
         User user = userService.getUserById( idUser );
@@ -91,27 +107,8 @@ public class UserController {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
         userService.updateBackground( idUser, image, imageName );
-        return new ResponseEntity<>( HttpStatus.OK );
-    }
-
-    /**
-     * method: find user by account name.
-     * author: HanTH
-     *
-     * @param accountName
-     * @return
-     */
-    @GetMapping("user/{accountName}")
-    public ResponseEntity<?> getUserByAccountName(@PathVariable("accountName") String accountName) {
-        Account account = accountService.findAccountByName( accountName );
-        if (account == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
-        }
-        User user = userService.getUserByAccountId( account.getAccountId() );
-        if (user == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
-        }
-        return ResponseEntity.ok( user );
+        user.setUserBackground(image);
+        return ResponseEntity.ok(user);
     }
 
     /**
