@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface GroupRequestService {
     GroupRequest findById(Integer id);
@@ -15,5 +17,5 @@ public interface GroupRequestService {
     Page<GroupRequest> findAllByUser(User user, Pageable pageable);
     GroupRequest findExist(GroupRequest groupRequest);
     void save(GroupRequest groupRequest);
-    String addGroupRequest(GroupRequest groupRequest);
+    List<GroupRequest> findGroupRequestByUserId(Integer userId);
 }

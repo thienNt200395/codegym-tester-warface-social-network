@@ -31,7 +31,7 @@ public class GroupRequest {
         return group;
     }
 
-    public void setGroup(Group groupSocial) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 

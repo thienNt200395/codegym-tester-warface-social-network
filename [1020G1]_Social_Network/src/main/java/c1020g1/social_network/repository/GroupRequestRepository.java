@@ -11,6 +11,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public interface GroupRequestRepository extends JpaRepository<GroupRequest, Integer> {
@@ -28,4 +30,8 @@ public interface GroupRequestRepository extends JpaRepository<GroupRequest, Inte
     Page<GroupRequest> findAllByUser(User user, Pageable pageable);
     @Query(value = "select * from group_request r where r.group_id = :group_id and r.user_id = :user_id",nativeQuery = true)
     GroupRequest findExist(@Param("group_id") Integer groupId,@Param("user_id") Integer userId);
+
+    @Query("select r from GroupRequest r where r.user.userId=?1")
+    List<GroupRequest> findGroupRequestByUserId(Integer userId);
+
 }

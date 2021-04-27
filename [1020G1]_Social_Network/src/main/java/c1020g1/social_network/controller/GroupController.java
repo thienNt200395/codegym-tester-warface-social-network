@@ -202,14 +202,21 @@ public class GroupController {
         }
     }
 
-    //Gui request join group
-    @RequestMapping(value = "/group-request", method = RequestMethod.POST)
-    public ResponseEntity<GroupRequest> requestGroup(@RequestBody GroupRequest groupRequest) {
+
+    @RequestMapping(value = "/group-detail/{groupId}/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<GroupUser> findGroupUserByGroupAndUser(@PathVariable Integer groupId, @PathVariable Integer userId) {
         try {
-            if (groupRequestService.addGroupRequest(groupRequest).equals("NG"))
+            if (groupService.findById(groupId) == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
+            }
+            if (userService.findById(userId) == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (groupUserService.findExist(groupId, userId) == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<GroupUser>(groupUserService.findExist(groupId, userId), HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -243,6 +250,7 @@ public class GroupController {
 
     @PostMapping("/request/save")
     public ResponseEntity<Void> saveRequest(@RequestBody GroupRequest groupRequest) {
+
         if (groupRequest.getGroup() == null || groupRequest.getUser() == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
@@ -331,5 +339,21 @@ public class GroupController {
             System.out.println(user.getUserName());
         }
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+    }
+
+    /**
+     * Author: CuongNVM
+     * get all data form table Group Request
+     * @param userId
+     * @return
+     */
+    @GetMapping("/group-request/{userId}")
+    public ResponseEntity<List<GroupRequest>> findGroupRequestByUserId(@PathVariable Integer userId){
+        try{
+            List<GroupRequest> list = groupRequestService.findGroupRequestByUserId(userId);
+            return new ResponseEntity<List<GroupRequest>>(list,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

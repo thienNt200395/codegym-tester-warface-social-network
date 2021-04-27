@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GroupRequestServiceImpl implements GroupRequestService {
     @Autowired
@@ -18,15 +20,7 @@ public class GroupRequestServiceImpl implements GroupRequestService {
     @Autowired
     private GroupService groupService;
 
-    @Override
-    public String addGroupRequest(GroupRequest groupRequest) {
-        if (groupService.findById(groupRequest.getGroup().getGroupId()) == null) {
-            return "NG";
-        }
 
-        groupRequestRepository.save(groupRequest);
-        return "OK";
-    }
 
         @Override
         public GroupRequest findById (Integer id){
@@ -57,5 +51,10 @@ public class GroupRequestServiceImpl implements GroupRequestService {
         public void save (GroupRequest groupRequest){
             groupRequestRepository.save(groupRequest);
         }
+
+    @Override
+    public List<GroupRequest> findGroupRequestByUserId(Integer userId) {
+        return groupRequestRepository.findGroupRequestByUserId(userId);
     }
+}
 
