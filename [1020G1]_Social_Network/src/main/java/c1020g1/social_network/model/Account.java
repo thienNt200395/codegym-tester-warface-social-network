@@ -1,27 +1,37 @@
 package c1020g1.social_network.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "account")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "accountId")
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
-    public int accountId;
-
-    @Column(name = "account_name",nullable = false)
-    public String accountName;
-
+    private Integer accountId;
+    @Column(name = "account_name", nullable = false)
+    @NotBlank(message = "required")
+    private String accountName;
+    @NotBlank(message = "required")
     @Column(name = "password")
-    public String password;
+    private String password;
 
-    public int getAccountId() {
+    @OneToOne(mappedBy = "account")
+    private User user;
+
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
@@ -39,5 +49,14 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

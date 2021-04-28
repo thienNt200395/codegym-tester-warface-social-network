@@ -3,8 +3,8 @@ package c1020g1.social_network.service.friends_service.impl;
 import c1020g1.social_network.model.Friends;
 import c1020g1.social_network.model.SuggestFriend;
 import c1020g1.social_network.model.User;
+import c1020g1.social_network.repository.UserRepository;
 import c1020g1.social_network.repository.friends_repository.FriendsRepository;
-import c1020g1.social_network.repository.user_repository.UserRepository;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,7 +39,7 @@ public class FriendsServiceImpl implements FriendsService {
         List<Integer> idUser = friendsRepository.getAllSuggestFriend(id);
         for (int i = 0; i< idUser.size(); i++){
             SuggestFriend suggestFriend = new SuggestFriend();
-            suggestFriend.setSuggestFriend(userRepository.findUserByUserId(idUser.get(i)));
+            suggestFriend.setSuggestFriend(userRepository.getUserById(idUser.get(i)));
 
             List<User> mutualFriends = friendsRepository.findMutualFriend(id,idUser.get(i));
             suggestFriend.setMutualFriends(mutualFriends);
