@@ -1,22 +1,14 @@
 package c1020g1.social_network.controller;
 
-import c1020g1.social_network.model.GroupRequest;
-import c1020g1.social_network.model.Group;
-import c1020g1.social_network.model.GroupUser;
-import c1020g1.social_network.model.Post;
-import c1020g1.social_network.service.GroupRequestService;
-import c1020g1.social_network.service.GroupService;
-import c1020g1.social_network.service.GroupUserService;
-import c1020g1.social_network.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import c1020g1.social_network.model.GroupWarning;
-import c1020g1.social_network.model.User;
+import c1020g1.social_network.model.*;
 import c1020g1.social_network.service.*;
+import c1020g1.social_network.service.post.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +28,8 @@ public class GroupController {
     private GroupUserService groupUserService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private WarningService warningService;
 
     //hien group detail
 
@@ -47,13 +41,13 @@ public class GroupController {
      * @return
      */
     @RequestMapping(value = "/group-detail/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Group> getGroup(@PathVariable("id") Integer id) {
+    public ResponseEntity<GroupSocial> getGroup(@PathVariable("id") Integer id) {
         try {
-            Group Group = groupService.findById(id);
+            GroupSocial Group = groupService.findById(id);
             if (Group == null) {
-                return new ResponseEntity<Group>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<GroupSocial>(HttpStatus.BAD_REQUEST);
             }
-            return new ResponseEntity<Group>(Group, HttpStatus.OK);
+            return new ResponseEntity<GroupSocial>(Group, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -71,7 +65,7 @@ public class GroupController {
     @RequestMapping(value = "/group-delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteGroup(@PathVariable("id") Integer id) {
         try {
-            Group Group = groupService.findById(id);
+            GroupSocial Group = groupService.findById(id);
             if (Group == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -134,20 +128,20 @@ public class GroupController {
      * @return
      */
     @RequestMapping(value = "/group-edit/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Group> updateGroup(@PathVariable("id") Integer id, @RequestBody Group Group) {
+    public ResponseEntity<GroupSocial> updateGroup(@PathVariable("id") Integer id, @RequestBody GroupSocial group) {
         try {
-            Group currentGroup = groupService.findById(id);
+            GroupSocial currentGroup = groupService.findById(id);
 
             if (currentGroup == null) {
-                return new ResponseEntity<Group>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<GroupSocial>(HttpStatus.NOT_FOUND);
             }
 
-            currentGroup.setImageAvatarUrl(Group.getImageAvatarUrl());
-            currentGroup.setImageBackground(Group.getImageBackground());
-            currentGroup.setScope(Group.getScope());
+            currentGroup.setImageAvatarUrl(group.getImageAvatarUrl());
+            currentGroup.setImageBackground(group.getImageBackground());
+            currentGroup.setScope(group.getScope());
 
             groupService.save(currentGroup);
-            return new ResponseEntity<Group>(currentGroup, HttpStatus.OK);
+            return new ResponseEntity<GroupSocial>(currentGroup, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -160,7 +154,7 @@ public class GroupController {
             if (groupService.findById(groupId) == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            if (userService.findById(userId) == null) {
+            if (userService.getUserById(userId) == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             if (groupUserService.findExist(groupId, userId) == null) {
@@ -172,13 +166,10 @@ public class GroupController {
         }
     }
 
-    private WarningService warningService;
-
-
     @RequestMapping(value = "/group", method = RequestMethod.GET)
-    public ResponseEntity<Page<Group>> listAllGroup(@PageableDefault(size = 5) Pageable pageable, @RequestParam String key) {
+    public ResponseEntity<Page<GroupSocial>> listAllGroup(@PageableDefault(size = 5) Pageable pageable, @RequestParam String key) {
         try {
-            Page<Group> Groups = groupService.findAllByGroupName(key, pageable);
+            Page<GroupSocial> Groups = groupService.findAllByGroupName(key, pageable);
             return new ResponseEntity<>(Groups, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -207,13 +198,13 @@ public class GroupController {
      */
     @GetMapping("/request/list/user/{id}")
     public ResponseEntity<List<GroupRequest>> getRequestListByUser(@PathVariable int id) {
-        User user = userService.findById(id);
+        User user = userService.getUserById(id);
         return new ResponseEntity<List<GroupRequest>>(groupRequestService.findAllByUser(user), HttpStatus.OK);
     }
 
     @GetMapping("/group-detail/{id}")
-    public ResponseEntity<Group> getGroupById(@PathVariable int id) {
-        return new ResponseEntity<Group>(groupService.findById(id), HttpStatus.OK);
+    public ResponseEntity<GroupSocial> getGroupById(@PathVariable int id) {
+        return new ResponseEntity<GroupSocial>(groupService.findById(id), HttpStatus.OK);
     }
 
     /**
@@ -236,14 +227,14 @@ public class GroupController {
     @PostMapping("/request/save")
     public ResponseEntity<Void> saveRequest(@RequestBody GroupRequest groupRequest) {
 
-        if (groupRequest.getGroup() == null || groupRequest.getUser() == null) {
+        if (groupRequest.getGroupSocial() == null || groupRequest.getUser() == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        if (groupService.findById(groupRequest.getGroup().getGroupId()) == null
-                || userService.findById(groupRequest.getUser().getUserId()) == null) {
+        if (groupService.findById(groupRequest.getGroupSocial().getGroupId()) == null
+                || userService.getUserById(groupRequest.getUser().getUserId()) == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        GroupUser groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
+        GroupUser groupUser = groupUserService.findExist(groupRequest.getGroupSocial().getGroupId(), groupRequest.getUser().getUserId());
         if (groupRequestService.findExist(groupRequest) != null || groupUser != null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
@@ -263,7 +254,7 @@ public class GroupController {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         GroupUser groupUser = new GroupUser();
-        groupUser.setGroup(groupRequest.getGroup());
+        groupUser.setGroupSocial(groupRequest.getGroupSocial());
         groupUser.setUser(groupRequest.getUser());
         groupUserService.save(groupUser);
         groupRequestService.deleteById(id);
@@ -358,7 +349,7 @@ public class GroupController {
      */
     @GetMapping("/request/invite/friends/{id}")
     public ResponseEntity<List<User>> getFriendsInviteList(@PathVariable int id, @RequestParam int userId) {
-        if (groupService.findById(id) == null || userService.findById(userId) == null) {
+        if (groupService.findById(id) == null || userService.getUserById(userId) == null) {
             return new ResponseEntity<List<User>>(new ArrayList<>(), HttpStatus.NOT_FOUND);
         }
         List<User> list = userService.inviteFriendList(id, userId);

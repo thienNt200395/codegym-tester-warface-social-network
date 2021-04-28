@@ -1,7 +1,9 @@
 package c1020g1.social_network.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -12,17 +14,26 @@ public class Post {
     @Column(name = "post_id")
     private Integer postId;
     @Column(name = "post_content")
+    @NotBlank(message = "Content not blank!!")
     private String postContent;
+
     @Column(name = "post_status")
+    @NotBlank(message = "Status not blank!!")
     private String postStatus;
+
     @Column(name = "post_published")
-    private Date postPublished;
+    private Timestamp postPublished;
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private Group group;
+    private GroupSocial groupSocial;
+
+    @OneToMany(mappedBy = "post")
+    private List<ParentComment> parentComments;
 
     public Integer getPostId() {
         return postId;
@@ -48,11 +59,11 @@ public class Post {
         this.postStatus = postStatus;
     }
 
-    public Date getPostPublished() {
+    public Timestamp getPostPublished() {
         return postPublished;
     }
 
-    public void setPostPublished(Date postPublished) {
+    public void setPostPublished(Timestamp postPublished) {
         this.postPublished = postPublished;
     }
 
@@ -64,11 +75,19 @@ public class Post {
         this.user = user;
     }
 
-    public Group getGroupSocial() {
-        return group;
+    public GroupSocial getGroupSocial() {
+        return groupSocial;
     }
 
-    public void setGroupSocial(Group groupSocial) {
-        this.group = groupSocial;
+    public void setGroupSocial(GroupSocial groupSocial) {
+        this.groupSocial = groupSocial;
+    }
+
+    public List<ParentComment> getParentComments() {
+        return parentComments;
+    }
+
+    public void setParentComments(List<ParentComment> parentComments) {
+        this.parentComments = parentComments;
     }
 }

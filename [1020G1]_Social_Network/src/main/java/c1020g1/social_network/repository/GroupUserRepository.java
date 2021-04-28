@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface GroupUserRepository extends JpaRepository<GroupUser,Integer> {
-    @Query("select mem from GroupUser mem where mem.group.groupId = ?1")
+    @Query("select mem from GroupUser mem where mem.groupSocial.groupId = ?1")
     Page<GroupUser> findAllGroupMember(Integer id, Pageable pageable);
 
     @Query(value = "select * from group_user " +

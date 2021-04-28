@@ -13,9 +13,11 @@ public class GroupWarning {
     private Integer groupWarningId;
     @Column(name = "warning_content")
     private String warningContent;
+
     @ManyToOne
     @JoinColumn(name = "group_user_id", referencedColumnName = "group_user_id")
     private GroupUser groupUser;
+
     @Column(name = "warning_date",nullable = false,columnDefinition = "date")
     private String warningDate;
 
@@ -23,7 +25,7 @@ public class GroupWarning {
         return groupWarningId;
     }
 
-    public void setGroupWarningId(int groupWarningId) {
+    public void setGroupWarningId(Integer groupWarningId) {
         this.groupWarningId = groupWarningId;
     }
 

@@ -39,7 +39,7 @@ public class GroupRequestServiceImpl implements GroupRequestService {
 
     @Override
     public GroupRequest findExist(GroupRequest groupRequest) {
-        return groupRequestRepository.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
+        return groupRequestRepository.findExist(groupRequest.getGroupSocial().getGroupId(), groupRequest.getUser().getUserId());
     }
 
     @Override
