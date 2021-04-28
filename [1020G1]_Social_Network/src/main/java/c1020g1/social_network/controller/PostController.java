@@ -1,9 +1,6 @@
 package c1020g1.social_network.controller;
 
-import c1020g1.social_network.model.Post;
-import c1020g1.social_network.model.PostDTO;
-import c1020g1.social_network.model.PostImage;
-import c1020g1.social_network.model.User;
+import c1020g1.social_network.model.*;
 import c1020g1.social_network.service.UserService;
 import c1020g1.social_network.service.post.PostService;
 import c1020g1.social_network.service.post_image.PostImageService;
@@ -90,7 +87,11 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         postDTO.getPost().setPostPublished(new Timestamp(System.currentTimeMillis()));
-        postDTO.getPost().setPostContent(postService.decodeStringUrl(postDTO.getPost().getPostContent()));
+
+        System.out.println(postDTO.getPost().getPostContent());
+        postDTO.getPost().setPostContent(postService.encodeStringUrl(postDTO.getPost().getPostContent()));
+        System.out.println(postDTO.getPost().getPostContent());
+
         postService.createPost(postDTO.getPost());
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
         for (String image : postDTO.getPostImages()) {
@@ -98,47 +99,57 @@ public class PostController {
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(postTemp).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     /**
      * Author : SonPH
      * edit post
      * @param postId
-     * @param post
+     * @param postEditDTO
      * @param bindingResult
      */
     @PutMapping("/{postId}")
-    public ResponseEntity<Post> editPost(@PathVariable("postId") Integer postId, @Validated @RequestBody Post post, BindingResult bindingResult) {
+    @Transactional
+    public ResponseEntity<PostEditDTO> editPost(@PathVariable("postId") Integer postId, @Validated @RequestBody PostEditDTO postEditDTO, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Post post1 = postService.getPostById(postId);
-        if (post1 == null) {
+        Post post = postService.getPostById(postId);
+        if (post != null) {
+            post.setPostContent(postService.encodeStringUrl(postEditDTO.getPost().getPostContent()));
+            post.setPostStatus(post.getPostStatus());
+            postService.editPost(post);
+            for (PostImage postImage : postEditDTO.getUpdateImages()) {
+                postImageService.createPostImage(postId, postImage.getImage());
+            }
+            for (PostImage postImage : postEditDTO.getDeleteImages()) {
+                postImageService.deletePostImage(postImage.getPostImageId());
+            }
+            return new ResponseEntity<PostEditDTO>(postEditDTO, HttpStatus.OK);
+        } else {
             System.out.println("Post with id " + postId + " not found!");
-            return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<PostEditDTO>(HttpStatus.NOT_FOUND);
         }
-        post1.setPostContent(post.getPostContent());
-        post1.setPostStatus(post.getPostStatus());
-
-        postService.editPost(post1);
-        return new ResponseEntity<>(post1, HttpStatus.OK);
     }
 
     /**
-     * Author : CaoLPT
+     * Author : SonPH
      * get post by ID
      * @param postId
      */
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPostById(@PathVariable("postId") Integer postId){
-        Post postFromDb = postService.getPostById(postId);
-
-        if(postFromDb == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<PostEditDTO> getPostById(@PathVariable("postId") Integer postId){
+        Post post = postService.getPostById(postId);
+        PostEditDTO postEditDTO = new PostEditDTO();
+        if (post != null) {
+            post.setPostContent(postService.decodeStringUrl(post.getPostContent()));
+            postEditDTO.setPost(post);
+            postEditDTO.setPostImages(postImageService.getAllImageByPostId(postId));
+            return new ResponseEntity<>(postEditDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(postFromDb, HttpStatus.OK);
     }
 
     /**

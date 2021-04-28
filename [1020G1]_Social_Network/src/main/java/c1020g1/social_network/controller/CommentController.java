@@ -50,6 +50,21 @@ public class CommentController {
 
     /**
      * Author : CaoLPT
+     * get parent comment by id
+     * @param parentCommentId
+     */
+    @GetMapping("/parent/find/{parentCommentId}")
+    public ResponseEntity<ParentComment> findParentCommentById(@PathVariable("parentCommentId") Integer parentCommentId){
+        ParentComment fromDb = commentService.getParentCommentById(parentCommentId);
+
+        if(fromDb == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(fromDb, HttpStatus.OK);
+    }
+
+    /**
+     * Author : CaoLPT
      * create new parent comment
      *
      * @param parentComment
