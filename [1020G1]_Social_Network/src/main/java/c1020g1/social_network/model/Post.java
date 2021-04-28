@@ -10,7 +10,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private int postId;
+    private Integer postId;
     @Column(name = "post_content")
     private String postContent;
     @Column(name = "post_status")
@@ -24,11 +24,11 @@ public class Post {
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private Group group;
 
-    public int getPostId() {
+    public Integer getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(Integer postId) {
         this.postId = postId;
     }
 
@@ -64,11 +64,11 @@ public class Post {
         this.user = user;
     }
 
-    public Group getGroup() {
+    public Group getGroupSocial() {
         return group;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupSocial(Group groupSocial) {
+        this.group = groupSocial;
     }
 }

@@ -21,7 +21,7 @@ public class GroupUser {
         return groupUserId;
     }
 
-    public void setGroupUserId(int groupUserId) {
+    public void setGroupUserId(Integer groupUserId) {
         this.groupUserId = groupUserId;
     }
 

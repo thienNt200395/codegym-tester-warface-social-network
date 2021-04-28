@@ -4,11 +4,11 @@ import c1020g1.social_network.model.GroupRequest;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.repository.GroupRequestRepository;
 import c1020g1.social_network.service.GroupRequestService;
+import c1020g1.social_network.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
@@ -18,18 +18,8 @@ public class GroupRequestServiceImpl implements GroupRequestService {
     private GroupRequestRepository groupRequestRepository;
 
     @Override
-    public GroupRequest findById(int id) {
-        return groupRequestRepository.findById(id);
-    }
-
-    @Override
-    public void deleteById(int id) {
-        groupRequestRepository.deleteById(id);
-    }
-
-    @Override
-    public Page<GroupRequest> findAllByGroupAndKey(int groupId, String key, Pageable pageable) {
-        return groupRequestRepository.findAllByGroupAndKey(groupId,key,pageable);
+    public GroupRequest findById(Integer id) {
+        return groupRequestRepository.findByGroupId(id);
     }
 
     @Override
@@ -38,12 +28,28 @@ public class GroupRequestServiceImpl implements GroupRequestService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        groupRequestRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<GroupRequest> findAllByGroupAndKey(Integer groupId, String key, Pageable pageable) {
+        return groupRequestRepository.findAllByGroupAndKey(groupId, key, pageable);
+    }
+
+    @Override
     public GroupRequest findExist(GroupRequest groupRequest) {
-        return groupRequestRepository.findExist(groupRequest.getGroup().getGroupId(),groupRequest.getUser().getUserId());
+        return groupRequestRepository.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
     }
 
     @Override
     public void save(GroupRequest groupRequest) {
         groupRequestRepository.save(groupRequest);
     }
+
+    @Override
+    public List<GroupRequest> findGroupRequestByUserId(Integer userId) {
+        return groupRequestRepository.findGroupRequestByUserId(userId);
+    }
 }
+

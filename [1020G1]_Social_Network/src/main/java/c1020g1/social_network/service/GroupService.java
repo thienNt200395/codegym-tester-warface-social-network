@@ -5,7 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface GroupService {
-    Group findById(int id);
-    void remove(Integer id);
     Page<Group> findAllByGroupName(String key,Pageable pageable);
+
+    Page<Group> findAll(Pageable pageable);
+
+    void save(Group groupSocial);
+
+    Group findById(Integer id);
+
+    void remove(Integer id);
 }

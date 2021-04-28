@@ -2,11 +2,11 @@ package c1020g1.social_network.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "group_social")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
@@ -23,6 +23,9 @@ public class Group {
     @JoinColumn(name = "admin", referencedColumnName = "user_id")
     private User admin;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private List<GroupRequest> groupRequests;
+
     @Column(name = "scope")
     private String scope;
 
@@ -30,7 +33,7 @@ public class Group {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
