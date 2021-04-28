@@ -5,16 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 @Repository
-public interface PostRepository extends JpaRepository<Post, Integer> {
-
+public interface PostRepository extends JpaRepository<Post,Integer> {
     @Modifying
     @Query(value = "insert into post (post_content, post_status, post_published, user_id) values (:postContent, " +
             ":postStatus, :postPublished, :userId)", nativeQuery = true)
@@ -64,5 +62,4 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("select p from Post p where p.groupSocial.groupId=?1")
     List<Post> findAllPostGroup(Integer id);
-
 }

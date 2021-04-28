@@ -28,13 +28,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "update user\n" + "set user.user_background = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
     void updateBackground(Integer userId, String background);
 
-
     @Query(value = "select * from `user` u " +
             "where u.user_id in " +
             "(SELECT distinct af.friend_id from friends f join friends af on f.friend_id = af.user_id " +
-            "where af.friend_id not in (select g.user_id from group_user g where g.group_id = :id)" +
+            "where f.user_id = :user_id and " +
+            "af.friend_id not in (select g.user_id from group_user g where g.group_id = :id)" +
             "and af.friend_id not in (select r.user_id from group_request r where r.group_id = :id))", nativeQuery = true)
-    List<User> inviteFriendsOfFriends(@Param("id") int groupId);
+    List<User> inviteFriendsOfFriends(@Param("id") int groupId,@Param("user_id") int userId);
 
     @Query(value = "select * from `user` u where u.user_id in (select f.friend_id from friends f " +
             "where f.user_id = :user_id and f.friend_id not in " +

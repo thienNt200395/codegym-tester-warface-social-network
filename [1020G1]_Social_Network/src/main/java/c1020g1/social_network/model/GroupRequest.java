@@ -3,7 +3,7 @@ package c1020g1.social_network.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "[group_request]")
+@Table(name = "group_request")
 public class GroupRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,7 +11,7 @@ public class GroupRequest {
     private Integer groupRequestId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private GroupSocial group;
+    private GroupSocial groupSocial;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
@@ -26,12 +26,16 @@ public class GroupRequest {
         this.groupRequestId = groupRequestId;
     }
 
-    public GroupSocial getGroup() {
-        return group;
+    public void setGroupSocial(GroupSocial groupSocial) {
+        this.groupSocial = groupSocial;
     }
 
-    public void setGroup(GroupSocial group) {
-        this.group = group;
+    public GroupSocial getGroupSocial() {
+        return groupSocial;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public User getUser() {
@@ -44,9 +48,5 @@ public class GroupRequest {
 
     public String getSender() {
         return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
     }
 }

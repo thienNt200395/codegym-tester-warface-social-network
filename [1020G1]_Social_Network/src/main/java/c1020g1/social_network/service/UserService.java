@@ -6,6 +6,11 @@ import c1020g1.social_network.model.dto.UserCreateDTO;
 import java.util.List;
 
 public interface UserService {
+
+    List<User> inviteFriendList(int groupId, int userId);
+
+    List<User> inviteFriendsOfFriendsList(int groupId, int userId);
+
     //HanTH
     void updateStatus(Integer userId, Integer statusId);
 
@@ -24,9 +29,5 @@ public interface UserService {
 
     //Duong
     User getUserByEmail(String email);
-
-    List<User> inviteFriendList(int groupId, int userId);
-
-    List<User> inviteFriendsOfFriendsList(int groupId);
 
 }

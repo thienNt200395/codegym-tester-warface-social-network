@@ -16,7 +16,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Integer postId;
-
     @Column(name = "post_content")
     @NotBlank(message = "Content not blank!!")
     private String postContent;
@@ -108,7 +107,6 @@ public class Post {
 
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
-
     }
 
     public List<PostImage> getPostImages() {
@@ -117,6 +115,5 @@ public class Post {
 
     public void setPostImages(List<PostImage> postImages) {
         this.postImages = postImages;
-
     }
 }

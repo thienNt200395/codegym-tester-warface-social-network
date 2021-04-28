@@ -21,13 +21,14 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     PostRepository postRepository;
-  
+
     @Autowired
     private PostImageRepository postImageRepository;
 
     /**
      * Author : CaoLPT
      * get post
+     *
      * @param postId
      */
     @Override
@@ -37,7 +38,8 @@ public class PostServiceImpl implements PostService {
 
     /**
      * Author : SonPH
-     *create post
+     * create post
+     *
      * @param post
      */
     @Override
@@ -53,6 +55,7 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : SonPH
      * edit post
+     *
      * @param post
      */
     @Override
@@ -64,6 +67,7 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : CaoLPT
      * get all posts in news feed
+     *
      * @param userId
      * @param pageable
      */
@@ -75,6 +79,7 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : CaoLPT
      * get all image of post
+     *
      * @param postId
      */
     @Override
@@ -86,6 +91,7 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : DungHA
      * get all posts in wall of user
+     *
      * @param userId
      */
     @Override
@@ -96,11 +102,12 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : SonPH
      * decode string URL
+     *
      * @param encodedUrl
      */
     @Override
     public String decodeStringUrl(String encodedUrl) {
-        String decodedUrl =null;
+        String decodedUrl = null;
         try {
             decodedUrl = URLDecoder.decode(encodedUrl, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -112,11 +119,12 @@ public class PostServiceImpl implements PostService {
     /**
      * Author : SonPH
      * decode string URL
+     *
      * @param url
      */
     @Override
     public String encodeStringUrl(String url) {
-        String encodedUrl =null;
+        String encodedUrl = null;
         try {
             encodedUrl = URLEncoder.encode(url, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -127,6 +135,7 @@ public class PostServiceImpl implements PostService {
 
     /**
      * Author : DungHA
+     *
      * @param userId
      */
     @Override
@@ -136,11 +145,13 @@ public class PostServiceImpl implements PostService {
 
     /**
      * Author : CuongNVM
+     *
      * @param id
      */
     @Override
     public List<Post> findAllPostGroup(Integer id) {
         return postRepository.findAllPostGroup(id);
     }
+
 
 }

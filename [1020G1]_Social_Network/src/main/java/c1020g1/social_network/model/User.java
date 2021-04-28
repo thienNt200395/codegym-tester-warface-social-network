@@ -18,7 +18,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
-
     @Column(name = "username", nullable = false)
     @NotBlank(message = "required")
     private String userName;
@@ -75,6 +74,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<GroupRequest> groupRequests;
+
     public Integer getUserId() {
         return userId;
     }

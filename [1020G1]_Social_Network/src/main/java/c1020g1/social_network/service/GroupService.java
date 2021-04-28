@@ -1,14 +1,14 @@
 package c1020g1.social_network.service;
 
-
 import c1020g1.social_network.model.GroupSocial;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface GroupService {
-    List<GroupSocial> findAll();
+    Page<GroupSocial> findAllByGroupName(String key, Pageable pageable);
 
-    List<GroupSocial> findGroupByNameContaining(String name);
+    Page<GroupSocial> findAll(Pageable pageable);
 
     void save(GroupSocial groupSocial);
 

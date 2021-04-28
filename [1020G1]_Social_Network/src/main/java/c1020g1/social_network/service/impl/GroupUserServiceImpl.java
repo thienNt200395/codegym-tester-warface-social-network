@@ -16,8 +16,8 @@ public class GroupUserServiceImpl implements GroupUserService {
     @Autowired
     private GroupUserRepository groupUserRepository;
     @Override
-    public List<GroupUser> findAllGroupMember(Integer id) {
-        return groupUserRepository.findAllGroupMember(id);
+    public Page<GroupUser> findAllGroupMember(Integer id, Pageable pageable) {
+        return groupUserRepository.findAllGroupMember(id , pageable);
     }
     public Page<GroupUser> findAllByGroupAndUsernameContainingOrderByUsername(Integer id, String key, Pageable pageable) {
         return groupUserRepository.findAllByGroupAndUsernameContainingOrderByUsername(id,key,pageable);
