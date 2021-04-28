@@ -230,10 +230,9 @@ c1020g1/social_network/service/post_image/PostImageServiceImpl.java
  c1020g1.social_network.service.post_image.PostImageServiceImpl
 c1020g1/social_network/service/post/PostServiceImpl.java
  c1020g1.social_network.service.post.PostServiceImpl
-c1020g1/social_network/controller/PostController.java
- c1020g1.social_network.controller.PostController
 c1020g1/social_network/service/post_image/PostImageService.java
  c1020g1.social_network.service.post_image.PostImageService
+<<<<<<< HEAD
 =======
 c1020g1/social_network/service/WardService.java
  c1020g1.social_network.service.WardService
@@ -268,3 +267,7 @@ c1020g1/social_network/model/dto/UserCreateDTO.java
 c1020g1/social_network/controller/AccountController.java
  c1020g1.social_network.controller.AccountController
 >>>>>>> dev
+=======
+c1020g1/social_network/controller/PostController.java
+ c1020g1.social_network.controller.PostController
+>>>>>>> f30e58ea0d55df5a42ef56d062eca5dad4556917

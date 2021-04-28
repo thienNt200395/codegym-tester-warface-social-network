@@ -106,7 +106,7 @@ public class PostController {
      * Author : SonPH
      * edit post
      * @param postId
-     * @param post
+     * @param postEditDTO
      * @param bindingResult
      */
     @PutMapping("/{postId}")

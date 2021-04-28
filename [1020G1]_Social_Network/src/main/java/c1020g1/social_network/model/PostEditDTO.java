@@ -6,6 +6,7 @@ import java.util.List;
 public class PostEditDTO {
     @Valid
     private Post post;
+
     private List<PostImage> postImages;
     private List<PostImage> deleteImages;
     private List<PostImage> updateImages;
