@@ -45,14 +45,10 @@ public class GroupController {
      * @return
      */
     @RequestMapping(value = "/group", method = RequestMethod.GET)
-    public ResponseEntity<List<Group>> listAllGroup() {
+    public ResponseEntity<Page<Group>> listAllGroup(@PageableDefault(size = 5) Pageable pageable) {
         try {
-            List<Group> Groups = groupService.findAll();
-            if (Groups.isEmpty()) {
-                return new ResponseEntity<List<Group>>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<List<Group>>(Groups, HttpStatus.OK);
-            }
+            Page<Group> Groups = groupService.findAll(pageable);
+            return new ResponseEntity<>(Groups, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -137,14 +133,10 @@ public class GroupController {
      * @return
      */
     @RequestMapping(value = "/group-member/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<GroupUser>> listAllGroupMember(@PathVariable Integer id) {
+    public ResponseEntity<Page<GroupUser>> listAllGroupMember(@PathVariable Integer id, @PageableDefault(size = 4) Pageable pageable) {
         try {
-            List<GroupUser> groupUsers = groupUserService.findAllGroupMember(id);
-            if (groupUsers.isEmpty()) {
-                return new ResponseEntity<List<GroupUser>>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<List<GroupUser>>(groupUsers, HttpStatus.OK);
-            }
+            Page<GroupUser> groupUsers = groupUserService.findAllGroupMember(id, pageable);
+            return new ResponseEntity<>(groupUsers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface GroupUserService {
-    List<GroupUser> findAllGroupMember(Integer id);
+    Page<GroupUser> findAllGroupMember(Integer id, Pageable pageable);
     Page<GroupUser> findAllByGroupAndUsernameContainingOrderByUsername(Integer id, String key, Pageable pageable);
     void save(GroupUser groupUser);
     void deleteById(Integer id);

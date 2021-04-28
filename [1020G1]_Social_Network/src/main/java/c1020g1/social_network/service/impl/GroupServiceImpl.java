@@ -5,6 +5,8 @@ import c1020g1.social_network.repository.GroupRepository;
 import c1020g1.social_network.service.GroupService;
 import c1020g1.social_network.service.GroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,9 +20,10 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     private GroupUserService groupUserService;
 
+
     @Override
-    public List<Group> findAll() {
-        return groupRepository.findAllGroup();
+    public Page<Group> findAll(Pageable pageable) {
+        return groupRepository.findAllGroup(pageable);
     }
 
     @Override

@@ -1,10 +1,10 @@
 package c1020g1.social_network.repository;
 
 import c1020g1.social_network.model.Group;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
-import c1020g1.social_network.model.Group;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ import java.util.List;
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     @Query("select gr from Group gr")
-    List<Group> findAllGroup();
+    Page<Group> findAllGroup(Pageable pageable);
 
     @Query("select gr from Group gr where gr.groupId=?1")
     Group findGroupById(Integer id);

@@ -2,6 +2,7 @@ package c1020g1.social_network.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "group_social")
@@ -21,6 +22,9 @@ public class Group {
     @ManyToOne
     @JoinColumn(name = "admin", referencedColumnName = "user_id")
     private User admin;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private List<GroupRequest> groupRequests;
 
     @Column(name = "scope")
     private String scope;
