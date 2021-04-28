@@ -5,22 +5,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "group_social")
-<<<<<<< HEAD:[1020G1]_Social_Network/src/main/java/c1020g1/social_network/model/Group.java
-public class Group {
-=======
 public class GroupSocial {
->>>>>>> dev:[1020G1]_Social_Network/src/main/java/c1020g1/social_network/model/GroupSocial.java
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
     private Integer groupId;
-<<<<<<< HEAD:[1020G1]_Social_Network/src/main/java/c1020g1/social_network/model/Group.java
-=======
-
->>>>>>> dev:[1020G1]_Social_Network/src/main/java/c1020g1/social_network/model/GroupSocial.java
     @Column(name = "group_name")
     private String groupName;
 
@@ -36,6 +29,9 @@ public class GroupSocial {
     @ManyToOne
     @JoinColumn(name = "admin", referencedColumnName = "user_id")
     private User admin;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupSocial")
+    private List<GroupRequest> groupRequests;
 
     @Column(name = "scope")
     private String scope;

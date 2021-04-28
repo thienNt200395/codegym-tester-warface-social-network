@@ -53,4 +53,9 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public List<Post> findAllPostGroup(Integer id) {
+        return postRepository.findAll();
+    }
+
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,4 +60,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserByEmail(email);
     }
 
+    @Override
+    public List<User> inviteFriendList(int groupId, int userId) {
+        return userRepository.inviteFriends(groupId, userId);
+    }
+
+    @Override
+    public List<User> inviteFriendsOfFriendsList(int groupId, int userId) {
+        return userRepository.inviteFriendsOfFriends(groupId, userId);
+    }
 }

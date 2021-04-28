@@ -30,7 +30,7 @@ CREATE TABLE `group_warning` (
   PRIMARY KEY (`group_warning_id`),
   KEY `tr_idx` (`group_user_id`),
   CONSTRAINT `tr` FOREIGN KEY (`group_user_id`) REFERENCES `group_user` (`group_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `group_warning` (
 
 LOCK TABLES `group_warning` WRITE;
 /*!40000 ALTER TABLE `group_warning` DISABLE KEYS */;
-INSERT INTO `group_warning` VALUES (2,'123',15,'2021-12-12');
+INSERT INTO `group_warning` VALUES (2,'123',15,'2021-12-12'),(3,'18+ post',15,'2021-03-23');
 /*!40000 ALTER TABLE `group_warning` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-23 11:21:09
+-- Dump completed on 2021-04-23 13:38:38
