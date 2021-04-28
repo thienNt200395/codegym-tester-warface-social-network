@@ -4,20 +4,20 @@ import c1020g1.social_network.model.District;
 import c1020g1.social_network.model.Province;
 import c1020g1.social_network.model.User;
 import c1020g1.social_network.model.Ward;
-import c1020g1.social_network.service.DistrictService;
-import c1020g1.social_network.service.EditService;
-import c1020g1.social_network.service.ProvinceService;
-import c1020g1.social_network.service.WardService;
+import c1020g1.social_network.service.district.DistrictService;
+import c1020g1.social_network.service.province.ProvinceService;
+import c1020g1.social_network.service.group.WardService;
+import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class EditController {
     @Autowired
-    EditService editService;
+    UserService userService;
 
     @Autowired
     WardService wardService;
@@ -28,15 +28,9 @@ public class EditController {
     @Autowired
     ProvinceService provinceService;
 
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Integer id) {
-        return editService.getUserInfoById( id );
-    }
-
-
-    @PostMapping("user/edit")
+    @PutMapping("user/edit")
     public void save(@RequestBody User user) {
-        editService.save( user );
+        userService.save( user );
     }
 
     @GetMapping("/user/ward")

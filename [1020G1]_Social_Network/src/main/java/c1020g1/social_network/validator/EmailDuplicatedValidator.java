@@ -2,7 +2,7 @@ package c1020g1.social_network.validator;
 
 import c1020g1.social_network.annotation.EmailDuplicated;
 import c1020g1.social_network.model.User;
-import c1020g1.social_network.service.UserService;
+import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

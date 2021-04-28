@@ -1,6 +1,5 @@
 package c1020g1.social_network.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 import javax.persistence.*;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-
 public class User {
 
     @Id

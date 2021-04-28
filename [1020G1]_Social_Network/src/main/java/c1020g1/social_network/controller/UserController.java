@@ -1,18 +1,17 @@
 package c1020g1.social_network.controller;
 
 
-import c1020g1.social_network.model.Account;
 import c1020g1.social_network.model.Status;
 import c1020g1.social_network.model.User;
 
 
-import c1020g1.social_network.service.AccountService;
+import c1020g1.social_network.service.account.AccountService;
 import org.springframework.web.bind.annotation.RestController;
 
 import c1020g1.social_network.model.dto.UserCreateDTO;
 import c1020g1.social_network.model.dto.UserResultMessageDTO;
 
-import c1020g1.social_network.service.UserService;
+import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 

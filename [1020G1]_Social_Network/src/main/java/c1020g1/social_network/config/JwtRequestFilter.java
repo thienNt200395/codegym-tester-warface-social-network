@@ -2,7 +2,7 @@ package c1020g1.social_network.config;
 
 
 
-import c1020g1.social_network.service.account.JwtAccountDetailService;
+import c1020g1.social_network.service.account.imp.JwtAccountDetailService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

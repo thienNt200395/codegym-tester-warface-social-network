@@ -1,7 +1,7 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.*;
-import c1020g1.social_network.service.UserService;
+import c1020g1.social_network.service.user.UserService;
 import c1020g1.social_network.service.post.PostService;
 import c1020g1.social_network.service.post_image.PostImageService;
 

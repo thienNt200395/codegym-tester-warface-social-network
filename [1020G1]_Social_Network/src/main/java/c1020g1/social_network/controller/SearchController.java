@@ -1,11 +1,10 @@
 package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.User;
-import c1020g1.social_network.service.SearchService;
+import c1020g1.social_network.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

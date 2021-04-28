@@ -2,7 +2,7 @@ package c1020g1.social_network.controller;
 
 import c1020g1.social_network.model.FriendRequest;
 import c1020g1.social_network.model.User;
-import c1020g1.social_network.service.UserService;
+import c1020g1.social_network.service.user.UserService;
 import c1020g1.social_network.service.friend_request_service.FriendRequestService;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
