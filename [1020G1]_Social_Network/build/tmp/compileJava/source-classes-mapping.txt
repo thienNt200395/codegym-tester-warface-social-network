@@ -42,8 +42,8 @@ c1020g1/social_network/repository/EditRepository.java
  c1020g1.social_network.repository.EditRepository
 c1020g1/social_network/model/District.java
  c1020g1.social_network.model.District
-c1020g1/social_network/model/dto/UserCreateDTO.java
- c1020g1.social_network.model.dto.UserCreateDTO
+c1020g1/social_network/controller/AccountController.java
+ c1020g1.social_network.controller.AccountController
 c1020g1/social_network/repository/PostImageRepository.java
  c1020g1.social_network.repository.PostImageRepository
 c1020g1/social_network/service/post_image/PostImageServiceImpl.java
@@ -72,8 +72,8 @@ c1020g1/social_network/sercurity/AccountPrincipleFactory.java
  c1020g1.social_network.sercurity.AccountPrincipleFactory
 c1020g1/social_network/service/impl/GroupRequestServiceImpl.java
  c1020g1.social_network.service.impl.GroupRequestServiceImpl
-c1020g1/social_network/controller/FriendRequestController.java
- c1020g1.social_network.controller.FriendRequestController
+c1020g1/social_network/service/account/JwtAccountDetailService.java
+ c1020g1.social_network.service.account.JwtAccountDetailService
 c1020g1/social_network/repository/GroupRepository.java
  c1020g1.social_network.repository.GroupRepository
 c1020g1/social_network/annotation/AccountDuplicated.java
@@ -116,8 +116,8 @@ c1020g1/social_network/model/GroupUser.java
  c1020g1.social_network.model.GroupUser
 c1020g1/social_network/repository/DistrictRepository.java
  c1020g1.social_network.repository.DistrictRepository
-c1020g1/social_network/service/UserService.java
- c1020g1.social_network.service.UserService
+c1020g1/social_network/service/impl/AccountServiceImpl.java
+ c1020g1.social_network.service.impl.AccountServiceImpl
 c1020g1/social_network/model/dto/AccountDTO.java
  c1020g1.social_network.model.dto.AccountDTO
 c1020g1/social_network/repository/PostRepository.java
@@ -180,23 +180,27 @@ c1020g1/social_network/model/ParentComment.java
  c1020g1.social_network.model.ParentComment
 c1020g1/social_network/service/impl/EditServiceImpl.java
  c1020g1.social_network.service.impl.EditServiceImpl
-c1020g1/social_network/controller/account/JwtAuthenticationController.java
- c1020g1.social_network.controller.account.JwtAuthenticationController
+c1020g1/social_network/repository/AccountRepository.java
+ c1020g1.social_network.repository.AccountRepository
 c1020g1/social_network/service/AccountService.java
  c1020g1.social_network.service.AccountService
 c1020g1/social_network/config/JwtRequestFilter.java
  c1020g1.social_network.config.JwtRequestFilter
-c1020g1/social_network/controller/UserController.java
- c1020g1.social_network.controller.UserController
-c1020g1/social_network/controller/AccountController.java
- c1020g1.social_network.controller.AccountController
-c1020g1/social_network/repository/AccountRepository.java
- c1020g1.social_network.repository.AccountRepository
 c1020g1/social_network/validator/AccountDuplicatedValidator.java
  c1020g1.social_network.validator.AccountDuplicatedValidator
-c1020g1/social_network/service/account/JwtAccountDetailService.java
- c1020g1.social_network.service.account.JwtAccountDetailService
+c1020g1/social_network/service/UserService.java
+ c1020g1.social_network.service.UserService
+c1020g1/social_network/controller/UserController.java
+ c1020g1.social_network.controller.UserController
+c1020g1/social_network/controller/FriendRequestController.java
+ c1020g1.social_network.controller.FriendRequestController
+c1020g1/social_network/annotation/EmailDuplicated.java
+ c1020g1.social_network.annotation.EmailDuplicated
+c1020g1/social_network/controller/account/JwtAuthenticationController.java
+ c1020g1.social_network.controller.account.JwtAuthenticationController
+c1020g1/social_network/validator/EmailDuplicatedValidator.java
+ c1020g1.social_network.validator.EmailDuplicatedValidator
+c1020g1/social_network/model/dto/UserCreateDTO.java
+ c1020g1.social_network.model.dto.UserCreateDTO
 c1020g1/social_network/service/impl/UserServiceImpl.java
  c1020g1.social_network.service.impl.UserServiceImpl
-c1020g1/social_network/service/impl/AccountServiceImpl.java
- c1020g1.social_network.service.impl.AccountServiceImpl

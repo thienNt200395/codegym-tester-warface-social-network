@@ -109,7 +109,7 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> facebook(@RequestBody SocialResponse jwtResponseSocial) {
         Facebook facebook = new FacebookTemplate(jwtResponseSocial.getToken());
 
-        final String[] fields = {"email", "gender", "name", "location", "picture"};
+        final String[] fields = {"email", "name"};
         org.springframework.social.facebook.api.User user = facebook
                 .fetchObject("me", org.springframework.social.facebook.api.User.class, fields);
         User newUser = userService.getUserByEmail(user.getEmail());
