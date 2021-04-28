@@ -2,6 +2,8 @@ package c1020g1.social_network.repository.friends_repository;
 
 import c1020g1.social_network.model.Friends;
 import c1020g1.social_network.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,11 +13,10 @@ import java.util.List;
 @Repository
 public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     @Query("select c from Friends c where c.user.userId = ?1")
-    List<Friends> findAllFriendById(Integer userId);
+    Page<Friends> findAllFriendById(Integer userId, Pageable pageable);
 
 
     // Câu lấy ra user_id được gợi ý với user login
-
     @Query(value = "select tmp_2.user_id," +
                     " count(tmp_2.user_id) as number_of_mutual_friend" +
             " from (" +

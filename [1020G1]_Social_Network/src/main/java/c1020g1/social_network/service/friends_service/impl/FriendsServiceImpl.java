@@ -7,6 +7,8 @@ import c1020g1.social_network.repository.friends_repository.FriendsRepository;
 import c1020g1.social_network.repository.user_repository.UserRepository;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +29,8 @@ public class FriendsServiceImpl implements FriendsService {
     private UserRepository userRepository;
 
     @Override
-    public List<Friends> findAllFriendById(Integer id) {
-        return friendsRepository.findAllFriendById(id);
+    public Page<Friends> findAllFriendById(Integer id, Pageable pageable) {
+        return friendsRepository.findAllFriendById(id, pageable);
     }
 
     @Override
@@ -60,19 +62,24 @@ public class FriendsServiceImpl implements FriendsService {
     }
 
     @Override
-    public String addNewFriend(Friends friends) {
-        //Check list friend of user has this friend or not.
-        List<Friends> friendsList = friendsRepository.findAllFriendById(friends.getUser().getUserId());
-        for (Friends friends1 : friendsList){
-            if (friends1.getFriend().getUserId() == friends.getFriend().getUserId())
-                return "NG";
-        }
-        friendsRepository.save(friends);
-        return "OK";
+    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+        return null;
     }
 
-    @Override
-    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
-        return friendsRepository.findMutualFriend(receiveUser,sendUser);
-    }
+//    @Override
+//    public String addNewFriend(Friends friends, Pageable pageable) {
+//        //Check list friend of user has this friend or not.
+//        Page<Friends> friendsList = friendsRepository.findAllFriendById(friends.getUser().getUserId(), pageable);
+//        for (Friends friends1 : friendsList){
+//            if (friends1.getFriend().getUserId() == friends.getFriend().getUserId())
+//                return "NG";
+//        }
+//        friendsRepository.save(friends);
+//        return "OK";
+//    }
+//
+//    @Override
+//    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+//        return friendsRepository.findMutualFriend(receiveUser,sendUser);
+//    }
 }

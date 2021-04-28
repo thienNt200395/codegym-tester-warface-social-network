@@ -7,6 +7,9 @@ import c1020g1.social_network.model.SuggestFriend;
 import c1020g1.social_network.service.friend_request_service.FriendRequestService;
 import c1020g1.social_network.service.friends_service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +36,9 @@ public class FriendsController {
      */
     // show list friend
     @RequestMapping(value = "/friend-list/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Friends>> getAllList(@PathVariable Integer id) {
+    public ResponseEntity<Page<Friends>> getAllList(@PathVariable Integer id, @PageableDefault(size = 4)Pageable pageable) {
         try {
-            List<Friends> friendsList = friendsService.findAllFriendById(id);
+            Page<Friends> friendsList = friendsService.findAllFriendById(id, pageable);
             return new ResponseEntity<>(friendsList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -72,7 +75,7 @@ public class FriendsController {
      */
     //show List Suggest Friend
     @RequestMapping(value = "friend-suggest/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<SuggestFriend>> showListSuggest(@PathVariable Integer id) {
+    public ResponseEntity<List<SuggestFriend>> getListSuggest(@PathVariable Integer id) {
         try {
             List<SuggestFriend> friendSuggestList = friendsService.getAllSuggestFriend(id);
             return new ResponseEntity<>(friendSuggestList, HttpStatus.OK);
@@ -87,27 +90,27 @@ public class FriendsController {
      * Author : TùngNT
      * Add Friend
      */
-    @PostMapping("/addfriend")
-    public ResponseEntity<Void> addNewFriend(@RequestBody FriendRequest friendRequest) {
-        try {
-            Friends friends1 = new Friends();
-            friends1.setUser(friendRequest.getReceiveUser());
-            friends1.setFriend(friendRequest.getSendUser());
-            if (friendsService.addNewFriend(friends1).equals("NG")) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            Friends friends2 = new Friends();
-            friends2.setUser(friendRequest.getSendUser());
-            friends2.setFriend(friendRequest.getReceiveUser());
-            if (friendsService.addNewFriend(friends2).equals("NG")) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            friendRequestService.deleteFriendRequest(friendRequest.getFriendRequestId());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
+//    @PostMapping("/addfriend")
+//    public ResponseEntity<Void> addNewFriend(@RequestBody FriendRequest friendRequest) {
+//        try {
+//            Friends friends1 = new Friends();
+//            friends1.setUser(friendRequest.getReceiveUser());
+//            friends1.setFriend(friendRequest.getSendUser());
+//            if (friendsService.addNewFriend(friends1).equals("NG")) {
+//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            }
+//
+//            Friends friends2 = new Friends();
+//            friends2.setUser(friendRequest.getSendUser());
+//            friends2.setFriend(friendRequest.getReceiveUser());
+//            if (friendsService.addNewFriend(friends2).equals("NG")) {
+//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            }
+//
+//            friendRequestService.deleteFriendRequest(friendRequest.getFriendRequestId());
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 }

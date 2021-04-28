@@ -50,13 +50,13 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         }
 
         //Check two users was friends or not.
-        List<Friends> sendUserFriends =
-                friendsService.findAllFriendById(newFriendRequest.getSendUser().getUserId());
-        for (Friends friends : sendUserFriends) {
-            if (newFriendRequest.getReceiveUser().getUserId() == friends.getFriendsId()){
-                return "NG";
-            }
-        }
+//        List<Friends> sendUserFriends =
+//                friendsService.findAllFriendById(newFriendRequest.getSendUser().getUserId());
+//        for (Friends friends : sendUserFriends) {
+//            if (newFriendRequest.getReceiveUser().getUserId() == friends.getFriendsId()){
+//                return "NG";
+//            }
+//        }
 
         friendRequestRepository.save(newFriendRequest);
         return "OK";
