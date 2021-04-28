@@ -1,8 +1,7 @@
 package c1020g1.social_network.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -12,9 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "userId")
+
 public class User {
 
     @Id
@@ -73,7 +70,6 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id",nullable = false)
-    @JsonBackReference
     private Account account;
 
 
