@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserService {
     User findById(int id);
     List<User> inviteFriendList(int groupId,int userId);
-    List<User> inviteFriendsOfFriendsList(int groupId);
+    List<User> inviteFriendsOfFriendsList(int groupId,int userId);
 }

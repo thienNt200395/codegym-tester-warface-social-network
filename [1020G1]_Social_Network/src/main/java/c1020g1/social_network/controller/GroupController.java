@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("group")
 public class GroupController {
     @Autowired
     private GroupRequestService groupRequestService;
@@ -28,6 +27,16 @@ public class GroupController {
     @Autowired
     private WarningService warningService;
 
+
+    @RequestMapping(value = "/group", method = RequestMethod.GET)
+    public ResponseEntity<Page<Group>> listAllGroup(@PageableDefault(size = 5) Pageable pageable,@RequestParam String key) {
+        try {
+            Page<Group> Groups = groupService.findAllByGroupName(key,pageable);
+            return new ResponseEntity<>(Groups, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     /**
      * @author PhinNL
      * get list request by group id
@@ -49,19 +58,28 @@ public class GroupController {
      * get list request by user id
      */
     @GetMapping("/request/list/user/{id}")
-    public ResponseEntity<Page<GroupRequest>> getRequestListByUser(@PathVariable int id, Pageable pageable) {
+    public ResponseEntity<List<GroupRequest>> getRequestListByUser(@PathVariable int id) {
         User user = userService.findById(id);
-        return new ResponseEntity<Page<GroupRequest>>(groupRequestService.findAllByUser(user, pageable), HttpStatus.OK);
+        return new ResponseEntity<List<GroupRequest>>(groupRequestService.findAllByUser(user), HttpStatus.OK);
     }
 
-    @GetMapping("/group/get/{id}")
+    @DeleteMapping("/group-delete/{id}")
+    public ResponseEntity<Void> deleteGroup(@PathVariable("id") Integer id) {
+        try {
+            Group Group = groupService.findById(id);
+            if (Group == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            groupService.remove(id);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/group-detail/{id}")
     public ResponseEntity<Group> getGroupById(@PathVariable int id){
         return new ResponseEntity<Group>(groupService.findById(id),HttpStatus.OK);
-    }
-
-    @GetMapping("/user/get/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id){
-        return new ResponseEntity<User>(userService.findById(id),HttpStatus.OK);
     }
 
     /**
@@ -90,7 +108,7 @@ public class GroupController {
                 || userService.findById(groupRequest.getUser().getUserId()) == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        GroupUser groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
+        GroupUser  groupUser = groupUserService.findExist(groupRequest.getGroup().getGroupId(), groupRequest.getUser().getUserId());
         if (groupRequestService.findExist(groupRequest) != null || groupUser != null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
@@ -98,7 +116,25 @@ public class GroupController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-    /**
+    @RequestMapping(value = "/group-detail/{groupId}/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<GroupUser> findGroupUserByGroupAndUser(@PathVariable Integer groupId, @PathVariable Integer userId) {
+        try {
+            if (groupService.findById(groupId) == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (userService.findById(userId) == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (groupUserService.findExist(groupId, userId) == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<GroupUser>(groupUserService.findExist(groupId, userId), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /** 
      * @author PhinNL
      * delete request and create member
      */
@@ -191,11 +227,11 @@ public class GroupController {
      * get list friends of friends admin not in group user and group request by group id
      */
     @GetMapping("/request/invite/list/{id}")
-    public ResponseEntity<List<User>> getFriendsOfFriendsInviteList(@PathVariable int id) {
+    public ResponseEntity<List<User>> getFriendsOfFriendsInviteList(@PathVariable int id,@RequestParam int userId) {
         if (groupService.findById(id) == null){
             return new ResponseEntity<List<User>>(new ArrayList<>(),HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<List<User>>(userService.inviteFriendsOfFriendsList(id), HttpStatus.OK);
+        return new ResponseEntity<List<User>>(userService.inviteFriendsOfFriendsList(id,userId), HttpStatus.OK);
     }
 
     /**

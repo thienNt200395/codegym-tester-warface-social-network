@@ -12,6 +12,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public User findById(int id) {
         return userRepository.findByUserId(id);
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> inviteFriendsOfFriendsList(int groupId) {
-        return userRepository.inviteFriendsOfFriends(groupId);
+    public List<User> inviteFriendsOfFriendsList(int groupId, int userId) {
+        return userRepository.inviteFriendsOfFriends(groupId, userId);
     }
 }

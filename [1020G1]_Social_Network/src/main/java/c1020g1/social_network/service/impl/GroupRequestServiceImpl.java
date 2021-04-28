@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
+import java.util.List;
 
 @Service
 public class GroupRequestServiceImpl implements GroupRequestService {
@@ -30,8 +33,8 @@ public class GroupRequestServiceImpl implements GroupRequestService {
     }
 
     @Override
-    public Page<GroupRequest> findAllByUser(User user, Pageable pageable) {
-        return groupRequestRepository.findAllByUser(user,pageable);
+    public List<GroupRequest> findAllByUser(User user) {
+        return groupRequestRepository.findAllByUser(user);
     }
 
     @Override
