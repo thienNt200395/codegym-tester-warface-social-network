@@ -16,6 +16,7 @@ import c1020g1.social_network.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -41,7 +42,6 @@ public class UserServiceImpl implements UserService {
      *
      * @param userCreateDTO
      * @return
-     *
      */
     @Override
     @Transactional
@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * author: PhucPT
      * method: return user in database by id
      *
@@ -79,7 +78,6 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer id) {
         return userRepository.getUserById(id);
     }
-
 
 
     /**
@@ -97,6 +95,7 @@ public class UserServiceImpl implements UserService {
     /**
      * method: update avatar of user.
      * author: HanTH
+     *
      * @param userId
      * @param image
      * @param imageName
@@ -135,9 +134,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> inviteFriendsOfFriendsList(int groupId) {
-        return userRepository.inviteFriendsOfFriends(groupId);
+    public List<User> inviteFriendsOfFriendsList(int groupId, int userId) {
+        return userRepository.inviteFriendsOfFriends(groupId, userId);
     }
+
 
     //ThinhTHB
     @Override

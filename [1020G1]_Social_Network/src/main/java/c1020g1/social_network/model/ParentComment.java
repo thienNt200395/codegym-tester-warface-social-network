@@ -1,5 +1,6 @@
 package c1020g1.social_network.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.validation.Errors;
@@ -19,7 +20,7 @@ public class ParentComment implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "parent_comment_id")
+    @Column(name = "parent_comment_id")
     private Integer parentCommentId;
 
     @Column(name = "content")
@@ -107,9 +108,9 @@ public class ParentComment implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ParentComment parentComment =(ParentComment) target;
+        ParentComment parentComment = (ParentComment) target;
 
-        if(parentComment.getContent() == null && parentComment.getCommentImage() == null)
+        if (parentComment.getContent() == null && parentComment.getCommentImage() == null)
             errors.reject("bad-request");
     }
 }
