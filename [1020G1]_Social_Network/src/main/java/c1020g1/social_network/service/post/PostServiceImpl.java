@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class PostServiceImpl implements PostService {
     }
 
     /**
-     * Author : CaoLPT
+     * Author : SonPH
      *create post
      * @param post
      */
@@ -50,7 +51,7 @@ public class PostServiceImpl implements PostService {
     }
 
     /**
-     * Author : CaoLPT
+     * Author : SonPH
      * edit post
      * @param post
      */
@@ -92,6 +93,11 @@ public class PostServiceImpl implements PostService {
         return postRepository.getAllPostInWallUser(userId);
     }
 
+    /**
+     * Author : SonPH
+     * decode string URL
+     * @param encodedUrl
+     */
     @Override
     public String decodeStringUrl(String encodedUrl) {
         String decodedUrl =null;
@@ -103,11 +109,35 @@ public class PostServiceImpl implements PostService {
         return decodedUrl;
     }
 
+    /**
+     * Author : SonPH
+     * decode string URL
+     * @param url
+     */
+    @Override
+    public String encodeStringUrl(String url) {
+        String encodedUrl =null;
+        try {
+            encodedUrl = URLEncoder.encode(url, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return encodedUrl;
+        }
+        return encodedUrl;
+    }
+
+    /**
+     * Author : DungHA
+     * @param userId
+     */
     @Override
     public Post getRecentPostByUserId(Integer userId) {
         return postRepository.getRecentPostByUserId(userId);
     }
 
+    /**
+     * Author : CuongNVM
+     * @param id
+     */
     @Override
     public List<Post> findAllPostGroup(Integer id) {
         return postRepository.findAllPostGroup(id);

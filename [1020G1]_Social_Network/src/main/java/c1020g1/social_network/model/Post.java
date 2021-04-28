@@ -1,6 +1,8 @@
 package c1020g1.social_network.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -28,7 +30,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
-//    @JsonBackReference
     private User user;
 
     @OneToMany(mappedBy = "post")
