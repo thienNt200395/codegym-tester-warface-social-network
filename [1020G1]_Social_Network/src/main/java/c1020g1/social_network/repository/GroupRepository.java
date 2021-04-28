@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 
 @Repository
 public interface GroupRepository extends JpaRepository<GroupSocial, Integer> {
@@ -27,4 +27,8 @@ public interface GroupRepository extends JpaRepository<GroupSocial, Integer> {
 
     @Query("select gr from GroupSocial gr where gr.groupName like %?1%")
     Page<GroupSocial> findGroupByGroupNameContaining(String name, Pageable pageable);
+
+    @Query(value = "select * from `group_social` where group_id = :id",nativeQuery = true)
+    GroupSocial findByGroupId(@Param("id") int id);
+
 }

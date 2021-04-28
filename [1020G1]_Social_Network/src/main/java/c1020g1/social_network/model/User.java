@@ -2,6 +2,7 @@ package c1020g1.social_network.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
+
 public class User {
 
     @Id
@@ -67,8 +69,8 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id",nullable = false)
-    @JsonBackReference
     private Account account;
+
 
     @OneToMany(mappedBy = "user")
     private Set<GroupRequest> groupRequests;

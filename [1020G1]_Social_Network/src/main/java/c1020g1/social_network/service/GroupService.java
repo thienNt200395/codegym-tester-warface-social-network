@@ -1,7 +1,7 @@
 package c1020g1.social_network.service;
 
-
 import c1020g1.social_network.model.GroupSocial;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

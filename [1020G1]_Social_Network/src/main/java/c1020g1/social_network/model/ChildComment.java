@@ -1,8 +1,7 @@
 package c1020g1.social_network.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -11,16 +10,15 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "child_comment")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "childCommentId")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "childCommentId")
 public class ChildComment implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "child_comment_id")
     private Integer childCommentId;
-
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -33,6 +31,7 @@ public class ChildComment implements Validator {
 
     @ManyToOne
     @JoinColumn(name = "parent_comment_id", referencedColumnName = "parent_comment_id")
+    @JsonBackReference
     private ParentComment parentComment;
 
     @ManyToOne

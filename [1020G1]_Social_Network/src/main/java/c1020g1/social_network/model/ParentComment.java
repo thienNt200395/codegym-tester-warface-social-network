@@ -1,7 +1,8 @@
 package c1020g1.social_network.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -12,14 +13,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "parent_comment")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "parentCommentId")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "parentCommentId")
 public class ParentComment implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "parent_comment_id")
+    @Column(name = "parent_comment_id")
     private Integer parentCommentId;
 
     @Column(name = "content")
@@ -33,6 +34,7 @@ public class ParentComment implements Validator {
 
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
+    @JsonBackReference
     private Post post;
 
     @ManyToOne
@@ -40,6 +42,7 @@ public class ParentComment implements Validator {
     private User user;
 
     @OneToMany(mappedBy = "parentComment")
+    @JsonManagedReference
     private List<ChildComment> childComments;
 
     public Integer getParentCommentId() {
@@ -105,9 +108,9 @@ public class ParentComment implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ParentComment parentComment =(ParentComment) target;
+        ParentComment parentComment = (ParentComment) target;
 
-        if(parentComment.getContent() == null && parentComment.getCommentImage() == null)
+        if (parentComment.getContent() == null && parentComment.getCommentImage() == null)
             errors.reject("bad-request");
     }
 }

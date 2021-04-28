@@ -13,6 +13,21 @@ import java.util.List;
 @Repository
 @Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
+    @Transactional
+    @Modifying
+    @Query(value = "update user\n" + "set user.status_id = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
+    void updateStatus(Integer userId, Integer status_id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update user\n" + "set user.user_avatar = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
+    void updateAvatar(Integer userId, String image);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update user\n" + "set user.user_background = ?2\n" + "where user.user_id = ?1", nativeQuery = true)
+    void updateBackground(Integer userId, String background);
+
     @Query(value = "select * from `user` u " +
             "where u.user_id in " +
             "(SELECT distinct af.friend_id from friends f join friends af on f.friend_id = af.user_id " +

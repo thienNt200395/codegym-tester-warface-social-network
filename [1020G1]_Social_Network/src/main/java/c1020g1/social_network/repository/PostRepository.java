@@ -8,15 +8,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,Integer> {
-    @Query("select p from Post p where p.groupSocial.groupId=?1")
-    List<Post> findAllPostGroup(Integer id);
-
     @Modifying
     @Query(value = "insert into post (post_content, post_status, post_published, user_id) values (:postContent, " +
             ":postStatus, :postPublished, :userId)", nativeQuery = true)
@@ -55,4 +51,15 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
             "WHERE user_id = :userId \n" +
             "ORDER BY post_published DESC ",countQuery= "SELECT count(*) from friends\n", nativeQuery = true)
     Page<Post> getAllPostInNewsFeed(@Param("userId") Integer userId, Pageable pageable);
+
+    @Query(value = "SELECT *\n" +
+            "FROM post\n" +
+            "WHERE user_id = :userId", nativeQuery = true)
+    List<Post> getAllPostInWallUser(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT * FROM post WHERE post.user_id = :userId ORDER BY post.post_id DESC LIMIT 1", nativeQuery = true)
+    Post getRecentPostByUserId(Integer userId);
+
+    @Query("select p from Post p where p.groupSocial.groupId=?1")
+    List<Post> findAllPostGroup(Integer id);
 }

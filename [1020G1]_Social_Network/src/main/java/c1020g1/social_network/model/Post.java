@@ -1,5 +1,8 @@
 package c1020g1.social_network.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -28,12 +31,15 @@ public class Post {
     @JoinColumn(referencedColumnName = "user_id", name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "post")
+    private List<ParentComment> parentComments;
+
+    @OneToMany(mappedBy = "post")
+    private List<PostImage> postImages;
+
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
-
-    @OneToMany(mappedBy = "post")
-    private List<ParentComment> parentComments;
 
     public Integer getPostId() {
         return postId;
@@ -79,8 +85,20 @@ public class Post {
         return groupSocial;
     }
 
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
+    public void setGroupSocial(GroupSocial group) {
+        this.groupSocial = group;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postContent='" + postContent + '\'' +
+                ", postStatus='" + postStatus + '\'' +
+                ", postPublished=" + postPublished +
+                ", user=" + user +
+                ", groupSocial=" + groupSocial +
+                '}';
     }
 
     public List<ParentComment> getParentComments() {
@@ -89,5 +107,13 @@ public class Post {
 
     public void setParentComments(List<ParentComment> parentComments) {
         this.parentComments = parentComments;
+    }
+
+    public List<PostImage> getPostImages() {
+        return postImages;
+    }
+
+    public void setPostImages(List<PostImage> postImages) {
+        this.postImages = postImages;
     }
 }
