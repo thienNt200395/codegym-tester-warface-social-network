@@ -32,7 +32,6 @@ public class FriendRequest {
     }
 
 
-
     public Integer getFriendRequestId() {
         return friendRequestId;
     }

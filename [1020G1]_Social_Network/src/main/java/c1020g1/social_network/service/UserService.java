@@ -15,8 +15,6 @@ public interface UserService {
     //HanTH
     void updateBackground(Integer userId, String background, String imageName);
 
-    //HanTH
-    User getUserByAccountId(Integer id);
 
     //PhucPT
     User createUser(UserCreateDTO userCreateDTO);
@@ -24,6 +22,7 @@ public interface UserService {
     //PhucPT
     User getUserById(Integer id);
 
+    //Duong
     User getUserByEmail(String email);
 
     List<User> inviteFriendList(int groupId, int userId);

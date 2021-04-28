@@ -124,18 +124,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /**
-     * method: get user through account id
-     * author: HanTH
-     * @param id
-     * @return
-     */
-
-    @Override
-    public User getUserByAccountId(Integer id) {
-        return userRepository.getUserByAccountId( id );
-    }
-
 
     //dương
     @Override

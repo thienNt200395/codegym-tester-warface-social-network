@@ -134,6 +134,8 @@ c1020g1/social_network/validator/AccountDuplicatedValidator.java
  c1020g1.social_network.validator.AccountDuplicatedValidator
 c1020g1/social_network/repository/SearchRepository.java
  c1020g1.social_network.repository.SearchRepository
+c1020g1/social_network/model/SuggestFriend.java
+ c1020g1.social_network.model.SuggestFriend
 c1020g1/social_network/service/GroupService.java
  c1020g1.social_network.service.GroupService
 c1020g1/social_network/controller/PostController.java
