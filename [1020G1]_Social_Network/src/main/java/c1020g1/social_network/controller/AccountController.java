@@ -36,27 +36,28 @@ public class AccountController {
     @GetMapping("/account/{email}/changePassword")
     public ResponseEntity<?> sendMailConfirmChangePassword(@PathVariable("email") String email,
                                                            @RequestParam("code") Integer code) throws MessagingException {
-        if (email == null || code == null){
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+        if (email == null || code == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         MimeMessage message = emailSender.createMimeMessage();
 
         boolean multipart = true;
 
-        MimeMessageHelper helper = new MimeMessageHelper( message, multipart, "utf-8" );
+        MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
 
         String htmlMsg = "<h3>Your code is <i style='color: blue'>" + code + "<i></h3>" +
-                "<h2><img src='https://apprecs.org/ios/images/app-icons/256/19/547702041.jpg'> C10tinder <h2>";
+                "<p style='color: red; font-size: 25px;'>" +
+                "<img style='width: 50px; height: 50px' src='https://apprecs.org/ios/images/app-icons/256/19/547702041.jpg'> " +
+                "C10-Tinder <3 <p>";
+        message.setContent(htmlMsg, "text/html");
 
-        message.setContent( htmlMsg, "text/html" );
+        helper.setTo(email);
 
-        helper.setTo( email );
+        helper.setSubject("C10Tinder Support Recover Password");
 
-        helper.setSubject( "C10Tinder Support Recover Password" );
-
-        emailSender.send( message );
-        return new ResponseEntity<>( HttpStatus.OK );
+        emailSender.send(message);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
@@ -73,11 +74,11 @@ public class AccountController {
                                             @RequestParam("oldPassword") String oldPassword,
                                             @RequestParam("newPassword") String newPassword,
                                             @RequestParam("confirmPassword") String confirmPassword) {
-        Account account = accountService.findAccountByName( accountName );
+        Account account = accountService.findAccountByName(accountName);
         if (account == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        accountService.changePassword( account, oldPassword, newPassword, confirmPassword );
-        return new ResponseEntity<>( HttpStatus.OK );
+        accountService.changePassword(account, oldPassword, newPassword, confirmPassword);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
