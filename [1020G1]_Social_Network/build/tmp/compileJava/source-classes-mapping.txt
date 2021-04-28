@@ -198,7 +198,7 @@ c1020g1/social_network/service/post_image/PostImageServiceImpl.java
  c1020g1.social_network.service.post_image.PostImageServiceImpl
 c1020g1/social_network/service/post/PostServiceImpl.java
  c1020g1.social_network.service.post.PostServiceImpl
-c1020g1/social_network/controller/PostController.java
- c1020g1.social_network.controller.PostController
 c1020g1/social_network/service/post_image/PostImageService.java
  c1020g1.social_network.service.post_image.PostImageService
+c1020g1/social_network/controller/PostController.java
+ c1020g1.social_network.controller.PostController
