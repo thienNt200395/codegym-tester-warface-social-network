@@ -1,46 +1,126 @@
 package c1020g1.social_network.controller;
-
-import c1020g1.social_network.model.User;
+import c1020g1.social_network.model.*;
+import c1020g1.social_network.model.dto.UserFavourites;
+import c1020g1.social_network.service.province.ProvinceService;
 import c1020g1.social_network.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.ArrayList;
 import java.util.List;
-
 @RestController
 @CrossOrigin("*")
 public class SearchController {
     @Autowired
     SearchService searchService;
-
+    @Autowired
+    ProvinceService provinceService;
+    /**
+     * @author KienTH
+     * get list user by name
+     */
     @GetMapping("/searching/name-search/{name}")
-    public List<User> doNameSearch(@PathVariable("name") String name) {
-        return searchService.findAllUserByNameContain(name);
+    public ResponseEntity<List<UserFavourites>> doNameSearch(@PathVariable("name") String name) {
+        List<User> list = searchService.findAllUserByNameContain(name);
+        List<UserFavourites> listUserFavourites = new ArrayList<>();
+        for(User userRecommend: list){
+            UserFavourites userFavourites = new UserFavourites();
+            userFavourites.setUser(userRecommend);
+            userFavourites.setFavourites(searchService.getListFavourite(userRecommend.getUserId()));
+            listUserFavourites.add(userFavourites);
+        }
+        if (list.isEmpty()){
+            return new ResponseEntity<List<UserFavourites>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<UserFavourites>>(listUserFavourites, HttpStatus.OK);
     }
-
+    /**
+     * @author KienTH
+     * get list user by multi param
+     */
     @GetMapping("/searching/advanced-search")
-    public List<User> doAdvancedSearch(@RequestParam("name") String name,
-                                       @RequestParam(value = "birthday", required = false) String birthday,
-                                       @RequestParam(value = "gender", required = false) String gender,
-                                       @RequestParam(value = "province", required = false) String province,
-                                       @RequestParam(value = "district", required = false) String district,
-                                       @RequestParam(value = "ward", required = false) String ward,
-                                       @RequestParam(value = "occupation", required = false) String occupation,
-                                       @RequestParam(value = "favourites", required = false) List<String> favourites) {
+    public ResponseEntity<List<UserFavourites>> doAdvancedSearch(@RequestParam("name") String name,
+                                                                 @RequestParam(value = "birthday", required = false) String birthday,
+                                                                 @RequestParam(value = "gender", required = false) String gender,
+                                                                 @RequestParam(value = "province", required = false) String province,
+                                                                 @RequestParam(value = "district", required = false) String district,
+                                                                 @RequestParam(value = "ward", required = false) String ward,
+                                                                 @RequestParam(value = "occupation", required = false) String occupation,
+                                                                 @RequestParam(value = "favourites", required = false) List<String> favourites) {
         Integer birthdayInt;
-        if (birthday.equals("undefined")) {
+        if (birthday.equals("undefined") || birthday.equals("Not select")) {
             birthdayInt = null;
         } else {
             birthdayInt = Integer.parseInt(birthday);
         }
-        return searchService.advancedSearch(name, birthdayInt, gender, province, district, ward, occupation, favourites);
+        if (province.equals("undefined") || province.equals("Not select")) {
+            province = null;
+        }
+        if (name.equals("undefined")) {
+            name = "";
+        }
+        if (gender.equals("undefined") || gender.equals("Not select")) {
+            gender = null;
+        }
+        if (occupation.equals("undefined") || occupation.equals("")) {
+            occupation = null;
+        }
+        List<User> list = searchService.advancedSearch(name, birthdayInt, gender, province,
+                district, ward, occupation, favourites);
+        List<UserFavourites> listUserFavourites = new ArrayList<>();
+        for(User userRecommend: list){
+            UserFavourites userFavourites = new UserFavourites();
+            userFavourites.setUser(userRecommend);
+            userFavourites.setFavourites(searchService.getListFavourite(userRecommend.getUserId()));
+            listUserFavourites.add(userFavourites);
+        }
+        if (list.isEmpty()){
+            return new ResponseEntity<List<UserFavourites>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<UserFavourites>>(listUserFavourites, HttpStatus.OK);
     }
-
+    /**
+     * @author KienTH
+     * get list user recommendation
+     */
     @GetMapping("/searching/recommend")
-    public List<User> doRecommendation(@RequestParam("id") Integer id) {
+    public ResponseEntity<List<UserFavourites>> doRecommendation(@RequestParam("id") Integer id) {
         User user = searchService.findById(id);
-        List<String> list = searchService.getListFavourite(user.getUserId());
-        return searchService.recommendation(user.getUserId(), user.getBirthday(),
-                user.getWard().getDistrict().getProvince().getProvinceId(), list);
+        List<String> listFavourite = searchService.getListFavourite(user.getUserId());
+        List<User> list = searchService.recommendation(user.getUserId(), user.getBirthday(), user.getGender(),
+                user.getWard().getDistrict().getProvince().getProvinceId(), listFavourite);
+        List<UserFavourites> listUserFavourites = new ArrayList<>();
+        for(User userRecommend: list){
+            UserFavourites userFavourites = new UserFavourites();
+            userFavourites.setUser(userRecommend);
+            userFavourites.setFavourites(searchService.getListFavourite(userRecommend.getUserId()));
+            listUserFavourites.add(userFavourites);
+        }
+        if (list.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(listUserFavourites, HttpStatus.OK);
+    }
+    /**
+     * @author KienTH
+     * get list province
+     */
+    @GetMapping("/searching/province")
+    public ResponseEntity<Iterable<Province>> getAllProvince() {
+        Iterable<Province> list = provinceService.getAllProvince();
+        return new ResponseEntity<Iterable<Province>>(list, HttpStatus.OK);
+    }
+    /**
+     * @author KienTH
+     * get list group by name
+     */
+    @GetMapping("/searching/group")
+    public ResponseEntity<Iterable<GroupSocial>> getAllProvince(@RequestParam("name") String name) {
+        List<GroupSocial> list = searchService.findAllGroupByName(name);
+        if (list.isEmpty()){
+            return new ResponseEntity<Iterable<GroupSocial>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Iterable<GroupSocial>>(list, HttpStatus.OK);
     }
 }

@@ -19,7 +19,9 @@ public interface FriendsService {
 
     Page<Friends> findAllFriendById(Integer idUser, Pageable pageable);
 
+    List<Friends> findAllFriendByIdToCheck(Integer idUser);
+
     List<User> findMutualFriend(Integer receiveUser,Integer sendUser);
 
-//    String addNewFriend(Friends friends);
+    String addNewFriend(Friends friends);
 }

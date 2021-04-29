@@ -38,11 +38,12 @@ public class PostController {
     /**
      * Author : CaoLPT
      * get all posts in news feed of user
+     *
      * @param userId
      * @param pageable
      */
     @GetMapping("/newsfeed/{userId}")
-    public ResponseEntity<Page<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable){
+    public ResponseEntity<Page<Post>> findAllPostInNewsFeed(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable) {
         User userFromDb = userService.getUserById(userId);
 
         if (userFromDb == null)
@@ -53,12 +54,17 @@ public class PostController {
         if (result.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
+        for (Post post : result.getContent()) {
+            post.setPostContent(postService.decodeStringUrl(post.getPostContent()));
+        }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
      * Author : CaoLPT
      * find all images of the post
+     *
      * @param postId
      */
     @GetMapping("/image/{postId}")
@@ -105,6 +111,7 @@ public class PostController {
     /**
      * Author : SonPH
      * edit post
+     *
      * @param postId
      * @param postEditDTO
      * @param bindingResult
@@ -136,10 +143,11 @@ public class PostController {
     /**
      * Author : SonPH
      * get post by ID
+     *
      * @param postId
      */
     @GetMapping("/{postId}")
-    public ResponseEntity<PostEditDTO> getPostById(@PathVariable("postId") Integer postId){
+    public ResponseEntity<PostEditDTO> getPostById(@PathVariable("postId") Integer postId) {
         Post post = postService.getPostById(postId);
         PostEditDTO postEditDTO = new PostEditDTO();
         if (post != null) {
@@ -155,13 +163,14 @@ public class PostController {
     /**
      * Author : DungHA
      * get all posts in wall of user
+     *
      * @param userId
      */
     @GetMapping("/wall/{userId}")
-    public ResponseEntity<List<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId){
+    public ResponseEntity<List<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId) {
         List<Post> postInWall = postService.getAllPostInWallUser(userId);
 
-        if(postInWall == null){
+        if (postInWall == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

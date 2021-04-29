@@ -12,16 +12,16 @@ c1020g1/social_network/model/FriendRequest.java
  c1020g1.social_network.model.FriendRequest
 c1020g1/social_network/controller/EditController.java
  c1020g1.social_network.controller.EditController
-c1020g1/social_network/repository/FriendsRepository.java
- c1020g1.social_network.repository.FriendsRepository
+c1020g1/social_network/model/PostDTO.java
+ c1020g1.social_network.model.PostDTO
 c1020g1/social_network/repository/ParentCommentRepository.java
  c1020g1.social_network.repository.ParentCommentRepository
 c1020g1/social_network/service/ward/WarningService.java
  c1020g1.social_network.service.ward.WarningService
 c1020g1/social_network/controller/JwtAuthenticationController.java
  c1020g1.social_network.controller.JwtAuthenticationController
-c1020g1/social_network/service/search/SearchServiceImpl.java
- c1020g1.social_network.service.search.SearchServiceImpl
+c1020g1/social_network/repository/GroupRepository.java
+ c1020g1.social_network.repository.GroupRepository
 c1020g1/social_network/service/account/AccountService.java
  c1020g1.social_network.service.account.AccountService
 c1020g1/social_network/service/user/UserServiceImpl.java
@@ -36,8 +36,8 @@ c1020g1/social_network/model/GroupWarning.java
  c1020g1.social_network.model.GroupWarning
 c1020g1/social_network/repository/ChildCommentRepository.java
  c1020g1.social_network.repository.ChildCommentRepository
-c1020g1/social_network/service/friends_service/FriendsService.java
- c1020g1.social_network.service.friends_service.FriendsService
+c1020g1/social_network/model/District.java
+ c1020g1.social_network.model.District
 c1020g1/social_network/controller/LocationController.java
  c1020g1.social_network.controller.LocationController
 c1020g1/social_network/controller/AccountController.java
@@ -64,20 +64,20 @@ c1020g1/social_network/model/FavouriteUser.java
  c1020g1.social_network.model.FavouriteUser
 c1020g1/social_network/model/Status.java
  c1020g1.social_network.model.Status
-c1020g1/social_network/service/friend_request_service/FriendRequestServiceImpl.java
- c1020g1.social_network.service.friend_request_service.FriendRequestServiceImpl
+c1020g1/social_network/service/account/imp/AccountServiceImpl.java
+ c1020g1.social_network.service.account.imp.AccountServiceImpl
 c1020g1/social_network/repository/FavouriteRepository.java
  c1020g1.social_network.repository.FavouriteRepository
 c1020g1/social_network/model/JwtRequest.java
  c1020g1.social_network.model.JwtRequest
-c1020g1/social_network/controller/SearchController.java
- c1020g1.social_network.controller.SearchController
+c1020g1/social_network/repository/SearchRepository.java
+ c1020g1.social_network.repository.SearchRepository
 c1020g1/social_network/sercurity/AccountPrincipleFactory.java
  c1020g1.social_network.sercurity.AccountPrincipleFactory
-c1020g1/social_network/controller/FriendRequestController.java
- c1020g1.social_network.controller.FriendRequestController
-c1020g1/social_network/repository/GroupRepository.java
- c1020g1.social_network.repository.GroupRepository
+c1020g1/social_network/model/PostEditDTO.java
+ c1020g1.social_network.model.PostEditDTO
+c1020g1/social_network/model/dto/UserFavourites.java
+ c1020g1.social_network.model.dto.UserFavourites
 c1020g1/social_network/service/group/imp/GroupUserServiceImpl.java
  c1020g1.social_network.service.group.imp.GroupUserServiceImpl
 c1020g1/social_network/annotation/AccountDuplicated.java
@@ -88,8 +88,8 @@ c1020g1/social_network/service/province/ProvinceServiceImpl.java
  c1020g1.social_network.service.province.ProvinceServiceImpl
 c1020g1/social_network/model/dto/UserResultMessageDTO.java
  c1020g1.social_network.model.dto.UserResultMessageDTO
-c1020g1/social_network/controller/FriendsController.java
- c1020g1.social_network.controller.FriendsController
+c1020g1/social_network/config/JwtTokenUtil.java
+ c1020g1.social_network.config.JwtTokenUtil
 c1020g1/social_network/config/JwtAuthenticationEntryPoint.java
  c1020g1.social_network.config.JwtAuthenticationEntryPoint
 c1020g1/social_network/model/Province.java
@@ -112,8 +112,8 @@ c1020g1/social_network/config/WebSecurityConfig.java
  c1020g1.social_network.config.WebSecurityConfig
 c1020g1/social_network/validator/EmailDuplicatedValidator.java
  c1020g1.social_network.validator.EmailDuplicatedValidator
-c1020g1/social_network/service/group/imp/GroupServiceImpl.java
- c1020g1.social_network.service.group.imp.GroupServiceImpl
+c1020g1/social_network/controller/PostController.java
+ c1020g1.social_network.controller.PostController
 c1020g1/social_network/SocialNetworkApplication.java
  c1020g1.social_network.SocialNetworkApplication
 c1020g1/social_network/service/user/UserService.java
@@ -144,16 +144,16 @@ c1020g1/social_network/service/post_image/PostImageService.java
  c1020g1.social_network.service.post_image.PostImageService
 c1020g1/social_network/validator/AccountDuplicatedValidator.java
  c1020g1.social_network.validator.AccountDuplicatedValidator
-c1020g1/social_network/service/friends_service/FriendsServiceImpl.java
- c1020g1.social_network.service.friends_service.FriendsServiceImpl
-c1020g1/social_network/repository/SearchRepository.java
- c1020g1.social_network.repository.SearchRepository
+c1020g1/social_network/config/JwtRequestFilter.java
+ c1020g1.social_network.config.JwtRequestFilter
+c1020g1/social_network/service/search/SearchService.java
+ c1020g1.social_network.service.search.SearchService
 c1020g1/social_network/service/ward/WardServiceImpl.java
  c1020g1.social_network.service.ward.WardServiceImpl
 c1020g1/social_network/model/SuggestFriend.java
  c1020g1.social_network.model.SuggestFriend
-c1020g1/social_network/controller/PostController.java
- c1020g1.social_network.controller.PostController
+c1020g1/social_network/controller/SearchController.java
+ c1020g1.social_network.controller.SearchController
 c1020g1/social_network/service/district/DistrictServiceImpl.java
  c1020g1.social_network.service.district.DistrictServiceImpl
 c1020g1/social_network/model/PostImage.java
@@ -172,8 +172,8 @@ c1020g1/social_network/service/group/FavouriteService.java
  c1020g1.social_network.service.group.FavouriteService
 c1020g1/social_network/controller/CommentController.java
  c1020g1.social_network.controller.CommentController
-c1020g1/social_network/service/search/SearchService.java
- c1020g1.social_network.service.search.SearchService
+c1020g1/social_network/repository/FriendRequestRepository.java
+ c1020g1.social_network.repository.FriendRequestRepository
 c1020g1/social_network/model/Friends.java
  c1020g1.social_network.model.Friends
 c1020g1/social_network/model/JwtResponse.java
@@ -186,19 +186,21 @@ c1020g1/social_network/controller/UserController.java
  c1020g1.social_network.controller.UserController
 c1020g1/social_network/model/ParentComment.java
  c1020g1.social_network.model.ParentComment
-c1020g1/social_network/config/JwtRequestFilter.java
- c1020g1.social_network.config.JwtRequestFilter
-c1020g1/social_network/model/PostDTO.java
- c1020g1.social_network.model.PostDTO
-c1020g1/social_network/service/account/imp/AccountServiceImpl.java
- c1020g1.social_network.service.account.imp.AccountServiceImpl
-c1020g1/social_network/model/PostEditDTO.java
- c1020g1.social_network.model.PostEditDTO
-c1020g1/social_network/repository/FriendRequestRepository.java
- c1020g1.social_network.repository.FriendRequestRepository
-c1020g1/social_network/model/District.java
- c1020g1.social_network.model.District
 c1020g1/social_network/service/friend_request_service/FriendRequestService.java
  c1020g1.social_network.service.friend_request_service.FriendRequestService
-c1020g1/social_network/config/JwtTokenUtil.java
- c1020g1.social_network.config.JwtTokenUtil
+c1020g1/social_network/service/search/SearchServiceImpl.java
+ c1020g1.social_network.service.search.SearchServiceImpl
+c1020g1/social_network/service/group/imp/GroupServiceImpl.java
+ c1020g1.social_network.service.group.imp.GroupServiceImpl
+c1020g1/social_network/controller/FriendsController.java
+ c1020g1.social_network.controller.FriendsController
+c1020g1/social_network/service/friends_service/FriendsService.java
+ c1020g1.social_network.service.friends_service.FriendsService
+c1020g1/social_network/controller/FriendRequestController.java
+ c1020g1.social_network.controller.FriendRequestController
+c1020g1/social_network/service/friend_request_service/FriendRequestServiceImpl.java
+ c1020g1.social_network.service.friend_request_service.FriendRequestServiceImpl
+c1020g1/social_network/repository/FriendsRepository.java
+ c1020g1.social_network.repository.FriendsRepository
+c1020g1/social_network/service/friends_service/FriendsServiceImpl.java
+ c1020g1.social_network.service.friends_service.FriendsServiceImpl

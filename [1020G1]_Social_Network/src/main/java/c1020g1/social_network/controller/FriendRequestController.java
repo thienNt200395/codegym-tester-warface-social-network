@@ -75,15 +75,14 @@ public class FriendRequestController {
      * Author : TungNT
      * Delete friend request
      */
-    @DeleteMapping("/delete/friend_request/{id}")
-    public ResponseEntity<Void> deleteFriendRequest(@PathVariable Integer id) {
-
+    @DeleteMapping("/delete/friend_request/{idReceiverUser}/{idSendUser}")
+    public ResponseEntity<Void> deleteFriendRequest(@PathVariable Integer idReceiverUser, @PathVariable Integer idSendUser) {
         try {
-            if (friendRequestService.deleteFriendRequest(id).equals("NG")) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            if (friendRequestService.deleteFriendRequest(idReceiverUser,idSendUser).equals("NG")) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

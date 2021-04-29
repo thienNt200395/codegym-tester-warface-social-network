@@ -90,27 +90,37 @@ public class FriendsController {
      * Author : TùngNT
      * Add Friend
      */
-//    @PostMapping("/addfriend")
-//    public ResponseEntity<Void> addNewFriend(@RequestBody FriendRequest friendRequest) {
-//        try {
-//            Friends friends1 = new Friends();
-//            friends1.setUser(friendRequest.getReceiveUser());
-//            friends1.setFriend(friendRequest.getSendUser());
-//            if (friendsService.addNewFriend(friends1).equals("NG")) {
-//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//            }
-//
-//            Friends friends2 = new Friends();
-//            friends2.setUser(friendRequest.getSendUser());
-//            friends2.setFriend(friendRequest.getReceiveUser());
-//            if (friendsService.addNewFriend(friends2).equals("NG")) {
-//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//            }
-//
-//            friendRequestService.deleteFriendRequest(friendRequest.getFriendRequestId());
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @PostMapping("/addfriend")
+    public ResponseEntity<Void> addNewFriend(@RequestBody FriendRequest friendRequest) {
+        try {
+            Friends friends1 = new Friends();
+            friends1.setUser(friendRequest.getReceiveUser());
+            friends1.setFriend(friendRequest.getSendUser());
+            if (friendsService.addNewFriend(friends1).equals("NG")) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            Friends friends2 = new Friends();
+            friends2.setUser(friendRequest.getSendUser());
+            friends2.setFriend(friendRequest.getReceiveUser());
+            if (friendsService.addNewFriend(friends2).equals("NG")) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            friendRequestService.deleteFriendRequest(friendRequest.getReceiveUser().getUserId(),friendRequest.getSendUser().getUserId());
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/friend-list-all/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Friends>> getAllListToCheck(@PathVariable Integer id) {
+        try {
+            List<Friends> friendsList = friendsService.findAllFriendByIdToCheck(id);
+            return new ResponseEntity<>(friendsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

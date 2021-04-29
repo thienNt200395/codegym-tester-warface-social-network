@@ -60,10 +60,9 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     }
 
     @Override
-    public String deleteFriendRequest(Integer idFriendRequest) {
-
-        if(friendRequestRepository.findByFriendRequestId(idFriendRequest) != null){
-            friendRequestRepository.deleteFriendRequestByFriendRequestId(idFriendRequest);
+    public String deleteFriendRequest(Integer idReceiverUser , Integer idSendUser) {
+        if(friendRequestRepository.findByReceiverUserIdAndSendUserId(idReceiverUser,idSendUser) != null){
+            friendRequestRepository.deleteFriendRequestByFriendRequestId(idReceiverUser,idSendUser);
             return "OK";
         }
         return "NG";

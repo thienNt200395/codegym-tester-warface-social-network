@@ -10,5 +10,5 @@ import java.util.List;
 public interface FriendRequestService {
     List<FriendRequest> findAllFriendRequest(Integer idUser);
     String saveFriendRequest(FriendRequest friendRequest);
-    String deleteFriendRequest(Integer idFriendRequest);
+    String deleteFriendRequest(Integer idReceiverUser, Integer idSendUser);
 }

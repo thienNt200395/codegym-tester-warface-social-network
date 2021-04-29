@@ -33,6 +33,11 @@ public class FriendsServiceImpl implements FriendsService {
     }
 
     @Override
+    public List<Friends> findAllFriendByIdToCheck(Integer idUser) {
+        return friendsRepository.findAllFriendByIdToCheck(idUser);
+    }
+
+    @Override
     public List<SuggestFriend> getAllSuggestFriend(Integer id) {
         List<SuggestFriend> suggestFriendList = new ArrayList<>();
         List<Integer> idUser = friendsRepository.getAllSuggestFriend(id);
@@ -61,24 +66,20 @@ public class FriendsServiceImpl implements FriendsService {
     }
 
     @Override
-    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
-        return null;
+    public String addNewFriend(Friends friends) {
+        //Check list friend of user has this friend or not.
+        System.out.println("abc");
+        List<Friends> friendsList = friendsRepository.findAllFriendByIdToCheck(friends.getUser().getUserId());
+        for (Friends friends1 : friendsList){
+            if (friends1.getFriend().getUserId() == friends.getFriend().getUserId())
+                return "NG";
+        }
+        friendsRepository.save(friends);
+        return "OK";
     }
 
-//    @Override
-//    public String addNewFriend(Friends friends, Pageable pageable) {
-//        //Check list friend of user has this friend or not.
-//        Page<Friends> friendsList = friendsRepository.findAllFriendById(friends.getUser().getUserId(), pageable);
-//        for (Friends friends1 : friendsList){
-//            if (friends1.getFriend().getUserId() == friends.getFriend().getUserId())
-//                return "NG";
-//        }
-//        friendsRepository.save(friends);
-//        return "OK";
-//    }
-//
-//    @Override
-//    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
-//        return friendsRepository.findMutualFriend(receiveUser,sendUser);
-//    }
+    @Override
+    public List<User> findMutualFriend(Integer receiveUser, Integer sendUser) {
+        return friendsRepository.findMutualFriend(receiveUser,sendUser);
+    }
 }

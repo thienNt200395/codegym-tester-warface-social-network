@@ -50,9 +50,12 @@ public interface FriendsRepository extends JpaRepository<Friends, Integer> {
     void deleteFriendsByUserUserIdAndFriendUserId(Integer userId,Integer friendId);
 
     // Câu lấy ra tất cả bạn chung giữa 2 user
-    @Query("select myFriend.friend" +
-            " from Friends myFriend" +
-            " join Friends yourFriend on myFriend.friend.userId = yourFriend.friend.userId" +
-            " where myFriend.user.userId = ?1 and yourFriend.user.userId = ?2")
-    List<User> findMutualFriend(Integer receiveUserId , Integer sendUserId);
+    @Query("select myFriend.friend from Friends myFriend " +
+            "inner join Friends yourFriend on myFriend.friend.userId = yourFriend.friend.userId " +
+            "where myFriend.user.userId = ?1 and yourFriend.user.userId = ?2")
+    List<User> findMutualFriend(Integer receiveUserId, Integer sendUserId);
+
+    @Query("select c from Friends c where c.user.userId = ?1")
+    List<Friends> findAllFriendByIdToCheck(Integer userId);
+
 }
