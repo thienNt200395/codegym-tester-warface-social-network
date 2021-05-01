@@ -28,6 +28,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Random;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -148,8 +149,19 @@ public class JwtAuthenticationController {
             return new ResponseEntity<>("Account không tồn tại", HttpStatus.OK);
         }
 
+        int leftLimit = 48;
+        int rightLimit = 122;
+        int targetStringLength = 6;
+        Random random = new Random();
 
-        jwtAccountDetailService.update(accountName);
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+
+        jwtAccountDetailService.update(accountName, generatedString);
 
         User user = account.getUser();
 
@@ -160,7 +172,7 @@ public class JwtAuthenticationController {
 
         MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
 
-        String htmlMsg = "<h3>Your new password is <i>123456<i></h3>" +
+        String htmlMsg = "<h3>Your new password is <i>"+generatedString+"<i></h3>" +
                 "<h2><img src='https://apprecs.org/ios/images/app-icons/256/19/547702041.jpg'> C10tinder <h2>";
 
         message.setContent(htmlMsg, "text/html");

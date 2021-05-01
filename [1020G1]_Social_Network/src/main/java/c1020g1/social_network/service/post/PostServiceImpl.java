@@ -95,8 +95,8 @@ public class PostServiceImpl implements PostService {
      * @param userId
      */
     @Override
-    public List<Post> getAllPostInWallUser(Integer userId) {
-        return postRepository.getAllPostInWallUser(userId);
+    public Page<Post> getAllPostInWallUser(Integer userId, Pageable pageable) {
+        return postRepository.getAllPostInWallUser(userId, pageable);
     }
 
     /**

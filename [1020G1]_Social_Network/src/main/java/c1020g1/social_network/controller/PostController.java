@@ -88,7 +88,7 @@ public class PostController {
      */
     @PostMapping("")
     @Transactional
-    public ResponseEntity<Void> createPost(@Validated @RequestBody PostDTO postDTO, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Post> createPost(@Validated @RequestBody PostDTO postDTO, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -99,13 +99,21 @@ public class PostController {
         System.out.println(postDTO.getPost().getPostContent());
 
         postService.createPost(postDTO.getPost());
+
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
+
+
+
         for (String image : postDTO.getPostImages()) {
             postImageService.createPostImage(postTemp.getPostId(), image);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(postTemp).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+
+//        postTemp.setPostContent(postService.decodeStringUrl(postTemp.getPostContent()));
+//
+//        System.out.println(postTemp.getPostContent());
+        return new ResponseEntity<>(postTemp, HttpStatus.CREATED);
     }
 
     /**
@@ -133,10 +141,10 @@ public class PostController {
             for (PostImage postImage : postEditDTO.getDeleteImages()) {
                 postImageService.deletePostImage(postImage.getPostImageId());
             }
-            return new ResponseEntity<PostEditDTO>(postEditDTO, HttpStatus.OK);
+            return new ResponseEntity<>(postEditDTO, HttpStatus.OK);
         } else {
             System.out.println("Post with id " + postId + " not found!");
-            return new ResponseEntity<PostEditDTO>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -167,11 +175,15 @@ public class PostController {
      * @param userId
      */
     @GetMapping("/wall/{userId}")
-    public ResponseEntity<List<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId) {
-        List<Post> postInWall = postService.getAllPostInWallUser(userId);
+    public ResponseEntity<Page<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId,@PageableDefault(size = 3) Pageable pageable) {
+        Page<Post> postInWall = postService.getAllPostInWallUser(userId, pageable);
 
         if (postInWall == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        for (Post post : postInWall.getContent()) {
+            post.setPostContent(postService.decodeStringUrl(post.getPostContent()));
         }
 
         return new ResponseEntity<>(postInWall, HttpStatus.OK);

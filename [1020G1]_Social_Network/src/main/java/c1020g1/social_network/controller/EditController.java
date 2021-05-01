@@ -30,6 +30,7 @@ public class EditController {
 
     @PutMapping("user/edit")
     public void save(@RequestBody User user) {
+        user.setAccount(userService.getUserById(user.getUserId()).getAccount());
         userService.save( user );
     }
 

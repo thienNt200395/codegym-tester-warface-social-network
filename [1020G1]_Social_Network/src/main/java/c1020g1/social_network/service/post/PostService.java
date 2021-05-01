@@ -50,7 +50,7 @@ public interface PostService {
      * get all posts in wall of user
      * @param userId
      */
-    List<Post> getAllPostInWallUser(Integer userId);
+    Page<Post> getAllPostInWallUser(Integer userId, Pageable pageable);
 
     String decodeStringUrl(String encodedUrl);
 

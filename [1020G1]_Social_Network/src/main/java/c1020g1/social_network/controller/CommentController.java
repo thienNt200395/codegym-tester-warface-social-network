@@ -80,7 +80,9 @@ public class CommentController {
 
         commentService.createParentComment( parentComment );
 
-        return new ResponseEntity<>( HttpStatus.CREATED );
+        ParentComment commentFromDb = commentService.getRecentParentComment(parentComment.getPost().getPostId());
+
+        return new ResponseEntity<>(commentFromDb, HttpStatus.CREATED );
     }
 
     /**
@@ -104,9 +106,9 @@ public class CommentController {
 
         commentService.editParentComment( parentComment );
 
-        ParentComment parentCommentFromDb = commentService.getParentCommentById( parentCommentId );
+//        ParentComment parentCommentFromDb = commentService.getParentCommentById( parentComment.getParentCommentId() );
 
-        return new ResponseEntity<>( parentCommentFromDb, HttpStatus.OK );
+        return new ResponseEntity<>( parentComment, HttpStatus.OK );
     }
 
     /**
@@ -167,7 +169,9 @@ public class CommentController {
 
         commentService.createChildComment( childComment );
 
-        return new ResponseEntity<>( HttpStatus.CREATED );
+        ChildComment childCommentFromDb = commentService.getRecentChildComment(childComment.getParentComment().getParentCommentId());
+
+        return new ResponseEntity<>( childCommentFromDb, HttpStatus.CREATED );
     }
 
     /**
@@ -191,7 +195,7 @@ public class CommentController {
 
         commentService.editChildComment( childComment );
 
-        return new ResponseEntity<>( commentService.getChildCommentById( childCommentId ), HttpStatus.OK );
+        return new ResponseEntity<>( childComment, HttpStatus.OK );
     }
 
     /**

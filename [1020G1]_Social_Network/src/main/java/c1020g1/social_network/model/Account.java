@@ -24,6 +24,7 @@ public class Account {
     @Column(name = "password")
     private String password;
 
+
     @OneToOne(mappedBy = "account")
     private User user;
 
@@ -59,4 +60,6 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

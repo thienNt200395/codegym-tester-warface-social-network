@@ -152,5 +152,15 @@ public class CommentServiceImpl implements CommentService {
         childCommentRepository.removeChildComment(childCommentId);
     }
 
+    @Override
+    public ParentComment getRecentParentComment(Integer postId) {
+        return parentCommentRepository.getRecentParentComment(postId);
+    }
+
+    @Override
+    public ChildComment getRecentChildComment(Integer parentCommentId) {
+        return childCommentRepository.getRecentChildComment(parentCommentId);
+    }
+
 
 }

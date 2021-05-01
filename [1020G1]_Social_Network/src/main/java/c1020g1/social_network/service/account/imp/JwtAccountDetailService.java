@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 @Transactional
 public class JwtAccountDetailService implements UserDetailsService {
@@ -47,8 +48,9 @@ public class JwtAccountDetailService implements UserDetailsService {
      * @param accountName
      */
 
-    public void update(String accountName) {
-        accountRepository.changePassword(passwordEncoder.encode(secretPwt),accountName);
+    public void update(String accountName, String newPass) {
+
+        accountRepository.changePassword(passwordEncoder.encode(newPass),accountName);
     }
 
     /**

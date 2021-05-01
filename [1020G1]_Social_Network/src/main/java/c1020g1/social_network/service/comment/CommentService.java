@@ -82,4 +82,7 @@ public interface CommentService {
      */
     void removeChildComment(Integer childCommentId);
 
+    ParentComment getRecentParentComment(Integer postId);
+
+    ChildComment getRecentChildComment(Integer parentCommentId);
 }
