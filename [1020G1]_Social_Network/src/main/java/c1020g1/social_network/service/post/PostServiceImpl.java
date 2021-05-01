@@ -153,5 +153,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllPostGroup(id);
     }
 
-
+    @Override
+    @Transactional
+    public void deletePostById(Integer postId) {
+        postRepository.deletePostByID(postId);
+    }
 }

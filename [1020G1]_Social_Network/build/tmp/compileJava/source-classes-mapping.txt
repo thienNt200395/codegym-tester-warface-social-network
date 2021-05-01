@@ -90,8 +90,8 @@ c1020g1/social_network/model/FriendRequest.java
  c1020g1.social_network.model.FriendRequest
 c1020g1/social_network/model/GroupUser.java
  c1020g1.social_network.model.GroupUser
-c1020g1/social_network/controller/GroupController.java
- c1020g1.social_network.controller.GroupController
+c1020g1/social_network/controller/EditController.java
+ c1020g1.social_network.controller.EditController
 c1020g1/social_network/repository/FriendsRepository.java
  c1020g1.social_network.repository.FriendsRepository
 c1020g1/social_network/repository/ParentCommentRepository.java
@@ -204,7 +204,7 @@ c1020g1/social_network/repository/PostRepository.java
  c1020g1.social_network.repository.PostRepository
 c1020g1/social_network/controller/CommentController.java
  c1020g1.social_network.controller.CommentController
+c1020g1/social_network/controller/GroupController.java
+ c1020g1.social_network.controller.GroupController
 c1020g1/social_network/controller/PostController.java
  c1020g1.social_network.controller.PostController
-c1020g1/social_network/controller/EditController.java
- c1020g1.social_network.controller.EditController

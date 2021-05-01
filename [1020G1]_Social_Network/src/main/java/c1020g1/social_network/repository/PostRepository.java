@@ -62,4 +62,8 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
 
     @Query("select p from Post p where p.groupSocial.groupId=?1")
     List<Post> findAllPostGroup(Integer id);
+
+    @Modifying
+    @Query(value = "DELETE FROM post WHERE post_id = ?1", nativeQuery = true)
+    void deletePostByID(Integer postId);
 }

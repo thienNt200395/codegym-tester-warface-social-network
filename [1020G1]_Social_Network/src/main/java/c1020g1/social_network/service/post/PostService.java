@@ -59,4 +59,6 @@ public interface PostService {
     List<Post> findAllPostGroup(Integer id);
 
     public String encodeStringUrl(String url);
+
+    void deletePostById(Integer postId);
 }

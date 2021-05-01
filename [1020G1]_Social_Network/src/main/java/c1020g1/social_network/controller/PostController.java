@@ -103,7 +103,6 @@ public class PostController {
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
 
 
-
         for (String image : postDTO.getPostImages()) {
             postImageService.createPostImage(postTemp.getPostId(), image);
         }
@@ -141,7 +140,13 @@ public class PostController {
             for (PostImage postImage : postEditDTO.getDeleteImages()) {
                 postImageService.deletePostImage(postImage.getPostImageId());
             }
-            return new ResponseEntity<>(postEditDTO, HttpStatus.OK);
+
+            Post updatePost = postService.getPostById(postId);
+            PostEditDTO updatePostEditDTO = new PostEditDTO();
+            updatePost.setPostContent(postService.decodeStringUrl(updatePost.getPostContent()));
+            updatePostEditDTO.setPost(updatePost);
+            updatePostEditDTO.setPostImages(postImageService.getAllImageByPostId(postId));
+            return new ResponseEntity<>(updatePostEditDTO, HttpStatus.OK);
         } else {
             System.out.println("Post with id " + postId + " not found!");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -175,7 +180,7 @@ public class PostController {
      * @param userId
      */
     @GetMapping("/wall/{userId}")
-    public ResponseEntity<Page<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId,@PageableDefault(size = 3) Pageable pageable) {
+    public ResponseEntity<Page<Post>> getAllPostInWallUser(@PathVariable("userId") Integer userId, @PageableDefault(size = 3) Pageable pageable) {
         Page<Post> postInWall = postService.getAllPostInWallUser(userId, pageable);
 
         if (postInWall == null) {
@@ -187,6 +192,17 @@ public class PostController {
         }
 
         return new ResponseEntity<>(postInWall, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Post> deletePostById(@PathVariable("postId") Integer postId) {
+        Post post = postService.getPostById(postId);
+        if (post == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            postService.deletePostById(postId);
+            return new ResponseEntity<Post>(post, HttpStatus.OK);
+        }
     }
 }
 
