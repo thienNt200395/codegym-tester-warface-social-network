@@ -9,6 +9,7 @@ import c1020g1.social_network.service.province.ProvinceService;
 import c1020g1.social_network.service.group.WardService;
 import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,9 +30,10 @@ public class EditController {
     ProvinceService provinceService;
 
     @PutMapping("user/edit")
-    public void save(@RequestBody User user) {
+    public ResponseEntity<?> save(@RequestBody User user) {
         user.setAccount(userService.getUserById(user.getUserId()).getAccount());
         userService.save( user );
+        return ResponseEntity.ok(userService.getUserById(user.getUserId()));
     }
 
     @GetMapping("/user/ward")
