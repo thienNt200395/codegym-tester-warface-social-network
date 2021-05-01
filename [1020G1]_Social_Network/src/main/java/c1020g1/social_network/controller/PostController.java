@@ -109,9 +109,8 @@ public class PostController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(postTemp).toUri());
 
-//        postTemp.setPostContent(postService.decodeStringUrl(postTemp.getPostContent()));
-//
-//        System.out.println(postTemp.getPostContent());
+        postTemp.setPostContent(postService.decodeStringUrl(postTemp.getPostContent()));
+
         return new ResponseEntity<>(postTemp, HttpStatus.CREATED);
     }
 
