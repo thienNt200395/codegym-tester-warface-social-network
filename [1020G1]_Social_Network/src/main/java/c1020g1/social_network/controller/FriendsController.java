@@ -4,8 +4,10 @@ package c1020g1.social_network.controller;
 import c1020g1.social_network.model.FriendRequest;
 import c1020g1.social_network.model.Friends;
 import c1020g1.social_network.model.SuggestFriend;
+import c1020g1.social_network.model.User;
 import c1020g1.social_network.service.friend_request_service.FriendRequestService;
 import c1020g1.social_network.service.friends_service.FriendsService;
+import c1020g1.social_network.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,7 @@ public class FriendsController {
 
     @Autowired
     FriendRequestService friendRequestService;
+
 
     /**
      * Author: DungNV
@@ -106,7 +109,6 @@ public class FriendsController {
             if (friendsService.addNewFriend(friends2).equals("NG")) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-
             friendRequestService.deleteFriendRequest(friendRequest.getReceiveUser().getUserId(),friendRequest.getSendUser().getUserId());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
