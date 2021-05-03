@@ -56,7 +56,7 @@ public interface PostService {
 
     Post getRecentPostByUserId(Integer userId);
 
-    List<Post> findAllPostGroup(Integer id);
+    Page<Post> findAllPostGroup(Integer id,Pageable pageable);
 
     public String encodeStringUrl(String url);
 

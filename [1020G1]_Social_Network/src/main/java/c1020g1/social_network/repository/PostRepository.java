@@ -61,7 +61,7 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     Post getRecentPostByUserId(Integer userId);
 
     @Query("select p from Post p where p.groupSocial.groupId=?1")
-    List<Post> findAllPostGroup(Integer id);
+    Page<Post> findAllPostGroup(Integer id, Pageable pageable);
 
     @Modifying
     @Query(value = "DELETE FROM post WHERE post_id = ?1", nativeQuery = true)

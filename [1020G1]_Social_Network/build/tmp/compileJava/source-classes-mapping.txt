@@ -20,10 +20,10 @@ c1020g1/social_network/repository/ParentCommentRepository.java
  c1020g1.social_network.repository.ParentCommentRepository
 c1020g1/social_network/service/ward/WarningService.java
  c1020g1.social_network.service.ward.WarningService
-c1020g1/social_network/controller/JwtAuthenticationController.java
- c1020g1.social_network.controller.JwtAuthenticationController
-c1020g1/social_network/service/search/SearchServiceImpl.java
- c1020g1.social_network.service.search.SearchServiceImpl
+c1020g1/social_network/model/District.java
+ c1020g1.social_network.model.District
+c1020g1/social_network/controller/GroupController.java
+ c1020g1.social_network.controller.GroupController
 c1020g1/social_network/service/account/AccountService.java
  c1020g1.social_network.service.account.AccountService
 c1020g1/social_network/service/user/UserServiceImpl.java
@@ -96,8 +96,8 @@ c1020g1/social_network/config/JwtAuthenticationEntryPoint.java
  c1020g1.social_network.config.JwtAuthenticationEntryPoint
 c1020g1/social_network/model/Province.java
  c1020g1.social_network.model.Province
-c1020g1/social_network/controller/GroupController.java
- c1020g1.social_network.controller.GroupController
+c1020g1/social_network/service/account/imp/AccountServiceImpl.java
+ c1020g1.social_network.service.account.imp.AccountServiceImpl
 c1020g1/social_network/service/district/DistrictService.java
  c1020g1.social_network.service.district.DistrictService
 c1020g1/social_network/model/SocialResponse.java
@@ -106,8 +106,8 @@ c1020g1/social_network/repository/AccountRepository.java
  c1020g1.social_network.repository.AccountRepository
 c1020g1/social_network/repository/GroupRequestRepository.java
  c1020g1.social_network.repository.GroupRequestRepository
-c1020g1/social_network/service/post/PostService.java
- c1020g1.social_network.service.post.PostService
+c1020g1/social_network/controller/JwtAuthenticationController.java
+ c1020g1.social_network.controller.JwtAuthenticationController
 c1020g1/social_network/model/dto/GroupStatusDTO.java
  c1020g1.social_network.model.dto.GroupStatusDTO
 c1020g1/social_network/repository/FavouriteUserRepository.java
@@ -158,8 +158,8 @@ c1020g1/social_network/model/SuggestFriend.java
  c1020g1.social_network.model.SuggestFriend
 c1020g1/social_network/model/dto/UserFavourites.java
  c1020g1.social_network.model.dto.UserFavourites
-c1020g1/social_network/controller/PostController.java
- c1020g1.social_network.controller.PostController
+c1020g1/social_network/model/PostEditDTO.java
+ c1020g1.social_network.model.PostEditDTO
 c1020g1/social_network/service/district/DistrictServiceImpl.java
  c1020g1.social_network.service.district.DistrictServiceImpl
 c1020g1/social_network/model/PostImage.java
@@ -176,8 +176,8 @@ c1020g1/social_network/config/JwtTokenUtil.java
  c1020g1.social_network.config.JwtTokenUtil
 c1020g1/social_network/service/group/FavouriteService.java
  c1020g1.social_network.service.group.FavouriteService
-c1020g1/social_network/controller/CommentController.java
- c1020g1.social_network.controller.CommentController
+c1020g1/social_network/repository/FriendRequestRepository.java
+ c1020g1.social_network.repository.FriendRequestRepository
 c1020g1/social_network/service/search/SearchService.java
  c1020g1.social_network.service.search.SearchService
 c1020g1/social_network/model/Friends.java
@@ -196,15 +196,15 @@ c1020g1/social_network/config/JwtRequestFilter.java
  c1020g1.social_network.config.JwtRequestFilter
 c1020g1/social_network/model/PostDTO.java
  c1020g1.social_network.model.PostDTO
-c1020g1/social_network/service/account/imp/AccountServiceImpl.java
- c1020g1.social_network.service.account.imp.AccountServiceImpl
-c1020g1/social_network/model/PostEditDTO.java
- c1020g1.social_network.model.PostEditDTO
-c1020g1/social_network/repository/FriendRequestRepository.java
- c1020g1.social_network.repository.FriendRequestRepository
-c1020g1/social_network/model/District.java
- c1020g1.social_network.model.District
 c1020g1/social_network/service/post/PostServiceImpl.java
  c1020g1.social_network.service.post.PostServiceImpl
+c1020g1/social_network/service/post/PostService.java
+ c1020g1.social_network.service.post.PostService
 c1020g1/social_network/repository/PostRepository.java
  c1020g1.social_network.repository.PostRepository
+c1020g1/social_network/controller/CommentController.java
+ c1020g1.social_network.controller.CommentController
+c1020g1/social_network/controller/PostController.java
+ c1020g1.social_network.controller.PostController
+c1020g1/social_network/service/search/SearchServiceImpl.java
+ c1020g1.social_network.service.search.SearchServiceImpl

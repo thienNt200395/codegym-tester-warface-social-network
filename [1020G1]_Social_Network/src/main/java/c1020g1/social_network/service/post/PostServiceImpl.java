@@ -149,8 +149,8 @@ public class PostServiceImpl implements PostService {
      * @param id
      */
     @Override
-    public List<Post> findAllPostGroup(Integer id) {
-        return postRepository.findAllPostGroup(id);
+    public Page<Post> findAllPostGroup(Integer id,Pageable pageable) {
+        return postRepository.findAllPostGroup(id, pageable);
     }
 
     @Override

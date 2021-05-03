@@ -113,13 +113,13 @@ public class GroupController {
      * @return
      */
     @RequestMapping(value = "/group-list-post/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Post>> listAllPostGroup(@PathVariable Integer id) {
+    public ResponseEntity<Page<Post>> listAllPostGroup(@PathVariable Integer id, @PageableDefault(value = 3) Pageable pageable) {
         try {
-            List<Post> posts = postService.findAllPostGroup(id);
+            Page<Post> posts = postService.findAllPostGroup(id,pageable);
             if (posts.isEmpty()) {
-                return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<Page<Post>>(HttpStatus.NO_CONTENT);
             } else {
-                return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+                return new ResponseEntity<Page<Post>>(posts, HttpStatus.OK);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

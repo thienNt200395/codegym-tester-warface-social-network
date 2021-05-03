@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -44,11 +45,16 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<User> recommendation(Integer id, Date birthday, String gender, Integer province,
-                           List<String> favorites) {
+                                     List<String> favorites) {
+        List<User> list;
         if (favorites.isEmpty()){
-            return searchRepository.recommendationNoFavourite(id, birthday, gender, province);
+            list = searchRepository.recommendationNoFavourite(id, birthday, gender, province);
+            Collections.shuffle(list);
+            return list;
         }
-        return searchRepository.recommendation(id, birthday, gender, province, favorites);
+        list = searchRepository.recommendation(id, birthday, gender, province, favorites);
+        Collections.shuffle(list);
+        return list;
     }
 
     @Override
@@ -72,8 +78,6 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public GroupUser findGroupUser(Integer userId, Integer groupId) {
-        System.out.println(userId);
-        System.out.println(groupId);
         return searchRepository.findGroupUser(userId, groupId);
     }
 }
