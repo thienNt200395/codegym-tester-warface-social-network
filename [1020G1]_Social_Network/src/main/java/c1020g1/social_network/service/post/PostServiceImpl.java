@@ -154,6 +154,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public void createPostInGroup(Post post) {
+        postRepository.createPostInGroup(post.getPostContent(), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId(), post.getGroupSocial().getGroupId());
+
+    }
+
+    @Override
     @Transactional
     public void deletePostById(Integer postId) {
         postRepository.deletePostByID(postId);

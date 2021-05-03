@@ -146,7 +146,7 @@ public class JwtAuthenticationController {
         Account account = jwtAccountDetailService.getAccount(accountName);
 
         if (account == null) {
-            return new ResponseEntity<>("Account không tồn tại", HttpStatus.OK);
+            return new ResponseEntity<>("The account you received does not exist", HttpStatus.NOT_FOUND);
         }
 
         int leftLimit = 48;

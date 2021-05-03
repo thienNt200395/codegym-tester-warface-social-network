@@ -58,6 +58,15 @@ public interface PostService {
 
     Page<Post> findAllPostGroup(Integer id,Pageable pageable);
 
+    /**
+     * Author : CaoLPT
+     *create post in group
+     * @param post
+     */
+    void createPostInGroup(Post post);
+
+
+
     public String encodeStringUrl(String url);
 
     void deletePostById(Integer postId);

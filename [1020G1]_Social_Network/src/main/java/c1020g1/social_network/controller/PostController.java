@@ -93,24 +93,22 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         postDTO.getPost().setPostPublished(new Timestamp(System.currentTimeMillis()));
-
         System.out.println(postDTO.getPost().getPostContent());
+        System.out.println(postDTO.getPost().getGroupSocial());
         postDTO.getPost().setPostContent(postService.encodeStringUrl(postDTO.getPost().getPostContent()));
         System.out.println(postDTO.getPost().getPostContent());
-
-        postService.createPost(postDTO.getPost());
-
+        if (postDTO.getPost().getGroupSocial() != null){
+            postService.createPostInGroup(postDTO.getPost());
+        } else {
+            postService.createPost(postDTO.getPost());
+        }
         Post postTemp = postService.getRecentPostByUserId(postDTO.getPost().getUser().getUserId());
-
-
         for (String image : postDTO.getPostImages()) {
             postImageService.createPostImage(postTemp.getPostId(), image);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{postId}").buildAndExpand(postTemp).toUri());
-
         postTemp.setPostContent(postService.decodeStringUrl(postTemp.getPostContent()));
-
         return new ResponseEntity<>(postTemp, HttpStatus.CREATED);
     }
 
