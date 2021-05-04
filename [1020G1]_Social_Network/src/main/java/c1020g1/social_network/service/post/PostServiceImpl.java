@@ -46,9 +46,9 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void createPost(Post post) {
         if (post.getGroupSocial() == null) {
-            postRepository.createPost(post.getPostContent(), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId());
+            postRepository.createPost(encodeStringUrl(post.getPostContent()), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId());
         } else {
-            postRepository.createPostInGroup(post.getPostContent(), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId(), post.getGroupSocial().getGroupId());
+            postRepository.createPostInGroup(encodeStringUrl(post.getPostContent()), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId(), post.getGroupSocial().getGroupId());
         }
     }
 
@@ -61,7 +61,7 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void editPost(Post post) {
-        postRepository.editPost(post.getPostContent(), post.getPostStatus(), post.getPostId());
+        postRepository.save(post);
     }
 
     /**

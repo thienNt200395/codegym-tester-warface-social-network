@@ -22,8 +22,8 @@ c1020g1/social_network/service/ward/WarningService.java
  c1020g1.social_network.service.ward.WarningService
 c1020g1/social_network/model/District.java
  c1020g1.social_network.model.District
-c1020g1/social_network/controller/GroupController.java
- c1020g1.social_network.controller.GroupController
+c1020g1/social_network/repository/PostRepository.java
+ c1020g1.social_network.repository.PostRepository
 c1020g1/social_network/service/account/AccountService.java
  c1020g1.social_network.service.account.AccountService
 c1020g1/social_network/service/user/UserServiceImpl.java
@@ -196,15 +196,15 @@ c1020g1/social_network/config/JwtRequestFilter.java
  c1020g1.social_network.config.JwtRequestFilter
 c1020g1/social_network/model/PostDTO.java
  c1020g1.social_network.model.PostDTO
-c1020g1/social_network/service/post/PostServiceImpl.java
- c1020g1.social_network.service.post.PostServiceImpl
-c1020g1/social_network/service/post/PostService.java
- c1020g1.social_network.service.post.PostService
-c1020g1/social_network/repository/PostRepository.java
- c1020g1.social_network.repository.PostRepository
-c1020g1/social_network/controller/CommentController.java
- c1020g1.social_network.controller.CommentController
-c1020g1/social_network/controller/PostController.java
- c1020g1.social_network.controller.PostController
 c1020g1/social_network/controller/JwtAuthenticationController.java
  c1020g1.social_network.controller.JwtAuthenticationController
+c1020g1/social_network/controller/GroupController.java
+ c1020g1.social_network.controller.GroupController
+c1020g1/social_network/service/post/PostService.java
+ c1020g1.social_network.service.post.PostService
+c1020g1/social_network/controller/CommentController.java
+ c1020g1.social_network.controller.CommentController
+c1020g1/social_network/service/post/PostServiceImpl.java
+ c1020g1.social_network.service.post.PostServiceImpl
+c1020g1/social_network/controller/PostController.java
+ c1020g1.social_network.controller.PostController

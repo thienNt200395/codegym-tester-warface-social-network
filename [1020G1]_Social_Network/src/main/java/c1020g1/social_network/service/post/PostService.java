@@ -67,7 +67,7 @@ public interface PostService {
 
 
 
-    public String encodeStringUrl(String url);
+    String encodeStringUrl(String url);
 
     void deletePostById(Integer postId);
 }

@@ -93,10 +93,8 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         postDTO.getPost().setPostPublished(new Timestamp(System.currentTimeMillis()));
-        System.out.println(postDTO.getPost().getPostContent());
-        System.out.println(postDTO.getPost().getGroupSocial());
         postDTO.getPost().setPostContent(postService.encodeStringUrl(postDTO.getPost().getPostContent()));
-        System.out.println(postDTO.getPost().getPostContent());
+
         if (postDTO.getPost().getGroupSocial() != null){
             postService.createPostInGroup(postDTO.getPost());
         } else {
@@ -120,16 +118,17 @@ public class PostController {
      * @param postEditDTO
      * @param bindingResult
      */
+
     @PutMapping("/{postId}")
     @Transactional
     public ResponseEntity<PostEditDTO> editPost(@PathVariable("postId") Integer postId, @Validated @RequestBody PostEditDTO postEditDTO, BindingResult bindingResult) {
+        postEditDTO.getPost().setPostContent(postService.encodeStringUrl(postEditDTO.getPost().getPostContent()));
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Post post = postService.getPostById(postId);
         if (post != null) {
-            post.setPostContent(postService.encodeStringUrl(postEditDTO.getPost().getPostContent()));
-            post.setPostStatus(post.getPostStatus());
+            post.setPostStatus(postEditDTO.getPost().getPostStatus());;
             postService.editPost(post);
             for (PostImage postImage : postEditDTO.getUpdateImages()) {
                 postImageService.createPostImage(postId, postImage.getImage());
@@ -140,7 +139,6 @@ public class PostController {
 
             Post updatePost = postService.getPostById(postId);
             PostEditDTO updatePostEditDTO = new PostEditDTO();
-            updatePost.setPostContent(postService.decodeStringUrl(updatePost.getPostContent()));
             updatePostEditDTO.setPost(updatePost);
             updatePostEditDTO.setPostImages(postImageService.getAllImageByPostId(postId));
             return new ResponseEntity<>(updatePostEditDTO, HttpStatus.OK);
