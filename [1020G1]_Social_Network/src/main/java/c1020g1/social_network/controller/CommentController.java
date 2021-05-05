@@ -106,7 +106,7 @@ public class CommentController {
 
         commentService.editParentComment( parentComment );
 
-//        ParentComment parentCommentFromDb = commentService.getParentCommentById( parentComment.getParentCommentId() );
+        parentComment.setCommentTime(fromDb.getCommentTime());
 
         return new ResponseEntity<>( parentComment, HttpStatus.OK );
     }
@@ -194,6 +194,8 @@ public class CommentController {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
 
         commentService.editChildComment( childComment );
+
+        childComment.setCommentTime(fromDb.getCommentTime());
 
         return new ResponseEntity<>( childComment, HttpStatus.OK );
     }

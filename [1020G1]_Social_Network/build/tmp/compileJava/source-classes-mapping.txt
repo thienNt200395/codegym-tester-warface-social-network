@@ -106,8 +106,8 @@ c1020g1/social_network/repository/AccountRepository.java
  c1020g1.social_network.repository.AccountRepository
 c1020g1/social_network/repository/GroupRequestRepository.java
  c1020g1.social_network.repository.GroupRequestRepository
-c1020g1/social_network/service/search/SearchServiceImpl.java
- c1020g1.social_network.service.search.SearchServiceImpl
+c1020g1/social_network/controller/CommentController.java
+ c1020g1.social_network.controller.CommentController
 c1020g1/social_network/model/dto/GroupStatusDTO.java
  c1020g1.social_network.model.dto.GroupStatusDTO
 c1020g1/social_network/repository/FavouriteUserRepository.java
@@ -202,9 +202,9 @@ c1020g1/social_network/controller/GroupController.java
  c1020g1.social_network.controller.GroupController
 c1020g1/social_network/service/post/PostService.java
  c1020g1.social_network.service.post.PostService
-c1020g1/social_network/controller/CommentController.java
- c1020g1.social_network.controller.CommentController
 c1020g1/social_network/service/post/PostServiceImpl.java
  c1020g1.social_network.service.post.PostServiceImpl
 c1020g1/social_network/controller/PostController.java
  c1020g1.social_network.controller.PostController
+c1020g1/social_network/service/search/SearchServiceImpl.java
+ c1020g1.social_network.service.search.SearchServiceImpl

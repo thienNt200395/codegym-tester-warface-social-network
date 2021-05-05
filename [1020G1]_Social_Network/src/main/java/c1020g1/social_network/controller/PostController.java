@@ -128,7 +128,8 @@ public class PostController {
         }
         Post post = postService.getPostById(postId);
         if (post != null) {
-            post.setPostStatus(postEditDTO.getPost().getPostStatus());;
+            post.setPostStatus(postEditDTO.getPost().getPostStatus());
+            post = postEditDTO.getPost();
             postService.editPost(post);
             for (PostImage postImage : postEditDTO.getUpdateImages()) {
                 postImageService.createPostImage(postId, postImage.getImage());

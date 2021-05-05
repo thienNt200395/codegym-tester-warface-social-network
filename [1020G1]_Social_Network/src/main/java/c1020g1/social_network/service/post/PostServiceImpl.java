@@ -155,7 +155,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void createPostInGroup(Post post) {
-        postRepository.createPostInGroup(post.getPostContent(), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId(), post.getGroupSocial().getGroupId());
+        postRepository.createPostInGroup(encodeStringUrl(post.getPostContent()), post.getPostStatus(), post.getPostPublished(), post.getUser().getUserId(), post.getGroupSocial().getGroupId());
 
     }
 
