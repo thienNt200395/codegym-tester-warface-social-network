@@ -1,23 +1,16 @@
 package c1020g1.social_network.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "group_social")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "groupId")
 public class GroupSocial {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
     private Integer groupId;
-
     @Column(name = "group_name")
     private String groupName;
 
@@ -33,6 +26,9 @@ public class GroupSocial {
     @ManyToOne
     @JoinColumn(name = "admin", referencedColumnName = "user_id")
     private User admin;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupSocial")
+    private List<GroupRequest> groupRequests;
 
     @Column(name = "scope")
     private String scope;

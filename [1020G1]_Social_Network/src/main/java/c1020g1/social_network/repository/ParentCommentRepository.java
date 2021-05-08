@@ -37,4 +37,7 @@ public interface ParentCommentRepository extends JpaRepository<ParentComment, In
     @Query(value = "DELETE FROM parent_comment\n" +
             "WHERE parent_comment_id = ?1", nativeQuery = true)
     void removeParentComment(Integer parentCommentId);
+
+    @Query(value = "SELECT * FROM parent_comment WHERE post_id = :postId ORDER BY parent_comment_id DESC LIMIT 1", nativeQuery = true)
+    ParentComment getRecentParentComment(Integer postId);
 }

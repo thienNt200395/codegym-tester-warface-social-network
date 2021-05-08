@@ -5,34 +5,37 @@ import javax.persistence.*;
 @Entity
 @Table(name = "group_request")
 public class GroupRequest {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_request_id")
-    private int groupRequestId;
+    private Integer groupRequestId;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     private GroupSocial groupSocial;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-    @Column(name = "from")
-    private String from;
+    @Column(name = "sender")
+    private String sender;
 
-    public int getGroupRequestId() {
+    public Integer getGroupRequestId() {
         return groupRequestId;
     }
 
-    public void setGroupRequestId(int groupRequestId) {
+    public void setGroupRequestId(Integer groupRequestId) {
         this.groupRequestId = groupRequestId;
+    }
+
+    public void setGroupSocial(GroupSocial groupSocial) {
+        this.groupSocial = groupSocial;
     }
 
     public GroupSocial getGroupSocial() {
         return groupSocial;
     }
 
-    public void setGroupSocial(GroupSocial groupSocial) {
-        this.groupSocial = groupSocial;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public User getUser() {
@@ -43,11 +46,7 @@ public class GroupRequest {
         this.user = user;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
+    public String getSender() {
+        return sender;
     }
 }
