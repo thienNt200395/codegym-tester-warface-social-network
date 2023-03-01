@@ -2,5 +2,10 @@
 
 ```shell
 cd app/src/main/resources/
+
 cp application.properties.example application.properties
+# edit application.properties as needed"
+
+cd -
+docker build -t social_network_23.03.01.1600 -f app.dockerfile .
 ```
