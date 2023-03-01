@@ -1,5 +1,6 @@
 # C1020G1-Repo-BE
-#demo push
-#demo pull
 
+```shell
+cd app
 cp application.properties.example application.properties
+```
