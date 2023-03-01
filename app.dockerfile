@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jdk-alpine as build
+FROM eclipse-temurin:8-jdk as build
 WORKDIR /workspace/app
 
 COPY app .
