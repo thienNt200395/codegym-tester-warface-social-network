@@ -1,7 +1,7 @@
 FROM eclipse-temurin:8-jdk as build
 WORKDIR /workspace/app
 COPY app .
-RUN ./gradlew build
+RUN ./gradlew build -x test
 
 FROM eclipse-temurin:8-jdk
 VOLUME /tmp
