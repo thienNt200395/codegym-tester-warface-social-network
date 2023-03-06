@@ -2,6 +2,7 @@ networks:
   publish:
     external: true
     name: ${PUBLISH_NETWORK}
+  warface_social:
 
 volumes:
   mysql_data:
