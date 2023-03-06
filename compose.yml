@@ -1,3 +1,8 @@
+networks:
+  publish:
+    external: true
+    name: ${PUBLISH_NETWORK}
+
 volumes:
   mysql_data:
     name: testers_warface_social_network_db
@@ -7,6 +12,9 @@ services:
   app:
     container_name: testers_warface_social_network
     image: social_network_23.03.01.1600 # build truoc
+    networks:
+      - publish
+      - warface_social
     depends_on:
       - db
 
@@ -14,6 +22,8 @@ services:
     platform: linux/amd64
     build:
       context: ./database
+    networks:
+      - warface_social
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql-docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
