@@ -8,4 +8,9 @@ cp application.properties.example application.properties
 
 cd -
 docker build -t social_network_23.03.01.1600 -f app.dockerfile .
+
+docker compose up db -d
+# wait for db fully init
+
+docker compose up -d 
 ```
