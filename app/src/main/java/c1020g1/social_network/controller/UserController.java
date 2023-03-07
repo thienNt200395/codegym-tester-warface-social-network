@@ -33,7 +33,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://social-network.warface.codegym.vn")
 public class UserController {
 
     /**

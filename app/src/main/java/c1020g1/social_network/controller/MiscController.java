@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/misc")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://social-network.warface.codegym.vn")
 public class MiscController {
 
     @Autowired

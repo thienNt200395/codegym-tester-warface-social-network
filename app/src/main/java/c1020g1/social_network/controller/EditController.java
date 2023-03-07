@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://social-network.warface.codegym.vn")
 public class EditController {
     @Autowired
     UserService userService;

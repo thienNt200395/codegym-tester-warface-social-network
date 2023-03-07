@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Random;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://social-network.warface.codegym.vn")
 public class JwtAuthenticationController {
 
     @Value("${google.clienId}")

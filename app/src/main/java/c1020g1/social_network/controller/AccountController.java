@@ -14,7 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://social-network.warface.codegym.vn")
 public class AccountController {
     @Autowired
     private AccountService accountService;
